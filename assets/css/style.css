@@ -1,0 +1,74 @@
+a.nav-link{
+   
+    color: #fff;
+    font-weight: 500;
+}
+
+.navbar-brand{
+
+  
+    font-weight: 500;
+
+}
+/*
+main{
+    margin-top: 70px;
+}
+.select-turma{
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.list-group-item:hover{
+    background-color:#AED6F1;
+}
+#tableRelatorioLista tbody tr:hover{
+    background-color:#AED6F1;
+    cursor:pointer;
+}
+tbody tr:hover{
+    background-color:#AED6F1;
+}
+.modal-dialog.modal-notify.modal-warning .badge, .modal-dialog.modal-notify.modal-warning .modal-header {
+    background-color: #006de2;
+}
+
+.imgAlunos{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+}
+.imgAlunosVenda {
+    height: 130px;
+    border-radius: 50%;
+}
+.cursor-pointer{
+    cursor:pointer;
+}
+/*
+active 
+navbar.navbar-dark .breadcrumb .nav-item.active>.nav-link, .navbar.navbar-dark .navbar-nav .nav-item.active>.nav-link {
+    background-color: rgba(255,255,255,.1);
+}
+/
+.link-turmas{
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 2;
+
+}
+.pt-list{
+    padding-top: 80px;
+}
+
+.pt-list-geral{
+    padding-top: 49px;
+}
+.anchor-alert{
+    color:#8d6f1e;
+}
+.anchor-alert:hover{
+    color:#8d6f1e;
+}
+/**/

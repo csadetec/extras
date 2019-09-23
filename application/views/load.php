@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="<?php echo base_url('./assets/imagens/icons/favicon.ico') ?> " >
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
+  <link  href="<?php echo base_url('/assets/css/style.css?2019090531');?>" rel="stylesheet">
+  <title><?php echo $titulo ?></title>
+</head>
+<body>
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <?php $this->load->view('navbar', false); ?>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+
+  <!--Main layout-->
+  <main class="mb-5">
+    <!--Main container-->
+    <div class="container-fluid mt-2">
+      <?php $this->load->view($page, FALSE); ?>
+      <?php $this->load->view('alunos/alert_desenturmar'); ?>
+      <?php $this->load->view('alunos/alunos_form'); ?>
+      <?php $this->load->view('email/alert_email');?>
+      <?php $this->load->view('email/alert_email_success');?>
+      <?php $this->load->view('alunos/alert_enturmar');?>
+      <?php $this->load->view('relatorios/relatorios_listar_modal');?>
+      <?php $this->load->view('relatorios/chart');?>
+      <?php $this->load->view('usuarios/usuarios_form_trocar_curso');?>
+
+
+      
+    </div>
+    <!--Main container-->
+  </main>
+  <!--Main layout-->
+  <!-- Footer -->
+  <footer class="page-footer font-small blue mt-4 fixed-bottom">
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">
+      © <?php echo date('Y') ?> Copyright: Beard Dev
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+
+  <!-- JQuery -->
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script> 
+  <script src="<?php echo base_url('/assets/js/turmas.js?20190918');?>"></script>
+  <!-- -->
+  <script src="<?php echo base_url('/assets/js/alunos.js?20190918')?>"></script>
+
+  <script src="<?php echo base_url('/assets/js/relatorios.js?20190918')?> "></script>
+  <script src="<?php echo base_url('/assets/js/usuarios.js?20190918')?> "></script>
+  <script src="<?php echo base_url('/assets/js/email.js?20190901115')?> "></script>
+  <script src="<?php echo base_url('/assets/js/comportamentos.js?2019')?> "></script>
+
+   <!-- -->
+</body>
+</html>
