@@ -9,6 +9,7 @@ class Arquivos extends CI_Controller {
 	
 		$this->load->library('PHPExcel');
 		$this->load->helper(array('download','funcoes_helper'));
+		$this->load->model(array('funcionarios_model'));
 		/*
 		verifica_login();
 		verifica_admin();
@@ -17,7 +18,6 @@ class Arquivos extends CI_Controller {
 
 	public function index()
 	{	
-
 	}
 
 	public function cadastrar()
@@ -44,16 +44,7 @@ class Arquivos extends CI_Controller {
         endif;
         //endif;
 
-        $data['titulo'] = 'Arquivos - Uploads';
-        $data['bread1'] = 'Arquivos';
-        $data['bread2'] = 'Uploads';
-        $data['page'] = 'arquivos/arquivos_form';
-        $data['action'] = 'arquivos/cadastrar/';
-        $data['btn_value'] = 'SALVAR';
-      
-
-        $this->load->view('load', $data, FALSE);
-
+        $this->load->view('load', FALSE);
     }
 
 	public function atualizar($arquivo='')
@@ -74,7 +65,7 @@ class Arquivos extends CI_Controller {
 		foreach ($letras as $key => $l):
 			if($worksheet->getCell($l.'1')->getValue() != null):
 				$t = $worksheet->getCell($l.'1')->getValue();
-				$t = strClear($t);
+				$t = rename_title($t);
 				$titulo[] = $t;
 			endif;
 		endforeach;
@@ -94,36 +85,36 @@ class Arquivos extends CI_Controller {
 
 		endfor;
 		
+		
 		echo '<pre>';
 		print_r($titulo);
-		
 		print_r($alunos);
 		echo '</pre>';
-		
-
+		/**/
 		/*
-		
+		$msg = 'Atualizado com Sucesso';
 		foreach ($alunos as $key => $row):
 
-			if($this->alunos_model->select_ra($row['matricula'])):
-				if($this->alunos_model->update($row, $row['matricula']) == false):
-					set_msg("Falha ao Atualizar", "danger");
+			if($this->funcionarios_model->select_chapa($row['chapa'])):
+				
+				if($this->funcionarios_model->update($row, $row['chapa']) == false):
+					$msg = "Falha ao Atualizar";
 					break;
 				endif;
 			else:
 				if($this->alunos_model->insert($row) == false):
-					set_msg("Falha ao cadastrar", "danger");
+					$msg = "Falha ao cadastrar";
 					break;
 				endif;
 			endif;
 		
 		endforeach;
+
+		echo '<script>alert("'.$msg.'")</script>';
+		$server = 'http://'.$_SERVER['SERVER_NAME'].'/enturmacao';
+		echo '<script>location.href = "'.$server.'"</script>';
 		/**/
-		//redirect('alunos/listar');
-		/** */
-
 	}
-
 
 }
 

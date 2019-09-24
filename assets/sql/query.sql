@@ -1,5 +1,14 @@
 #criar usuarios para acessar o mysql
 
+create table funcionarios(
+	id_funcionario int primary key auto_increment,
+	chapa varchar(10) not null,
+	nome_funcionario varchar(150) not null,
+	nome_funcao varchar(50) not null,
+	descricao_secao varchar(50) not null
+
+)
+
 create table comportamentos(
 	id_comportamento int primary key auto_increment,
 	nome_comportamento varchar(50) not null
@@ -51,28 +60,3 @@ SET
 tur_ant = "f3c"
 where codcur=22 and codper=4;
 
-update alunos
-SET tur_ant = "f1c"
-where codcur=22 and codper=2;
-
-update usuarios
-set curso = "f9"
-where usuario = "lucas.assuncao";
-
-select * from alunos
-where codcur = 20 and codper = 3;
-
-update alunos
-SET
-tur_ant = "i2"
-where codcur=20 and codper=3;
-
-update alunos
-SET
-tur_ant = "i1c"
-where codcur=21 and codper=2;
-
-update alunos
-SET
-tur_ant = "i2c"
-where codcur=22 and codper=1;

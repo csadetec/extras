@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 	$("form#form_arquivos").submit(function(){
-		
+		/*
     
 		var url = `http://${location.hostname}/extras/arquivos/cadastrar`
 		form = new FormData();
@@ -17,7 +17,7 @@ $(document).ready(function () {
             }
         });
 		/**/
-		return false
+	//	return false
 		
 	})
 
