@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Alunos extends CI_Controller {
+class Professores extends CI_Controller {
 
 	public function __construct()
 	{
