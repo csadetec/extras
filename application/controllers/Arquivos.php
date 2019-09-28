@@ -9,7 +9,7 @@ class Arquivos extends CI_Controller {
 	
 		$this->load->library('PHPExcel');
 		$this->load->helper(array('download','funcoes_helper'));
-		$this->load->model(array('funcionarios_model'));
+		$this->load->model(array('colaboradores_model'));
 		/*
 		verifica_login();
 		verifica_admin();
@@ -49,7 +49,6 @@ class Arquivos extends CI_Controller {
 
 	public function atualizar($arquivo='')
 	{
-		
 		if($arquivo == null)redirect('arquivos/cadastrar');
 		
 		$this->load->library('PHPExcel');
@@ -65,6 +64,7 @@ class Arquivos extends CI_Controller {
 		foreach ($letras as $key => $l):
 			if($worksheet->getCell($l.'1')->getValue() != null):
 				$t = $worksheet->getCell($l.'1')->getValue();
+				$t = strclear($t);
 				$t = rename_title($t);
 				$titulo[] = $t;
 			endif;
@@ -85,24 +85,24 @@ class Arquivos extends CI_Controller {
 
 		endfor;
 		
-		
+		/**
 		echo '<pre>';
 		print_r($titulo);
 		print_r($alunos);
 		echo '</pre>';
 		/**/
-		/*
+		
 		$msg = 'Atualizado com Sucesso';
 		foreach ($alunos as $key => $row):
 
-			if($this->funcionarios_model->select_chapa($row['chapa'])):
+			if($this->colaboradores_model->select_chapa($row['chapa'])):
 				
-				if($this->funcionarios_model->update($row, $row['chapa']) == false):
+				if($this->colaboradores_model->update($row, $row['chapa']) == false):
 					$msg = "Falha ao Atualizar";
 					break;
 				endif;
 			else:
-				if($this->alunos_model->insert($row) == false):
+				if($this->colaboradores_model->insert($row) == false):
 					$msg = "Falha ao cadastrar";
 					break;
 				endif;
@@ -111,7 +111,7 @@ class Arquivos extends CI_Controller {
 		endforeach;
 
 		echo '<script>alert("'.$msg.'")</script>';
-		$server = 'http://'.$_SERVER['SERVER_NAME'].'/enturmacao';
+		$server = 'http://'.$_SERVER['SERVER_NAME'].'/extras';
 		echo '<script>location.href = "'.$server.'"</script>';
 		/**/
 	}

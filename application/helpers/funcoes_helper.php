@@ -4,9 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 function rename_title($t)
 {
     $t = strtolower($t);
-    if($t == 'nome')return 'nome_funcionario';
-    if($t == 'nome funcão')return 'nome_funcao';
-    if($t == 'descrição seção')return 'descricao_secao';
+    if($t == 'nome')return 'nome_colaborador';
+    if($t == 'nome funcao')return 'gargo';
+    if($t == 'descricao secao')return 'descricao_secao';
     
     return $t;
 }
@@ -32,10 +32,10 @@ function verifica_admin()
 }
 function strclear($string)
 {
-    $search = array('Ã','Ç');
-    $replace= array('a','c');
+    $search = array('Ã','ã','Ç','ç');
+    $replace= array('a','a','c', 'c');
     $string = str_replace($search, $replace, $string);
-        $string = strtolower($string);
+    $string = strtolower($string);
 
     return $string;
 }

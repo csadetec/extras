@@ -22,7 +22,7 @@
       <a class="navbar-brand" href="" >EXTRAS</a>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#professores">PROFESSORES
+          <a class="nav-link" href="#colaboradores">Colaboradores
             <span class="sr-only">(current)</span>
           </a>
         </li>
@@ -36,7 +36,7 @@
       <div class="collapse navbar-collapse" id="basicExampleNav">
         <ul class="navbar-nav float-right">
           <li class="nav-item">
-            <a class="nav-link" href="#professores">Atualizar Professores
+            <a class="nav-link" href="#">Atualizar Professores
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -53,9 +53,8 @@
   <!--Main layout-->
   <main class="mb-5">
     <!--Main container-->
-    <div class="container-fluid mt-2">
-      <?php $this->load->view('arquivos/arquivos_form', FALSE); ?>
-      
+    <div class="container-fluid mt-2" id="conteudo">
+      <?php //$this->load->view('teste', FALSE); ?>
     </div>
     <!--Main container-->
   </main>
@@ -79,16 +78,8 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script> 
-  <script src="<?php echo base_url('assets/js/arquivos.js?2019');?>"></script>
-
-  <!--
-  <script src="<?php echo base_url('/assets/js/alunos.js?20190918')?>"></script>
-
-  <script src="<?php echo base_url('/assets/js/relatorios.js?20190918')?> "></script>
-  <script src="<?php echo base_url('/assets/js/usuarios.js?20190918')?> "></script>
-  <script src="<?php echo base_url('/assets/js/email.js?20190901115')?> "></script>
-  <script src="<?php echo base_url('/assets/js/comportamentos.js?2019')?> "></script>
-
+  <script src="assets/js/script.js"></script>
+  <script src="assets/js/colaboradores.js?201909"></script>
 
   <!-- -->
 </body>

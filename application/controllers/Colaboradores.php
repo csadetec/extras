@@ -1,21 +1,29 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Professores extends CI_Controller {
+class Colaboradores extends CI_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('alunos_model','turmas_model'));
+		$this->load->model(array('colaboradores_model'));
 		$this->load->library(array('form_validation'));
 		$this->load->helper(array('funcoes_helper', 'form'));
-		verifica_login();
+		//verifica_login();
 
 	}
 	public function index()
 	{
-		$this->load-view()
+		$colaboradores = $this->colaboradores_model->select();
+		echo json_encode($colaboradores);
 	}
+
+	public function listar($chapa = null)
+	{
+		$colaborador = $this->colaboradores_model->select_chapa($chapa);
+		echo json_encode($colaborador);
+	}
+
 
 
 	public function cadastrar()

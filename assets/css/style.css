@@ -11,3 +11,6 @@ a.nav-link{
 .pt-list{
     padding-top: 80px;
 }
+.cursor-pointer{
+	cursor:pointer;
+}
