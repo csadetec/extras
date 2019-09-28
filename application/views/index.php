@@ -11,7 +11,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
-  <link  href="assets/css/style.css?20190923162122" rel="stylesheet">
+  <link  href="assets/css/style.css?201909281403" rel="stylesheet">
   <title></title>
 </head>
 <body>
@@ -54,7 +54,10 @@
   <main class="mb-5">
     <!--Main container-->
     <div class="container-fluid mt-2" id="conteudo">
-      <?php //$this->load->view('teste', FALSE); ?>
+      <?php $this->load->view('colaboradores_form', FALSE); ?>
+      
+   
+
     </div>
     <!--Main container-->
   </main>
@@ -78,8 +81,8 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script> 
-  <script src="assets/js/script.js"></script>
-  <script src="assets/js/colaboradores.js?201909"></script>
+  <script src="assets/js/script.js?201909"></script>
+  <script src="assets/js/colaboradores.js?201909281853"></script>
 
   <!-- -->
 </body>

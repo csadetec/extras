@@ -12,7 +12,7 @@ class Colaboradores_model extends CI_Model {
 	public function select_chapa($chapa)
 	{
 		$this->db->where('chapa', $chapa);
-		return $this->db->get('colaboradores')->result();
+		return $this->db->get('colaboradores')->row();
 	}
 	
 	public function update($dados, $chapa)
@@ -31,8 +31,8 @@ class Colaboradores_model extends CI_Model {
 		$this->db->where('a.codcur', $codcur);
 		$this->db->where('a.codper', $codper);
 		/**/
-		$this->db->order_by('c.nome_colaborador', 'asc');
 		$this->db->order_by('c.gargo', 'asc');
+		$this->db->order_by('c.nome_colaborador', 'asc');
 		return $this->db->get()->result();
 	}
 

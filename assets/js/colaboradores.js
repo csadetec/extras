@@ -1,7 +1,7 @@
 $(document).ready(function(){
  
-  //  colaboradores()
-    var colaboradores = function()
+    colaboradores()
+    function colaboradores()
     {   
        
         var url = `${site}/colaboradores`
@@ -20,7 +20,7 @@ $(document).ready(function(){
                     +`<li class="list-group-item list-group-item-action cursor-pointer">`
                     +   `<div class="row">`
                     +       `<div   class="col-3 col-md-2" >`
-                   // +           //`<img class="imgAlunos cursor-pointer" title="Editar nformações" src="#">`
+                    +           `<img class="img-list"  src="${visiografo}${chapa}.JPG">`
                     +        `</div>`
                     +        `<div class="col-9 col-md-10">`
                     +            `<div class="float-right">${cargo}</div>`
@@ -30,9 +30,13 @@ $(document).ready(function(){
                     +   `</div>`
                     +`</li>`
                 }
-
                 var html = ``
-                +`<div class="row justify-content-center pt-list">`
+                +`<div class="row justify-content-center pt-list" id="">`
+                +   `<div class="col-md-8">`
+                +`      <input class="form-control form-control-lg mb-2" type="search" placeholder="Pesquisar Colaborador" aria-label="Pesquisar Colaborador" id="myInput" data-list="list-group">`
+                +   `</div>`
+                +`</div>`
+                +`<div class="row justify-content-center">`
                 +   `<div class="col-md-8" >`
                 +      `<ul class="list-group" id="lista_colaboradores">`
                 +           `${row}`
@@ -41,81 +45,50 @@ $(document).ready(function(){
                 +`</div>`
 
                 $("div#conteudo").prepend(html)
-                $("#lista_colaboradores li").click(form_colaborador)
+                $("#lista_colaboradores li").click(colaboradores_form)
+                $("#myInput").on("keyup", pesquisa)
+    
+
                
             }
 
         )
     }
 
-    colaboradores()
-
-    var form_colaborador = function(){
-
-<div class="modal fade" id="formTurmas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true" data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">DADOS DA TURMA</h4>
-      
-        <button onclick="location.reload()" type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      
-      <div class="modal-body mx-3">
-        <div class="row justify-content-end">
-          <div class="col-4">
-            <button id="btnExcluir"  class="btn btn-danger d-none">Excluir</button>    
-            
-          </div>
-        </div>
-
-        <form method="post" id="formTurmas">
-          <div class="md-form mb-5">
-            <input type="text" id="nome_turma" class="form-control" name="nome_turma" autofocus>
-            <label data-error="wrong" data-success="right" for="nome_turma">Nome</label>
-          </div>
-          <div class="form-row">
-            <select id="turno" name="turno" class="custom-select ">
-              <option value="" selected>SELECIONE O TURNO </option> 
-              <option value="MANHÃ">MANHÃ</option> 
-              <option value="TARDE">TARDE</option>
-            </select>
-          </div>
-          <div class="modal-footer d-flex justify-content-center">
-            <input type="hidden" id="id_turma" name="id_turma">
-            <button type="submit" class="btn btn-indigo" id="btnSalvarTurma" >SALVAR <i class="fas fa-paper-plane-o ml-1"></i></button>
-            <button type="button" onclick="location.reload()" class="btn btn-info" data-dismiss="modal" aria-label="Close">
-              CANCELAR     
-            </button>
-          </div>
-        </form>  
-      </div>
-    </div>
-  </div>
-</div>
-
-
+    var colaboradores_form = function()
+    {
         var chapa = $(this).find('#chapa').text()
-        console.log(chapa)
+        var url = `${site}/colaboradores/listar/${chapa}`
 
+        $.getJSON(
+            url,
+            function(data){
+
+                $('#nome_form').text(data.nome_colaborador)
+                //$('#chapa_gargo').html(`<sub>${data.gargo} | ${chapa}</sub>`)
+                $('#chapa_gargo').html(`${data.gargo} | ${chapa}`)
+                
+                $('.img-form').attr('src', `${visiografo}${chapa}.JPG`)
+                $('#colaboradores_form').modal('show')
+            }
+        )
     }
 
+    var pesquisa = function()
+    {
+        var value = $(this).val().toLowerCase();
+        $("#lista_colaboradores li").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    }
 
- 
+     
 
-    $("form#formTurmas").submit(function(){
+    $("form#colaboradores_form").submit(function(){
         var obj = $(this).serialize();
-        var id_turma = $("#id_turma").val()
-        var url
-        if(id_turma == ''){
-            url = `http://${location.hostname}/enturmacao/turmas/cadastrar`
-        }else{
-            url = `http://${location.hostname}/enturmacao/turmas/editar/${id_turma}`
-        }
+        console.log(obj)
 
+        /*
         $.post(
             url,
             obj,
@@ -157,33 +130,17 @@ $(document).ready(function(){
 
             }
         )
-
+        /**/
 
         return false
     })
 
-    $("#btnExcluir").click(function(){
-        var id_turma = $("#id_turma").val()
-        var url = `http://${location.hostname}/enturmacao/turmas/apagar/${id_turma}`
-        var result = confirm('Tem certeza?')
-
-        if(result){
-
-            $.get(
-                url,
-                function(data){
-                    if(data == 'deletado'){
-                        //alert('Deletado Com Succeso')
-                        location.reload()
-                    }else{
-                        alert(data)
-                        location.reload()
-                    }
-                    console.log(data)
-                }
-            )
-        }
+    $("#btn_cancelar").click(function(){
+        $('#colaboradores_form').modal('hide')
+       
     })
+
+
  
 
 })

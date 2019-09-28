@@ -14,3 +14,13 @@ a.nav-link{
 .cursor-pointer{
 	cursor:pointer;
 }
+
+.img-form {
+    height: 125px;
+    border-radius: 50%;
+}
+.img-list{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+}
