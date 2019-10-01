@@ -12,22 +12,23 @@ class Usuarios_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
-	public function select($dados)
+	public function select_login($dados)
 	{
-		$this->db->select('u.id_usuario, u.nome, u.usuario, u.email, u.email_sup, u.codcur, u.codper, p.nome_perfil');
+		$this->db->select('u.id_usuario, u.nome, u.usuario, p.nome_perfil');
 		$this->db->from('usuarios as u');
 		$this->db->join('perfis as p', 'u.id_perfil = p.id_perfil');
 		$this->db->where($dados);
 		return $this->db->get()->row();
 	}
 
-	public function insert($dados){
+	public function insert($dados)
+	{
 		$this->db->insert('usuarios', $dados);
 		return $this->db->insert_id();
 
 	}
 
-	public function select_all()
+	public function select()
 	{
 		$this->db->order_by('nome', 'asc');
 

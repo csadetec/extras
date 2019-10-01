@@ -1,6 +1,6 @@
 $(document).ready(function(){
  
-    colaboradores()
+   // colaboradores()
     function colaboradores()
     {   
        
@@ -14,8 +14,8 @@ $(document).ready(function(){
                 var row = ``
                 for(var i in data){
                     var nome = data[i].nome_colaborador
-                    var chapa = data[i].chapa
-                    var cargo = data[i].gargo
+                    var chapa = data[i].chapa 
+                    var cargo = set_cargo(data[i].gargo)
                     row += ``
                     +`<li class="list-group-item list-group-item-action cursor-pointer">`
                     +   `<div class="row">`
@@ -66,7 +66,7 @@ $(document).ready(function(){
 
                 $('#nome_form').text(data.nome_colaborador)
                 //$('#chapa_gargo').html(`<sub>${data.gargo} | ${chapa}</sub>`)
-                $('#chapa_gargo').html(`${data.gargo} | ${chapa}`)
+                $('#chapa_gargo').html(`${set_cargo(data.gargo)} | ${chapa}`)
                 
                 $('.img-form').attr('src', `${visiografo}${chapa}.JPG`)
                 $('#colaboradores_form').modal('show')
@@ -80,6 +80,12 @@ $(document).ready(function(){
         $("#lista_colaboradores li").filter(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
+    }
+
+    function set_cargo(g)
+    {
+        if(g == 'ANALISTA DE ÁREA DO CONHECIMENTO SÊNIOR')return 'ANALISTA DE ÁREA'
+        return g
     }
 
      
