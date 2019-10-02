@@ -22,6 +22,18 @@ class Colaboradores_model extends CI_Model {
 		$this->db->where('chapa', $chapa);
 		return $this->db->update('colaboradores', $dados);
 	}
+
+	public function select_seach($c)
+	{
+		# code...
+		$this->db->select('c.chapa, c.nome_colaborador, c.cargo');
+		$this->db->from('colaboradores as c');
+		$this->db->like('c.nome_colaborador', $c, 'BOTH');
+		$this->db->order_by('c.cargo', 'asc');
+		$this->db->order_by('c.nome_colaborador', 'asc');
+		return $this->db->get()->result();
+	}
+
 	public function select()
 	{
 		# code...

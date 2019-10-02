@@ -4,6 +4,51 @@ $(document).ready(function(){
 
 	servicos_form()
 	function servicos_form(){
+		
+		
+		motivos()
+		data_horas()
+		$("#pesquisa_colaborador").on("keyup", colaboradores)
+    
+		$('#servicos_form').modal('show')
+
+	}
+
+	function colaboradores(){
+		var value = $(this).val().toLowerCase()
+		//console.log(value.length)
+		if(value.length > 2){
+		//	console.log(`${site}colaboradores/pesquisa/${value}`)
+			$.getJSON(
+				`${site}colaboradores/pesquisa/${value}`,
+				function(data){
+					//console.log(data)
+					var row = ``
+					for(var i in data){
+						var cargo = data[i].cargo == 'ANALISTA DE ÁREA DO CONHECIMENTO SÊNIOR'?'ANALISTA DE ÁREA':data[i].cargo
+						row +=``
+	                    +`<li class="list-group-item list-group-item-action cursor-pointer">`
+	                    +   `<div class="row">`
+	                    +       `<div   class="col-3 col-md-2" >`
+	                    +           `<img class="img-list-form"  src="${visiografo}${data[i].chapa}.JPG">`
+	                    +        `</div>`
+	                    +        `<div class="col-9 col-md-10 pt-3 pb-3">`
+	                    +            `<div class="float-left">${data[i].nome_colaborador} | ${cargo}</div>`
+	                    +        `</div>`
+	                    +   `</div>`
+	                    +`</li>`
+
+					}
+					$('#lista_colaboradores').empty()
+					$('#lista_colaboradores').prepend(row)
+				
+				}
+			)
+		}
+		
+	}
+	
+	function motivos(){
 		$.getJSON(
 			`${site}motivos`,
 			function(data){
@@ -17,6 +62,9 @@ $(document).ready(function(){
 				$('select#id_motivo').prepend(options)
 			}
 		)
+	}
+	function data_horas()
+	{
 		$.getJSON(
 			`${site}setup/data`,
 			function(data){
@@ -25,10 +73,6 @@ $(document).ready(function(){
 				$('#horas_fim').val(data.fim)
 			}
 		)
-
-
-		$('#servicos_form').modal('show')
-
 	}
 
 	$('#btn_cancelar_servico').click(function(){

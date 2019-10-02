@@ -19,9 +19,11 @@ class Colaboradores extends CI_Controller {
 		$this->load->view('index', $data, false);
 
 	}
-	public function all()
-	{
-		$colaboradores = $this->colaboradores_model->select();
+	public function pesquisa($p = null)
+	{	
+		$p = urldecode($p);
+		//echo $p;
+		$colaboradores = $this->colaboradores_model->select_seach($p);
 		echo json_encode($colaboradores);
 	}
 
