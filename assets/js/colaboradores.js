@@ -1,59 +1,6 @@
 $(document).ready(function(){
  
-   // colaboradores()
-    function colaboradores()
-    {   
-       
-        var url = `${site}/colaboradores`
 
-        $.getJSON(
-            url,
-            function(data){
-
-
-                var row = ``
-                for(var i in data){
-                    var nome = data[i].nome_colaborador
-                    var chapa = data[i].chapa 
-                    var cargo = set_cargo(data[i].gargo)
-                    row += ``
-                    +`<li class="list-group-item list-group-item-action cursor-pointer">`
-                    +   `<div class="row">`
-                    +       `<div   class="col-3 col-md-2" >`
-                    +           `<img class="img-list"  src="${visiografo}${chapa}.JPG">`
-                    +        `</div>`
-                    +        `<div class="col-9 col-md-10">`
-                    +            `<div class="float-right">${cargo}</div>`
-                    +            `<div>${nome}</div>`
-                    +            `<div id="chapa">${chapa}</div>`
-                    +        `</div>`
-                    +   `</div>`
-                    +`</li>`
-                }
-                var html = ``
-                +`<div class="row justify-content-center pt-list" id="">`
-                +   `<div class="col-md-8">`
-                +`      <input class="form-control form-control-lg mb-2" type="search" placeholder="Pesquisar Colaborador" aria-label="Pesquisar Colaborador" id="myInput" data-list="list-group">`
-                +   `</div>`
-                +`</div>`
-                +`<div class="row justify-content-center">`
-                +   `<div class="col-md-8" >`
-                +      `<ul class="list-group" id="lista_colaboradores">`
-                +           `${row}`
-                +       `</ul>`
-                +    `</div>`
-                +`</div>`
-
-                $("div#conteudo").prepend(html)
-                $("#lista_colaboradores li").click(colaboradores_form)
-                $("#myInput").on("keyup", pesquisa)
-    
-
-               
-            }
-
-        )
-    }
 
     var colaboradores_form = function()
     {
@@ -146,6 +93,62 @@ $(document).ready(function(){
        
     })
 
+    /*
+    $('#a_colaboradores').click(function colaboradores(){ 
+
+        $('#conteudo').empty()  
+       
+        var url = `${site}/colaboradores`
+
+        $.getJSON(
+            url,
+            function(data){
+
+
+                var row = ``
+                for(var i in data){
+                    var nome = data[i].nome_colaborador
+                    var chapa = data[i].chapa 
+                    var cargo = set_cargo(data[i].gargo)
+                    row += ``
+                    +`<li class="list-group-item list-group-item-action cursor-pointer">`
+                    +   `<div class="row">`
+                    +       `<div   class="col-3 col-md-2" >`
+                    +           `<img class="img-list"  src="${visiografo}${chapa}.JPG">`
+                    +        `</div>`
+                    +        `<div class="col-9 col-md-10">`
+                    +            `<div class="float-right">${cargo}</div>`
+                    +            `<div>${nome}</div>`
+                    +            `<div id="chapa">${chapa}</div>`
+                    +        `</div>`
+                    +   `</div>`
+                    +`</li>`
+                }
+                var html = ``
+                +`<div class="row justify-content-center pt-list" id="">`
+                +   `<div class="col-md-8">`
+                +`      <input class="form-control form-control-lg mb-2" type="search" placeholder="Pesquisar Colaborador" aria-label="Pesquisar Colaborador" id="myInput" data-list="list-group">`
+                +   `</div>`
+                +`</div>`
+                +`<div class="row justify-content-center">`
+                +   `<div class="col-md-8" >`
+                +      `<ul class="list-group" id="lista_colaboradores">`
+                +           `${row}`
+                +       `</ul>`
+                +    `</div>`
+                +`</div>`
+
+                $("div#conteudo").prepend(html)
+                $("#lista_colaboradores li").click(colaboradores_form)
+                $("#myInput").on("keyup", pesquisa)
+    
+
+               
+            }
+
+        )
+    })
+    /**/
 
  
 

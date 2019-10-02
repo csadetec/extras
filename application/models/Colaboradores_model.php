@@ -1,7 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
 class Colaboradores_model extends CI_Model {
+
 
 	public function insert($dados)
 	{
@@ -23,7 +25,7 @@ class Colaboradores_model extends CI_Model {
 	public function select()
 	{
 		# code...
-		$this->db->select('c.chapa, c.nome_colaborador, c.gargo');
+		$this->db->select('c.chapa, c.nome_colaborador, c.cargo');
 		$this->db->from('colaboradores as c');
 		/*
 		$this->db->join('turmas as t', 'a.id_turma = t.id_turma','left');
@@ -31,7 +33,7 @@ class Colaboradores_model extends CI_Model {
 		$this->db->where('a.codcur', $codcur);
 		$this->db->where('a.codper', $codper);
 		/**/
-		$this->db->order_by('c.gargo', 'asc');
+		$this->db->order_by('c.cargo', 'asc');
 		$this->db->order_by('c.nome_colaborador', 'asc');
 		return $this->db->get()->result();
 	}

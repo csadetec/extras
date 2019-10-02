@@ -18,10 +18,8 @@
 
           <div class="form-row mb-3">
             <div class="col-12">
-              <select name="id_motivo" class="form-control">
+              <select name="id_motivo" id="motivo" class="form-control">
                 <option value="">SELECIONE O MOTIVO</option>
-                <option value="1">APLICAÇÃO DE PROVA</option>
-                <option value="2">REUNIÃO PEDAGÓGICA</option>
               </select>
             </div>
           </div>   

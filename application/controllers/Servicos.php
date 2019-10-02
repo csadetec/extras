@@ -6,18 +6,19 @@ class Servicos extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('colaboradores_model'));
+		$this->load->model(array('colaboradores_model', 'servicos_model'));
 		$this->load->library(array('form_validation'));
 		$this->load->helper(array('funcoes_helper'));
+		
+
 		//verifica_login();
 
 	}
 	public function index()
 	{
-		/*
-		$colaboradores = $this->colaboradores_model->select();
-		echo json_encode($colaboradores);
-		?**/
+		$data['servicos'] = $this->servicos_model->select();
+		$data['page'] = 'servicos/servicos_listar';
+		$this->load->view('index', $data, false);
 	}
 	/*
 	public function listar($chapa = null)

@@ -18,21 +18,8 @@
   <!--Main Navigation-->
   <header>
    
-    <nav class="navbar  navbar-dark primary-color fixed-top pt-3 pb-3 d-none">
+    <nav class="navbar navbar-expand-lg  navbar-dark primary-color fixed-top pt-3 pb-3">
       <a class="navbar-brand" href="" >EXTRAS</a>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#colaboradores">Serviços
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="#colaboradores">Colaboradores
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-      </ul>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
           aria-expanded="false" aria-label="Toggle navigation">
@@ -40,19 +27,23 @@
       </button>
 
       <div class="collapse navbar-collapse" id="basicExampleNav">
-        <ul class="navbar-nav float-right">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Atualizar Professores
+            <a class="nav-link" href="<?php echo base_url('servicos') ?>" id="a_servicos">Serviços
               <span class="sr-only">(current)</span>
             </a>
           </li>
-         
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('colaboradores') ?>" id="a_colaboradores">Colaboradores
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
     <!--/.Navbar-->
 
-    <!--
+   
   </header>
   <!--Main Navigation-->
 
@@ -60,12 +51,7 @@
   <main class="mb-5">
     <!--Main container-->
     <div class="container-fluid mt-2" id="conteudo">
-      
-      <!--
-      <?php //$this->load->view('usuarios_login', FALSE); ?>
-      <?php $this->load->view('colaboradores_form', FALSE); ?>
-      
-   
+      <?php $this->load->view($page, FALSE); ?>      
 
     </div>
     <!--Main container-->
@@ -91,8 +77,10 @@
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script> 
   <script src="assets/js/script.js?201909"></script>
-  <script src="assets/js/usuarios.js?20190930"></script>
-  <script src="assets/js/colaboradores.js?201909301932"></script>
+  <script src="assets/js/usuarios.js?201909301521"></script>
+  <script src="assets/js/colaboradores.js?20191001"></script>
+  <script src="assets/js/servicos.js?20191001ab"></script>
+
 
   <!-- -->
 </body>

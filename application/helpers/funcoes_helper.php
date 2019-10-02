@@ -5,7 +5,7 @@ function rename_title($t)
 {
     $t = strtolower($t);
     if($t == 'nome')return 'nome_colaborador';
-    if($t == 'nome funcao')return 'gargo';
+    if($t == 'nome funcao')return 'cargo';
     if($t == 'descricao secao')return 'descricao_secao';
     
     return $t;

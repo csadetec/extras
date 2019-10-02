@@ -5,19 +5,23 @@ class Setup extends CI_Controller {
 
 	public function index()
 	{
-		$data['usuario'] = $_SESSION;
 
-		if($_SESSION['logged']){
-			$data['navbar']  = 'show';
 
-		}else{
-			$data['navbar']  = 'd-none';
-		}
+	}
 
+
+	public function data()
+	{
+		date_default_timezone_set('America/Sao_Paulo');
+		$data['dia'] = date('Y-m-d');
+		$data['inicio'] = date('H:i');
+
+		$fim =  strtotime($data['inicio']) + 60*60;
+
+		$data['fim'] = date('H:i', $fim);
 
 		echo json_encode($data);
 	}
-
 }
 
 /* End of file Setup.php */

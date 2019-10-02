@@ -61,7 +61,7 @@ class Usuarios extends CI_Controller {
 			/**/
 
 		endif;
-		if(!$this->input->post)$this->load->view('usuarios/usuarios_login');
+		if(!$this->input->post())$this->load->view('usuarios/usuarios_login');
 		
 	}
 

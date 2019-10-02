@@ -14,9 +14,18 @@ class Colaboradores extends CI_Controller {
 	}
 	public function index()
 	{
+		$data['colaboradores'] = $this->colaboradores_model->select();
+		$data['page'] = 'colaboradores/colaboradores_listar';
+		$this->load->view('index', $data, false);
+
+	}
+	public function all()
+	{
 		$colaboradores = $this->colaboradores_model->select();
 		echo json_encode($colaboradores);
 	}
+
+
 
 	public function listar($chapa = null)
 	{
