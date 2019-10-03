@@ -31,12 +31,11 @@ class Servicos extends CI_Controller {
 		if ($this->form_validation->run() == false):
 			# code...
 			if(validation_errors()):
-				$data['alerts'] =  validation_errors();
+				$data['msg'] =  validation_errors();
 			endif;
 		else:
 			# code...
 			$post = $this->input->post();
-//			print_r($post);
 					
 			if($data['id_servico'] = $this->servicos_model->insert($post)):
 				$data['msg'] = 'cadastrado';
@@ -77,4 +76,9 @@ class Servicos extends CI_Controller {
 		endif;
 		echo json_encode($data);
 	}
+
+
+
+
+
 }

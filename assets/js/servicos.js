@@ -1,18 +1,19 @@
 $(document).ready(function(){
-
+	
 	$('#btn_cadastrar_servico').click(servicos_form)
 
 	servicos_form()
+
 	
 	function servicos_form()
 	{
-		motivos()
+		listar_motivos()
 		data_horas()
-		$("#pesquisa_colaborador").on("keyup", colaboradores)
+		$("#pesquisa_colaborador").on("keyup", listar_colaboradores)
 		$('#servicos_form').modal('show')
 	}
 
-	function colaboradores()
+	function listar_colaboradores()
 	{
 		var value = $(this).val().toLowerCase()
 		//console.log(value.length)
@@ -23,6 +24,7 @@ $(document).ready(function(){
 				function(data){
 					//console.log(data)
 					var row = ``
+					var id_servico = $('#id_servico').val()
 					for(var i in data){
 						var cargo = data[i].cargo == 'ANALISTA DE ÁREA DO CONHECIMENTO SÊNIOR'?'ANALISTA DE ÁREA':data[i].cargo
 						row +=``
@@ -34,6 +36,12 @@ $(document).ready(function(){
 	                    +        `<div class="col-9 col-md-10 pt-3 pb-3">`
 	                    +            `<div class="float-left">${data[i].nome_colaborador} | ${cargo}</div>`
 	                    +        `</div>`
+	                    +		`<div id="chapa" class="d-none">`
+	                    +			`${data[i].chapa}`
+	                    +		`</div>`
+	                    +		`<div id="id_servico" class="d-none">`
+	                    +			`${id_servico}`
+	                    +		`</div>`
 	                    +   `</div>`
 	                    +`</li>`
 					}
@@ -48,10 +56,22 @@ $(document).ready(function(){
 
 	function colaboradores_servico()
 	{
-		console.log('clicou')
+		var chapa = $(this).find('#chapa').text()
+		var id_servico = $(this).find('#id_servico').text()
+
+		var obj = {chapa:chapa, id_servico:id_servico}
+
+		$.post(
+			`${site}servicos_colaboradores/cadastrar`,
+			obj,
+			function(data){
+				console.log(data)
+			}
+
+		)
 	}
 	
-	function motivos(){
+	function listar_motivos(){
 		$.getJSON(
 			`${site}motivos`,
 			function(data){
@@ -110,8 +130,8 @@ $(document).ready(function(){
 	                $('#btn_add_colaboradores').hide()
 	                $('#input_pesquisa').removeClass('d-none')
 	                
-				}else if(data.alerts){
-					var msg = `${data.alerts}<a href=""><strong><i class="fas fa-times"></i> Fechar Formulário</a></strong>` 
+				}else if(data.msg){
+					var msg = `${data.msg}<a href=""><strong><i class="fas fa-times"></i> Fechar Formulário</a></strong>` 
 	                $("div#alert_servico_cadastro").removeClass('d-none')
 	                $("div#alert_servico_cadastro").empty()
 	                $("div#alert_servico_cadastro").prepend(msg)
