@@ -3,18 +3,17 @@ $(document).ready(function(){
 	$('#btn_cadastrar_servico').click(servicos_form)
 
 	servicos_form()
-	function servicos_form(){
-		
-		
+	
+	function servicos_form()
+	{
 		motivos()
 		data_horas()
 		$("#pesquisa_colaborador").on("keyup", colaboradores)
-    
 		$('#servicos_form').modal('show')
-
 	}
 
-	function colaboradores(){
+	function colaboradores()
+	{
 		var value = $(this).val().toLowerCase()
 		//console.log(value.length)
 		if(value.length > 2){
@@ -37,15 +36,19 @@ $(document).ready(function(){
 	                    +        `</div>`
 	                    +   `</div>`
 	                    +`</li>`
-
 					}
 					$('#lista_colaboradores').empty()
 					$('#lista_colaboradores').prepend(row)
+					$("#lista_colaboradores li").click(colaboradores_servico)
 				
 				}
 			)
 		}
-		
+	}
+
+	function colaboradores_servico()
+	{
+		console.log('clicou')
 	}
 	
 	function motivos(){
@@ -75,6 +78,57 @@ $(document).ready(function(){
 		)
 	}
 
+	$('form#servicos_form').submit(function(){
+		var obj = $(this).serialize()
+		var id_servico = $('#id_servico').val()
+		var url = ''
+		if(id_servico > 0){
+			var url = `${site}servicos/editar/${id_servico}`
+		}else{
+			var url = `${site}servicos/cadastrar`
+		}
+
+		$.post(
+			url,
+			obj,
+			function(data){
+				data = JSON.parse(data)
+				if(data.msg == 'cadastrado'){
+					var msg = `Cadastrado com Sucesso. <a href=""> <strong><i class="fas fa-times"></i> Fechar Formulário</a></strong>` 
+	                $("div#alert_servico_cadastro").removeClass('d-none')
+	                $("div#alert_servico_cadastro").empty()
+	                $("div#alert_servico_cadastro").prepend(msg)
+	                $('h5.modal-title').text(`Editar Serviço Nº ${data.id_servico}`)
+	                $('button#btn_add_colaboradores').hide()
+	                $('#input_pesquisa').removeClass('d-none')
+	                $('#id_servico').val(data.id_servico)
+	            }else if(data.msg == 'editado'){
+					var msg = `Editado com Sucesso. <a href=""> <strong><i class="fas fa-times"></i> Fechar Formulário</a></strong>` 
+	                $("div#alert_servico_cadastro").removeClass('d-none')
+	                $("div#alert_servico_cadastro").empty()
+	                $("div#alert_servico_cadastro").prepend(msg)
+	                $('#btn_add_colaboradores').hide()
+	                $('#input_pesquisa').removeClass('d-none')
+	                
+				}else if(data.alerts){
+					var msg = `${data.alerts}<a href=""><strong><i class="fas fa-times"></i> Fechar Formulário</a></strong>` 
+	                $("div#alert_servico_cadastro").removeClass('d-none')
+	                $("div#alert_servico_cadastro").empty()
+	                $("div#alert_servico_cadastro").prepend(msg)
+				}else{
+					var msg = `NÃO POSSÍVEL CADASTRAR!!! <a href=""><strong><i class="fas fa-times"></i> Fechar Formulário</a></strong>` 
+	                $("div#alert_servico_cadastro").removeClass('d-none')
+	                $("div#alert_servico_cadastro").empty()
+	                $("div#alert_servico_cadastro").prepend(msg)
+	             //   setTimeout(function(){location.reload()}, 3000)
+				}
+
+				console.log(data)
+				console.log(url)
+			}
+		)		
+		return false
+	})
 	$('#btn_cancelar_servico').click(function(){
 		$('#servicos_form').modal('hide')
 	})

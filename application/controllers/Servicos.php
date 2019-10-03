@@ -20,20 +20,44 @@ class Servicos extends CI_Controller {
 		$data['page'] = 'servicos/servicos_listar';
 		$this->load->view('index', $data, false);
 	}
-	/*
-	public function listar($chapa = null)
-	{
-		$colaborador = $this->colaboradores_model->select_chapa($chapa);
-		echo json_encode($colaborador);
-	}
-	/**/
-
 
 	public function cadastrar()
 	{	
-		$this->form_validation->set_rules('nome_turma', 'Nome da Turma', 'trim|required|ucfirst');
-		$this->form_validation->set_rules('turno', 'Turno', 'trim|required|strtoupper');
+		$this->form_validation->set_rules('id_motivo', 'MOTIVO', 'trim|required');
+		$this->form_validation->set_rules('data', 'DATA', 'trim|required');
+		$this->form_validation->set_rules('horas_inicio', 'INÍCIO', 'trim|required');
+		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
+		$data = null;
 		if ($this->form_validation->run() == false):
+			# code...
+			if(validation_errors()):
+				$data['alerts'] =  validation_errors();
+			endif;
+		else:
+			# code...
+			$post = $this->input->post();
+//			print_r($post);
+					
+			if($data['id_servico'] = $this->servicos_model->insert($post)):
+				$data['msg'] = 'cadastrado';
+			endif;
+
+			
+		endif;	
+		echo json_encode($data);
+		
+	}
+
+	public function editar($id_servico = null)
+	{
+		$this->form_validation->set_rules('id_motivo', 'MOTIVO', 'trim|required');
+		$this->form_validation->set_rules('data', 'DATA', 'trim|required');
+		$this->form_validation->set_rules('horas_inicio', 'INÍCIO', 'trim|required');
+		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
+	
+		if(!$data['servico'] = $this->servicos_model->select_id($id_servico)):
+			$data['msg'] = 'Serviço não Cadastrado';
+		elseif($this->form_validation->run() == false):
 			# code...
 			if(validation_errors()):
 				echo validation_errors();
@@ -41,35 +65,16 @@ class Servicos extends CI_Controller {
 		else:
 			# code...
 			$post = $this->input->post();
-		
+			$data['msg'] = 'editado';
+//			print_r($post);
+			/*
 			if($this->turmas_model->insert($post)):
-			//	set_msg('Turma cadastrado com Sucesso', 'success');
 				echo 'cadastrado';
 			else:
-				echo 'FALHA AO CADASTRAR';
+				echo 'error';
 			endif;
-
+			/**/
 		endif;
-		
+		echo json_encode($data);
 	}
-
-	/*
-	public function editar()
-	{
-		$this->form_validation->set_rules('matricula', 'MATRÍCULA', 'trim|required');
-		if ($this->form_validation->run() == false):
-			if(validation_errors()):
-				echo validation_errors();
-			endif;
-		else:
-			$post = $this->input->post();
-			//print_r($post);
-			if($this->alunos_model->update($post, $post['matricula'])):
-				echo 'success';
-			else:
-				echo 'Falha ao Atualizar os Dados do Aluno';
-			endif;
-		endif;
-	}
-	/**/
 }

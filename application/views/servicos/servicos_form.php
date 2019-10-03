@@ -11,10 +11,11 @@
         <!-- Default form login -->
         <div class="row">
           <div class="col-6">
-            <form id="colaboradores_form" class="text-center" action="post">
+            <form id="servicos_form" class="text-center" action="post">
               <div class="form-row mb-3">
-                <button type="button" class="btn btn-success">Salvar</button>
+                <button type="submit" class="btn btn-success">Salvar</button>
                 <button type="reset" class="btn btn-secondary" id="btn_cancelar_servico">Cancelar</button>
+                <input type="hidden" id="id_servico">
               </div>
               <div class="form-row mb-3">
                 <div class="col-6" >
@@ -23,28 +24,25 @@
                 </div>
                 <div class="col-6">
                   <!--<label for="data" class="float-left">Data</label>-->
-                  <input type="date" name="data" id="data" class="form-control" value="<?php echo date('Y-m-d') ?>" >
+                  <input type="date" name="data" id="data" class="form-control">
                 </div>
               </div>
-              <!--
-              <div class="form-row mb-3">
-                <div class="col-12">
-                  <label for="data" class="float-left">Data</label>
-                  <input type="date" name="data" id="data" class="form-control" value="<?php echo date('Y-m-d') ?>" >
-                </div>
-              </div>
-              <!-- -->
+
               <div class="form-row mb-3">
                 <div class="col-6">
                   <label for="horas_inicio" class="float-left">Início</label>
-                  <input type="time" name="horas_inicio" id="horas_inicio" class="form-control" value="<?php echo date('H:i') ?>" >
+                  <input type="time" name="horas_inicio" id="horas_inicio" class="form-control">
                 </div>
                 <div class="col-6">
                   <label for="horas_fim" class="float-left">Fim</label>
                   <input type="time" name="horas_fim" id="horas_fim" class="form-control">
                 </div>
               </div>
-              <div class="form-row">
+              <div class="form-row justify-content-end">
+
+                <button id="btn_add_colaboradores" type="submit" class="btn btn-primary">ADICIONAR PESSOAS</button>
+              </div>
+              <div id="input_pesquisa" class="form-row d-none">
                 <input class="form-control form-control-lg mb-2" type="search" placeholder="Pesquisar Colaborador" aria-label="Pesquisar Colaborador" id="pesquisa_colaborador" data-list="list-group">
               </div>
               <div class="form-row">
@@ -67,6 +65,12 @@
               
               </div>
             </form>
+          </div>
+          <div class="col-6">
+            <div class="row" id="">
+              <div id="alert_servico_cadastro" class="col-12 alert alert-info d-none" role="alert">                
+              </div>
+            </div>
           </div>
         </div>
       </div>
