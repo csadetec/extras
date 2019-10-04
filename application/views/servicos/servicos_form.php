@@ -16,7 +16,7 @@
             <form id="servicos_form" class="text-center" action="post">
               <div class="form-row mb-3">
                 <div class="col-6" >
-                  <select name="id_motivo" id="id_motivo" class="form-control">
+                  <select name="id_motivo" id="id_motivo" class="form-control" required>
                     <option value="">SELECIONE O MOTIVO</option>
                     <optgroup label="Ensino Fundamental I">
                       <option value="1">APLICAÇÃO DE PROVA EF I </option>
@@ -47,50 +47,28 @@
                 </div>
                 <div class="col-6">
                   <!--<label for="data" class="float-left">Data</label>-->
-                  <input type="date" name="data" id="data" class="form-control">
+                  <input type="date" name="data" id="data" class="form-control" required>
                 </div>
               </div>
-
               <div class="form-row mb-3">
                 <div class="col-6">
                   <label for="horas_inicio" class="float-left">Início</label>
-                  <input type="time" name="horas_inicio" id="horas_inicio" class="form-control">
+                  <input type="time" name="horas_inicio" id="horas_inicio" class="form-control" required>
                 </div>
                 <div class="col-6">
                   <label for="horas_fim" class="float-left">Fim</label>
-                  <input type="time" name="horas_fim" id="horas_fim" class="form-control">
+                  <input type="time" name="horas_fim" id="horas_fim" class="form-control" required>
                 </div>
               </div>
-              <div id="input_pesquisa" class="form-row ">
+              <div id="input_pesquisa" class="form-row d-none">
                 <input class="form-control form-control-lg mb-2" type="search" placeholder="Pesquisar Colaborador"  id="pesquisa_colaborador" list="list-colaboradores">
                 <datalist id="list-colaboradores">
-
-                 
                 </datalist>
               </div>
               <div class="form-row mb-3">
-                <button type="submit" class="btn btn-success">Salvar</button>
+                <button type="submit" class="btn btn-primary" id="add_colaborador">Adicionar Colaboradores</button>
                 <button type="reset" class="btn btn-secondary" id="btn_cancelar_servico" onclick="location.reload()">Fechar</button>
                 <input type="hidden" id="id_servico">
-              </div>
-              <div class="form-row">
-                <div class="col-12">
-                  <ul class="list-group" id="lista_colaboradores">
-                    <!-- -
-                    <li class="list-group-item list-group-item-action cursor-pointer">
-                      <div class="row justify-content-center">
-                        <div class="col-3 col-md-2">
-                          <img class="img-list"  src="#">
-                        </div>
-                        <div class="col-9 col-md-10">
-                          <div class="float-left " >nome do colaborador | cargo</div>
-                        </div>
-                      </div>
-                    </li>
-                    <!-- -->
-                  </ul>
-                </div>
-              
               </div>
             </form>
           </div>
@@ -98,7 +76,32 @@
            
             <div class="row">
               <div class="col-12">
+                <!--
                 <ul class="list-group" id="lista_servico_colaboradores"></ul>
+                <!-- -->
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <!--
+                      <th scope="col">#</th>
+                      <th scope="col">NOME</th>
+                      <th scope="col">INÍCIO</th>
+                      <th scope="col">FIM</th>
+                      <!-- -->
+                    </tr>
+                  </thead>
+                  <tbody id="lista_servico_colaboradores" class="cursor-pointer">
+                    <!--
+                    <tr>
+                      <th scope="row">1</th>
+                      <td class="d-none">chapa</td>
+                      <td>lucas</td>
+                      <td>18:00</td>
+                      <td>20:00</td>
+                    </tr>
+                    <!-- -->
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

@@ -34,3 +34,7 @@ a.nav-link{
 #lista_servicos > tr:hover{
     background: #aaaaaa29
 }
+
+#lista_servico_colaboradores > tr:hover{
+    background: #aaaaaa29
+}

@@ -1,7 +1,5 @@
 $(document).ready(function(){
  
-
-
     var colaboradores_form = function()
     {
         var chapa = $(this).find('#chapa').text()
@@ -22,66 +20,6 @@ $(document).ready(function(){
     }
 
  
-    $("#pesquisa_colaborador").on("keyup", function(){
-    
-        var value = $(this).val().toLowerCase()
-        //console.log('click '+value)
-        var escolhido = value
-        value = value.replace('analista de área','')
-        value = value.replace('professor','')
-        value = value.replace('|','')
-        $.getJSON(
-            `${site}colaboradores/pesquisa/${value}`,
-            function(data){
-                //console.log(data)
-                var options = ``
-                var id_servico = $('#id_servico').val()
-                for(var i in data){
-                    var cargo = data[i].cargo == 'ANALISTA DE ÁREA DO CONHECIMENTO SÊNIOR'?'ANALISTA DE ÁREA':data[i].cargo
-                    var colaborador = `${data[i].nome_colaborador} | ${cargo}`
-                    options +=`<option value="${colaborador}">`
-
-                    console.log('value '+value)
-                    console.log('escolhido '+escolhido)
-                    console.log('colaborador '+colaborador)
-                    
-                    if(colaborador.toLowerCase() == escolhido){
-                        console.log('cadastrar no servico')
-                    }
-
-                }
-                $('datalist#list-colaboradores').empty()
-                $('datalist#list-colaboradores').prepend(options)
-
-            
-            }
-        )
-    })
-
-    function cadastrar_colaborador_servico()
-    {
-        /*
-        var chapa = $(this).find('#chapa').text()
-        var id_servico = $(this).find('#id_servico').text()
-        /**/
-        console.log('add')
-
-        //var obj = {chapa:chapa, id_servico:id_servico}
-
-        /*
-        $.post(
-            `${site}servicos_colaboradores/cadastrar`,
-            obj,
-            function(data){
-                data = JSON.parse(data)
-                //console.log(data)
-                listar_servicos_colaboradores()
-            }
-
-        )
-        /**/
-
-    }
    
 
     $("form#colaboradores_form").submit(function(){
@@ -135,10 +73,7 @@ $(document).ready(function(){
         return false
     })
 
-    $("#btn_cancelar").click(function(){
-        $('#colaboradores_form').modal('hide')
-       
-    })
+  
 
 
 
