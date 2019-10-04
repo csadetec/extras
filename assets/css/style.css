@@ -30,3 +30,7 @@ a.nav-link{
     width: 50px;
     border-radius: 50%;
 }
+
+#lista_servicos > tr:hover{
+    background: #aaaaaa29
+}

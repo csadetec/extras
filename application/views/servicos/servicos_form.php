@@ -71,6 +71,11 @@
               <div id="alert_servico_cadastro" class="col-12 alert alert-info d-none" role="alert">                
               </div>
             </div>
+            <div class="row">
+              <div class="col-12">
+                <ul class="list-group" id="lista_servico_colaboradores"></ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>

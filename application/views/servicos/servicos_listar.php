@@ -19,13 +19,15 @@
           <th scope="col">MOTIVO</th>
         </tr>
       </thead>
-      <tbody id="lista_servicos">
+      <tbody id="lista_servicos" class="cursor-pointer">
+
         <?php foreach($servicos as $r): ?>
         <tr>
           <th scope="row"><?php echo $r->data ?></th>
+          <td class="d-none"><?php echo $r->id_servico ?></td>
           <td><?php echo $r->horas_inicio ?></td>
           <td><?php echo $r->horas_fim ?></td>
-          <td><?php echo $r->id_motivo ?></td>
+          <td><?php echo $r->nome_motivo ?></td>
         </tr>
         <?php endforeach; ?>
       </tbody>

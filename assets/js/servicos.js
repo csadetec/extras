@@ -2,7 +2,7 @@ $(document).ready(function(){
 	
 	$('#btn_cadastrar_servico').click(servicos_form)
 
-	servicos_form()
+	//servicos_form()
 
 	
 	function servicos_form()
@@ -13,11 +13,13 @@ $(document).ready(function(){
 		$('#servicos_form').modal('show')
 	}
 
+	//essa funcao é chamada pelo 	$("#pesquisa_colaborador").on("keyup", listar_colaboradores)
+
 	function listar_colaboradores()
 	{
 		var value = $(this).val().toLowerCase()
 		//console.log(value.length)
-		if(value.length > 2){
+		if(value.length > 1){
 		//	console.log(`${site}colaboradores/pesquisa/${value}`)
 			$.getJSON(
 				`${site}colaboradores/pesquisa/${value}`,
@@ -47,14 +49,14 @@ $(document).ready(function(){
 					}
 					$('#lista_colaboradores').empty()
 					$('#lista_colaboradores').prepend(row)
-					$("#lista_colaboradores li").click(colaboradores_servico)
+					$("#lista_colaboradores li").click(cadastrar_colaborador_servico)
 				
 				}
 			)
 		}
 	}
 
-	function colaboradores_servico()
+	function cadastrar_colaborador_servico()
 	{
 		var chapa = $(this).find('#chapa').text()
 		var id_servico = $(this).find('#id_servico').text()
@@ -65,9 +67,45 @@ $(document).ready(function(){
 			`${site}servicos_colaboradores/cadastrar`,
 			obj,
 			function(data){
-				console.log(data)
+				data = JSON.parse(data)
+				//console.log(data)
+				listar_servicos_colaboradores()
 			}
 
+		)
+
+	}
+	function listar_servicos_colaboradores()
+	{
+		var id_servico = $('#id_servico').val()
+		var  url = `${site}servicos_colaboradores/listar/${id_servico}`
+		$.get(
+			url,
+			function(data){
+				data = JSON.parse(data)
+				console.log(data)
+				var row = ``
+				for(var i in data){
+					var cargo = data[i].cargo == 'ANALISTA DE ÁREA DO CONHECIMENTO SÊNIOR'?'ANALISTA DE ÁREA':data[i].cargo
+					row +=``
+	                +`<li class="list-group-item list-group-item-action cursor-pointer">`
+	                +   `<div class="row">`
+	                +       `<div   class="col-3 col-md-2" >`
+	                +           `<img class="img-list-form"  src="${visiografo}${data[i].chapa}.JPG">`
+	                +        `</div>`
+	                +        `<div class="col-9 col-md-10 pt-3 pb-3">`
+	                +            `<div class="float-left">${data[i].nome_colaborador} | ${cargo}</div>`
+	                +        `</div>`
+	                +		`<div id="chapa" class="d-none">`
+	                +			`${data[i].chapa}`
+	                +		`</div>`
+	                +   `</div>`
+	                +`</li>`
+				}
+			
+				$('#lista_servico_colaboradores').empty()
+				$('#lista_servico_colaboradores').prepend(row)
+			}
 		)
 	}
 	
@@ -143,14 +181,18 @@ $(document).ready(function(){
 	             //   setTimeout(function(){location.reload()}, 3000)
 				}
 
-				console.log(data)
-				console.log(url)
 			}
 		)		
 		return false
 	})
 	$('#btn_cancelar_servico').click(function(){
 		$('#servicos_form').modal('hide')
+	})
+
+	//editar servico
+	$('#lista_servicos tr').click(function(){
+		var id_servico = $(this).find('td').eq(0).text()
+		var url = ``
 	})
 
 	$("#myInput").on("keyup", function(){

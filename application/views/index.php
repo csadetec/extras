@@ -11,7 +11,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
-  <link  href="assets/css/style.css?20191001" rel="stylesheet">
+  <link  href="assets/css/style.css?20191003" rel="stylesheet">
   <title></title>
 </head>
 <body>
@@ -79,8 +79,8 @@
   <script src="assets/js/script.js?201909"></script>
   <script src="assets/js/usuarios.js?201909301521"></script>
   <script src="assets/js/colaboradores.js?20191001"></script>
-  <script src="assets/js/servicos.js?20191002ab"></script>
-  <script src="assets/js/motivos.js?20191002ab"></script>
+  <script src="assets/js/servicos.js?20191003a"></script>
+  <script src="assets/js/motivos.js?20191003"></script>
 
 
 

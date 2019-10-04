@@ -6,7 +6,7 @@ class Servicos_colaboradores extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('colaboradores_model', 'servicos_model'));
+		$this->load->model(array('servicos_colaboradores_model','colaboradores_model', 'servicos_model'));
 		$this->load->library(array('form_validation'));
 		$this->load->helper(array('funcoes_helper'));
 		//verifica_login();
@@ -32,30 +32,30 @@ class Servicos_colaboradores extends CI_Controller {
 			# code...
 			$post = $this->input->post();
 			if($servico = $this->servicos_model->select_id($post['id_servico'])):
-				
 				$post['data'] = $servico->data;
 				$post['horas_inicio'] = $servico->horas_inicio;
 				$post['horas_fim'] = $servico->horas_fim;
 				$post['id_motivo'] = $servico->id_motivo;
-				/**/
-				$data['msg'] = $post;
+				//$data['msg'] = $post;
 				$data['servico'] = $servico;
-				
+
+				if($this->servicos_colaboradores_model->insert($post)):
+					$data['msg'] = 'cadastrado';
+				endif;
 			else:
 				$data['msg'] = 'Serviço não encontrado!';
 			endif;
-			//$data['msg'] = $post;
-					/*
-			if($data['id_servico'] = $this->servicos_model->insert($post)):
-				$data['msg'] = 'cadastrado';
-			endif;
-			/**/
-
+			
 			
 		endif;	
 		echo json_encode($data);
 	}
 
+	public function listar($id_servico = null)
+	{
+		$colaboradores = $this->servicos_colaboradores_model->select_colaboradores_by_id_servico($id_servico);
+		echo json_encode($colaboradores);
+	}
 }
 
 /* End of file Servicos_colaboradores.php */

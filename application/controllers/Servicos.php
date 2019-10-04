@@ -18,6 +18,10 @@ class Servicos extends CI_Controller {
 	{
 		$data['servicos'] = $this->servicos_model->select();
 		$data['page'] = 'servicos/servicos_listar';
+		/*
+		print_r($data['servicos']);
+		$data['servicos'] = [];
+		/**/
 		$this->load->view('index', $data, false);
 	}
 
