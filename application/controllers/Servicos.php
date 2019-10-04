@@ -63,7 +63,7 @@ class Servicos extends CI_Controller {
 		elseif($this->form_validation->run() == false):
 			# code...
 			if(validation_errors()):
-				echo validation_errors();
+				$data['msg'] = validation_errors();
 			endif;
 		else:
 			# code...

@@ -1,14 +1,16 @@
 $(document).ready(function(){
 	
-	$('#btn_cadastrar_servico').click(servicos_form)
+	$('#btn_cadastrar_servico').click(function(){
+		servicos_form()
+	})
 
 	//servicos_form()
 
 	
 	function servicos_form()
 	{
-		listar_motivos()
-		data_horas()
+		//listar_motivos()
+		//	data_horas()
 		$("#pesquisa_colaborador").on("keyup", listar_colaboradores)
 		$('#servicos_form').modal('show')
 	}
@@ -109,32 +111,11 @@ $(document).ready(function(){
 		)
 	}
 	
-	function listar_motivos(){
-		$.getJSON(
-			`${site}motivos`,
-			function(data){
-				$('div#motivos').empty()
 
-				var options = `<option value="">SELECIONE O MOTIVO</option>`
-				for(var i in data){
-					options +=`<option value=${data[i].id_motivo}>${data[i].nome_motivo}</option>`
-				}
-				
-				$('select#id_motivo').prepend(options)
-			}
-		)
-	}
-	function data_horas()
-	{
-		$.getJSON(
-			`${site}setup/data`,
-			function(data){
-				$('#data').val(data.dia)
-				$('#horas_inicio').val(data.inicio)
-				$('#horas_fim').val(data.fim)
-			}
-		)
-	}
+	$('form#servicos_form').click(function(){
+       $("#alert_servico").empty()
+	})
+
 
 	$('form#servicos_form').submit(function(){
 		var obj = $(this).serialize()
@@ -152,33 +133,34 @@ $(document).ready(function(){
 			function(data){
 				data = JSON.parse(data)
 				if(data.msg == 'cadastrado'){
-					var msg = `Cadastrado com Sucesso. <a href=""> <strong><i class="fas fa-times"></i> Fechar Formulário</a></strong>` 
-	                $("div#alert_servico_cadastro").removeClass('d-none')
-	                $("div#alert_servico_cadastro").empty()
-	                $("div#alert_servico_cadastro").prepend(msg)
+					var msg =  ``
+					+`<div class="alert alert-success col-12" role="alert">`                
+          			+	`Cadastrado com Sucesso. :)`
+          			+`</div>`
+	                $("#alert_servico").prepend(msg)
 	                $('h5.modal-title').text(`Editar Serviço Nº ${data.id_servico}`)
-	                $('button#btn_add_colaboradores').hide()
 	                $('#input_pesquisa').removeClass('d-none')
 	                $('#id_servico').val(data.id_servico)
 	            }else if(data.msg == 'editado'){
-					var msg = `Editado com Sucesso. <a href=""> <strong><i class="fas fa-times"></i> Fechar Formulário</a></strong>` 
-	                $("div#alert_servico_cadastro").removeClass('d-none')
-	                $("div#alert_servico_cadastro").empty()
-	                $("div#alert_servico_cadastro").prepend(msg)
-	                $('#btn_add_colaboradores').hide()
+					var msg =  ``
+					+`<div class="alert alert-info col-12" role="alert">`                
+          			+	`Editado com Sucesso. :)`
+          			+`</div>`
+	                $("#alert_servico").prepend(msg)
 	                $('#input_pesquisa').removeClass('d-none')
 	                
 				}else if(data.msg){
-					var msg = `${data.msg}<a href=""><strong><i class="fas fa-times"></i> Fechar Formulário</a></strong>` 
-	                $("div#alert_servico_cadastro").removeClass('d-none')
-	                $("div#alert_servico_cadastro").empty()
-	                $("div#alert_servico_cadastro").prepend(msg)
+					var msg =  ``
+					+`<div class="alert alert-warning col-12" role="alert">`                
+          			+	`${data.msg}`
+          			+`</div>`
+	                $("#alert_servico").prepend(msg)
 				}else{
-					var msg = `NÃO POSSÍVEL CADASTRAR!!! <a href=""><strong><i class="fas fa-times"></i> Fechar Formulário</a></strong>` 
-	                $("div#alert_servico_cadastro").removeClass('d-none')
-	                $("div#alert_servico_cadastro").empty()
-	                $("div#alert_servico_cadastro").prepend(msg)
-	             //   setTimeout(function(){location.reload()}, 3000)
+					var msg =  ``
+					+`<div class="alert alert-danger col-12" role="alert">`                
+          			+	`Não é Possível Cadastrar`
+          			+`</div>`
+	                $("#alert_servico").prepend(msg)
 				}
 
 			}
@@ -192,8 +174,42 @@ $(document).ready(function(){
 	//editar servico
 	$('#lista_servicos tr').click(function(){
 		var id_servico = $(this).find('td').eq(0).text()
-		var url = ``
+		var url = `${site}/servicos/editar/${id_servico}`
+
+		$.get(
+			url,
+			function(data){
+				servicos_form()
+				data = JSON.parse(data)
+				console.log(data.servico)
+				$('h5.modal-title').text(`Editar Serviço Nº ${data.servico.id_servico}`)
+				$('#id_motivo').val(data.servico.id_motivo)
+				$('#data').val(data.servico.data)
+				$('#horas_inicio').val(data.servico.horas_inicio)
+				$('#horas_fim').val(data.servico.horas_fim)
+				$('#id_servico').val(data.servico.id_servico)
+	            $('#input_pesquisa').removeClass('d-none')
+	            listar_servicos_colaboradores()
+				
+			//	console.log(data.servico.id_servico)
+
+			}
+		)
 	})
+
+	/*
+	function data_horas()
+	{
+		$.getJSON(
+			`${site}setup/data`,
+			function(data){
+				$('#data').val(data.dia)
+				$('#horas_inicio').val(data.inicio)
+				$('#horas_fim').val(data.fim)
+			}
+		)
+	}
+	/**/
 
 	$("#myInput").on("keyup", function(){
         var value = $(this).val().toLowerCase();
