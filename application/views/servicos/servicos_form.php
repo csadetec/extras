@@ -61,8 +61,12 @@
                   <input type="time" name="horas_fim" id="horas_fim" class="form-control">
                 </div>
               </div>
-              <div id="input_pesquisa" class="form-row d-none">
-                <input class="form-control form-control-lg mb-2" type="search" placeholder="Pesquisar Colaborador" aria-label="Pesquisar Colaborador" id="pesquisa_colaborador" data-list="list-group">
+              <div id="input_pesquisa" class="form-row ">
+                <input class="form-control form-control-lg mb-2" type="search" placeholder="Pesquisar Colaborador"  id="pesquisa_colaborador" list="list-colaboradores">
+                <datalist id="list-colaboradores">
+
+                 
+                </datalist>
               </div>
               <div class="form-row mb-3">
                 <button type="submit" class="btn btn-success">Salvar</button>

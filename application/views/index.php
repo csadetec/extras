@@ -78,8 +78,8 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script> 
   <script src="assets/js/script.js?201909"></script>
   <script src="assets/js/usuarios.js?201909301521"></script>
-  <script src="assets/js/colaboradores.js?20191001"></script>
-  <script src="assets/js/servicos.js?20191003ab"></script>
+  <script src="assets/js/colaboradores.js?20191004a"></script>
+  <script src="assets/js/servicos.js?20191004a"></script>
   <script src="assets/js/motivos.js?20191003"></script>
 
 

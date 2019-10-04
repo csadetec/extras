@@ -4,7 +4,7 @@ $(document).ready(function(){
 		servicos_form()
 	})
 
-	//servicos_form()
+	servicos_form()
 
 	
 	function servicos_form()
