@@ -56,8 +56,9 @@ class Servicos_colaboradores extends CI_Controller {
 		$this->form_validation->set_rules('horas_inicio', 'INÍCIO', 'trim|required');
 		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
 
-		if($data['servico_colaborador'] = $this->servicos_colaboradores_model->select_id()):
-		if ($this->form_validation->run() == false):
+		if(!$data['servico_colaborador'] = $this->servicos_colaboradores_model->select_id($id_sc)):
+			$data['servico_colaborador'] = 'NÃO encontrado';
+		elseif ($this->form_validation->run() == false):
 			# code...
 			if(validation_errors()):
 				$data['msg'] =  validation_errors();
@@ -65,6 +66,7 @@ class Servicos_colaboradores extends CI_Controller {
 		else:
 			# code...
 			$post = $this->input->post();
+			/*
 			if($servico = $this->servicos_model->select_id($post['id_servico'])):
 				$post['data'] = $servico->data;
 				$post['horas_inicio'] = $servico->horas_inicio;
@@ -79,7 +81,7 @@ class Servicos_colaboradores extends CI_Controller {
 			else:
 				$data['msg'] = 'Serviço não encontrado!';
 			endif;
-			
+			/**/
 			
 		endif;	
 		echo json_encode($data);

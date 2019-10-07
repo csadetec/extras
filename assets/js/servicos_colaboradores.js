@@ -60,7 +60,6 @@ $(document).ready(function(){
 
         )
         /**/
-
     }
 
 
@@ -95,15 +94,20 @@ $(document).ready(function(){
         )
     }
 
-
-
-    //form para editar/excluir colaborador do servico
+    //montagem do form para editar/excluir colaborador do servico
     function form_servico_colaboradores()
     {
         var id_sc = $(this).find('td').eq(0).text()
-        console.log(id_sc)
-        
-        
+        var url = `${site}servicos_colaboradores/editar/${id_sc}`
+        $.get(
+            url,
+            function(data){
+                data = JSON.parse(data)
+                console.log(data.servico_colaborador)
+
+            }
+
+        )
 
     }
 

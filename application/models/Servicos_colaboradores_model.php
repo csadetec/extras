@@ -20,6 +20,16 @@ class Servicos_colaboradores_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 	
+	public function select_id($id_sc)
+	{
+		$this->db->select('sc.id_sc, sc.id_servico, sc.chapa, sc.horas_inicio, sc.horas_fim, '
+		.'c.nome_colaborador');
+		$this->db->from('servicos_colaboradores as sc');
+		$this->db->join('colaboradores as c', 'sc.chapa = c.chapa');
+		$this->db->where('sc.id_sc', $id_sc);
+
+		return $this->db->get()->row();
+	}
 
 }
 
