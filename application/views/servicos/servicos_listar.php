@@ -35,4 +35,5 @@
   </div>
 </div>
 <?php $this->load->view('servicos/servicos_form'); ?>
+<?php $this->load->view('servicos/servicos_colaboradores_form'); ?>
 

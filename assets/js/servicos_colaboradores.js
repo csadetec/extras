@@ -38,9 +38,6 @@ $(document).ready(function(){
             }
         )
     })
-
-
-
     function cadastrar_colaborador_servico(chapa, id_servico)
     {
 
@@ -62,7 +59,6 @@ $(document).ready(function(){
         /**/
     }
 
-
     function listar_servicos_colaboradores()
     {
         var id_servico = $('#id_servico').val()
@@ -81,7 +77,7 @@ $(document).ready(function(){
                     +`<tr>`
                     +   `<th scope="row">${cont++}</th>`
                     +   `<td class="d-none">${data[i].id_sc}</td>`
-                    +   `<td>${data[i].nome_colaborador}</td>`
+                    +   `<td>${data[i].nome_colaborador} | <i>${cargo}</i></td>`
                     +   `<td>${data[i].horas_inicio}</td>`
                     +   `<td>${data[i].horas_fim}</td>`
                     +`</tr>`
@@ -99,11 +95,26 @@ $(document).ready(function(){
     {
         var id_sc = $(this).find('td').eq(0).text()
         var url = `${site}servicos_colaboradores/editar/${id_sc}`
+        
         $.get(
             url,
             function(data){
                 data = JSON.parse(data)
-                console.log(data.servico_colaborador)
+                console.log(data)
+                if(data.servico_colaborador){
+                    var chapa = data.servico_colaborador.chapa
+                    var inicio = data.servico_colaborador.horas_inicio
+                    var fim = data.servico_colaborador.horas_fim
+                    $('#servicos_colaboradores_form').modal('show')
+                    //$('#servicos_form').modal('hide')
+                    $('#sc_img').attr('src', `${visiografo}${chapa}.JPG`)
+                    $('#sc_horas_inicio').val(inicio)
+                    $('#sc_horas_fim').val(fim)
+                    
+                }else{
+                    alert('FAÇA LOGIN NOVAMENTE')
+                    //location.href = `${site}login`
+                }
 
             }
 
