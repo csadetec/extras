@@ -11,6 +11,12 @@ function rename_title($t)
     return $t;
 }
 
+function diff_date($inicio, $fim)
+{
+        
+    $dif =  gmdate('H:i', strtotime($fim) - strtotime($inicio));
+    return $dif;
+}
 
 function verifica_login()
 {

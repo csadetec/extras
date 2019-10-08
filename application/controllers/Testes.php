@@ -5,16 +5,13 @@ class Testes extends CI_Controller {
 
 	public function index()
 	{
-		$inicio = '18:30';
-		$fim = '20:00';
+		$inicio = '18:47';
+		$fim = '19:47';
 
-		$inicio = strtotime($inicio);
-		$fim = strtotime($fim);
-
-		$dif =  $fim - $inicio - 3600;
+		
+		$dif =  gmdate('H:i', strtotime($fim) - strtotime($inicio));
 		print_r($dif);
-		echo '<br>';
-		print_r(date('H:i', $dif));
+	
 
 	}
 

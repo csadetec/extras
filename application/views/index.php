@@ -80,7 +80,7 @@
   <script src="assets/js/usuarios.js?201909301521"></script>
   <script src="assets/js/colaboradores.js?20191004a"></script>
   <script src="assets/js/servicos_colaboradores.js?20191007a"></script>
-  <script src="assets/js/servicos.js?20191004ab"></script>
+  <script src="assets/js/servicos.js?20191007a"></script>
   <script src="assets/js/motivos.js?20191003"></script>
 
 

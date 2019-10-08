@@ -6,7 +6,7 @@ class Servicos extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('colaboradores_model', 'servicos_model'));
+		$this->load->model(array('colaboradores_model', 'servicos_model', 'servicos_colaboradores_model'));
 		$this->load->library(array('form_validation'));
 		$this->load->helper(array('funcoes_helper'));
 		
@@ -68,13 +68,16 @@ class Servicos extends CI_Controller {
 		else:
 			# code...
 			$post = $this->input->post();
-			$data['msg'] = 'editado';
+			//$data['msg'] = $post;
 //			print_r($post);
-			/*
-			if($this->turmas_model->insert($post)):
-				echo 'cadastrado';
+			
+			if($this->servicos_model->update($post, $id_servico)):
+				$post['diferenca'] = diff_date($post['horas_inicio'], $post['horas_fim']);
+				if($this->servicos_colaboradores_model->update_id_servico($post, $id_servico)):
+					$data['msg'] = 'editado';
+				endif;
 			else:
-				echo 'error';
+				$data['msg'] =  'error';
 			endif;
 			/**/
 		endif;

@@ -11,7 +11,7 @@ class Servicos_colaboradores_model extends CI_Model {
 
 	public function select_colaboradores_by_id_servico($id_servico)
 	{
-		$this->db->select('sc.id_sc, sc.id_servico, sc.id_motivo, sc.chapa, sc.horas_inicio, sc.horas_fim, sc.data, '
+		$this->db->select('sc.id_sc, sc.id_servico, sc.id_motivo, sc.chapa, sc.horas_inicio, sc.horas_fim,  sc.diferenca, sc.data, '
 			.'c.nome_colaborador, c.cargo');
 		$this->db->from('servicos_colaboradores as sc');
 		$this->db->join('colaboradores as c', 'sc.chapa = c.chapa');
@@ -22,13 +22,20 @@ class Servicos_colaboradores_model extends CI_Model {
 	
 	public function select_id($id_sc)
 	{
-		$this->db->select('sc.id_sc, sc.id_servico, sc.chapa, sc.horas_inicio, sc.horas_fim, '
-		.'c.nome_colaborador');
+		$this->db->select('sc.id_sc, sc.id_servico, sc.chapa, sc.horas_inicio, sc.horas_fim, DATE_FORMAT(sc.data, "%d/%m/%Y") as data, '
+		.'c.nome_colaborador, c.cargo, m.nome_motivo');
 		$this->db->from('servicos_colaboradores as sc');
 		$this->db->join('colaboradores as c', 'sc.chapa = c.chapa');
+		$this->db->join('motivos as m', 'sc.id_motivo = m.id_motivo');
 		$this->db->where('sc.id_sc', $id_sc);
 
 		return $this->db->get()->row();
+	}
+
+	public function update_id_servico($dados, $id_servico)
+	{
+		$this->db->where('id_servico', $id_servico);
+		return $this->db->update('servicos_colaboradores', $dados);
 	}
 
 }

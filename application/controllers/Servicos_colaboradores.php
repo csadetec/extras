@@ -36,6 +36,7 @@ class Servicos_colaboradores extends CI_Controller {
 				$post['horas_inicio'] = $servico->horas_inicio;
 				$post['horas_fim'] = $servico->horas_fim;
 				$post['id_motivo'] = $servico->id_motivo;
+				$post['diferenca'] = diff_date($post['horas_inicio'], $post['horas_fim']);
 				//$data['msg'] = $post;
 				$data['servico'] = $servico;
 
@@ -66,6 +67,7 @@ class Servicos_colaboradores extends CI_Controller {
 		else:
 			# code...
 			$post = $this->input->post();
+			$data['msg'] = $post;
 			/*
 			if($servico = $this->servicos_model->select_id($post['id_servico'])):
 				$post['data'] = $servico->data;

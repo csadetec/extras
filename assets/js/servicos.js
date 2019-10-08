@@ -12,9 +12,6 @@ $(document).ready(function(){
 		$('#servicos_form').modal('show')
 	}
 
-
-	
-
 	$('form#servicos_form').click(function(){
        $("#alert_servico").empty()
 	})
@@ -37,6 +34,7 @@ $(document).ready(function(){
 			obj,
 			function(data){
 				data = JSON.parse(data)
+				console.log(data.msg)
 				if(data.msg == 'cadastrado'){
 					var msg =  ``
 					+`<div class="alert alert-success col-12" role="alert">`                
@@ -54,6 +52,8 @@ $(document).ready(function(){
           			+`</div>`
 	                $("#alert_servico").prepend(msg)
 	                $('#input_pesquisa').removeClass('d-none')
+				//	$('#servicos_form').modal('hide')
+					servicos_form()
 	                
 				}else if(data.msg){
 					var msg =  ``
@@ -87,7 +87,7 @@ $(document).ready(function(){
 			function(data){
 				servicos_form()
 				data = JSON.parse(data)
-				console.log(data.servico)
+				//console.log(data.msg)
 				$('h5.modal-title').text(`Editar Serviço Nº ${data.servico.id_servico}`)
 				$('#id_motivo').val(data.servico.id_motivo)
 				$('#data').val(data.servico.data)
@@ -105,37 +105,7 @@ $(document).ready(function(){
 		)
 	})
 
-	/*
-	function listar_servicos_colaboradores()
-    {
-        var id_servico = $('#id_servico').val()
-        var  url = `${site}servicos_colaboradores/listar/${id_servico}`
-        $.get(
-            url,
-            function(data){
-                data = JSON.parse(data)
-                console.log(data)
-                var row = ``
-                var cont = 1
-                for(var i in data){
-                    var cargo = data[i].cargo == 'ANALISTA DE ÁREA DO CONHECIMENTO SÊNIOR'?'ANALISTA DE ÁREA':data[i].cargo
 
-                    row +=``
-                    +`<tr>`
-                    +	`<th scope="row">${cont++}</th>`
-                    +	`<td class="d-none">${data[i].chapa}</td>`
-                    +	`<td>${data[i].nome_colaborador}</td>`
-                    +	`<td>${data[i].horas_inicio}</td>`
-                    +  	`<td>${data[i].horas_fim}</td>`
-                    +`</tr>`
-                }
-            
-                $('#lista_servico_colaboradores').empty()
-                $('#lista_servico_colaboradores').prepend(row)
-            }
-        )
-    }
-    /**/
 
 	$("#myInput").on("keyup", function(){
         var value = $(this).val().toLowerCase();

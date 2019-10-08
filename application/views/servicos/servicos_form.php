@@ -66,7 +66,7 @@
                 </datalist>
               </div>
               <div class="form-row mb-3">
-                <button type="submit" class="btn btn-primary" id="add_colaborador">Adicionar Colaboradores</button>
+                <button type="submit" class="btn btn-indigo" id="add_colaborador">Adicionar Colaboradores</button>
                 <button type="reset" class="btn btn-secondary" id="btn_cancelar_servico" onclick="location.reload()">Fechar</button>
                 <input type="hidden" id="id_servico">
               </div>

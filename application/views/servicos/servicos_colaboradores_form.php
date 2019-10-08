@@ -10,8 +10,19 @@
       </div>
       <!--Body-->
       <div class="modal-body mb-1">
-        <h5 class="mt-1 mb-2 text-center" id="nome_form" ></h5>
-        <div class="text-center" id="chapa_gargo"></div>
+        <div class="row">
+          <div class="col-9">
+            <div id="sc_cargo"></div>
+            <div id="sc_nome" ></div>
+            <div id="sc_motivo"></div>
+            <div id="sc_data"></div>
+          </div>
+          <div class="col-3">
+            <button class="btn btn-danger">EXCLUIR</button>
+          </div>
+        </div>
+
+       
         <hr>
         <!-- Default form contact -->
         <form id="servicos_colaboradores_form" class="text-center" action="post">
@@ -28,7 +39,7 @@
           <hr>
           <div class="form-row justify-content-center">
             <button class="btn btn-indigo" type="submit">Cadastrar</button>
-            <button class="btn btn-info" id="btn_cancelar" data-dismiss="modal">Cancelar</button> 
+            <button class="btn btn-secondary" id="btn_cancelar" data-dismiss="modal">Cancelar</button> 
           </div>
           <!-- -->
         </form>

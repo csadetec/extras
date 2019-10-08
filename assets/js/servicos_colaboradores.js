@@ -38,6 +38,7 @@ $(document).ready(function(){
             }
         )
     })
+
     function cadastrar_colaborador_servico(chapa, id_servico)
     {
 
@@ -49,7 +50,7 @@ $(document).ready(function(){
             obj,
             function(data){
                 data = JSON.parse(data)
-                console.log(data)
+                //console.log(data)
                 $('#pesquisa_colaborador').val('')
                 //$('#pesquisa_colaborador').focusNextInputField()
                 listar_servicos_colaboradores()
@@ -72,7 +73,7 @@ $(document).ready(function(){
                 var cont = 1
                 for(var i in data){
                     var cargo = data[i].cargo == 'ANALISTA DE ÁREA DO CONHECIMENTO SÊNIOR'?'ANALISTA DE ÁREA':data[i].cargo
-
+                 //   console.log(data)
                     row +=``
                     +`<tr>`
                     +   `<th scope="row">${cont++}</th>`
@@ -80,6 +81,7 @@ $(document).ready(function(){
                     +   `<td>${data[i].nome_colaborador} | <i>${cargo}</i></td>`
                     +   `<td>${data[i].horas_inicio}</td>`
                     +   `<td>${data[i].horas_fim}</td>`
+                    +   `<td>${data[i].diferenca}</td>`
                     +`</tr>`
                 }
             
@@ -100,13 +102,19 @@ $(document).ready(function(){
             url,
             function(data){
                 data = JSON.parse(data)
-                console.log(data)
+                //console.log(data)
                 if(data.servico_colaborador){
                     var chapa = data.servico_colaborador.chapa
                     var inicio = data.servico_colaborador.horas_inicio
                     var fim = data.servico_colaborador.horas_fim
+                    var nome = data.servico_colaborador.nome_colaborador
+                    var cargo = data.servico_colaborador.cargo
+                    var motivo = data.servico_colaborador.nome_motivo
+                    var data = data.servico_colaborador.data
                     $('#servicos_colaboradores_form').modal('show')
-                    //$('#servicos_form').modal('hide')
+                    $('#sc_cargo').text(cargo)
+                    $('#sc_nome').text(nome)
+                    $('#sc_data').text(motivo+ ' - '+data)
                     $('#sc_img').attr('src', `${visiografo}${chapa}.JPG`)
                     $('#sc_horas_inicio').val(inicio)
                     $('#sc_horas_fim').val(fim)
