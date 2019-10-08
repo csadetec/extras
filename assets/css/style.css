@@ -7,7 +7,12 @@ a.nav-link{
 .navbar-brand{
     font-weight: 400;
 }
-
+.pt-100{
+    padding-top: 100px;
+}
+.pt-65{
+    padding-top: 65px;
+}
 .pt-list{
     padding-top: 80px;
 }

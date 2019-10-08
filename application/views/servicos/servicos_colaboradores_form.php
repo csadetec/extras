@@ -18,7 +18,7 @@
             <div id="sc_data"></div>
           </div>
           <div class="col-3">
-            <button class="btn btn-danger">EXCLUIR</button>
+            <button class="btn btn-danger" id="btn_excluir_sc">EXCLUIR</button>
           </div>
         </div>
 
@@ -38,6 +38,7 @@
           </div>
           <hr>
           <div class="form-row justify-content-center">
+            <input type="hidden" id="sc_id">
             <button class="btn btn-indigo" type="submit">Cadastrar</button>
             <button class="btn btn-secondary" id="btn_cancelar" data-dismiss="modal">Cancelar</button> 
           </div>

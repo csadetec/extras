@@ -1,6 +1,6 @@
 <div class="row justify-content-center pt-list">
     <div class="col-md-8">
-      <button id="btn_cadastrar_servico" class="btn btn-primary float-right">CADASTRAR SERVIÇO</button>
+      <a href="<?php echo base_url('servicos/cadastrar') ?>" class="btn btn-primary float-right">CADASTRAR SERVIÇO</a>
     </div>
 </div>
 <div class="row justify-content-center" id="">
@@ -34,6 +34,4 @@
     </table>
   </div>
 </div>
-<?php $this->load->view('servicos/servicos_form'); ?>
-<?php $this->load->view('servicos/servicos_colaboradores_form'); ?>
 

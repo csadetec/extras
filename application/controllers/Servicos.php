@@ -25,6 +25,13 @@ class Servicos extends CI_Controller {
 		$this->load->view('index', $data, false);
 	}
 
+	public function listar($id_servico = null)
+	{
+		$servico = $this->servicos_model->select_id($id_servico);
+		$data['servico'] = $servico;
+		echo json_encode($data);
+	}
+
 	public function cadastrar()
 	{	
 		$this->form_validation->set_rules('id_motivo', 'MOTIVO', 'trim|required');
@@ -46,9 +53,14 @@ class Servicos extends CI_Controller {
 			endif;
 
 			
-		endif;	
-		echo json_encode($data);
-		
+		endif;			
+		if($this->input->post()):
+			echo json_encode($data);
+		else:
+			$data['title'] = 'Cadastrar Serviço';
+			$data['page'] = 'servicos/servicos_form';
+			$this->load->view('index', $data, FALSE);
+		endif;
 	}
 
 	public function editar($id_servico = null)
@@ -58,7 +70,7 @@ class Servicos extends CI_Controller {
 		$this->form_validation->set_rules('horas_inicio', 'INÍCIO', 'trim|required');
 		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
 	
-		if(!$data['servico'] = $this->servicos_model->select_id($id_servico)):
+		if(!$this->servicos_model->select_id($id_servico)):
 			$data['msg'] = 'Serviço não Cadastrado';
 		elseif($this->form_validation->run() == false):
 			# code...
@@ -67,10 +79,7 @@ class Servicos extends CI_Controller {
 			endif;
 		else:
 			# code...
-			$post = $this->input->post();
-			//$data['msg'] = $post;
-//			print_r($post);
-			
+			$post = $this->input->post();	
 			if($this->servicos_model->update($post, $id_servico)):
 				$post['diferenca'] = diff_date($post['horas_inicio'], $post['horas_fim']);
 				if($this->servicos_colaboradores_model->update_id_servico($post, $id_servico)):
@@ -81,7 +90,14 @@ class Servicos extends CI_Controller {
 			endif;
 			/**/
 		endif;
-		echo json_encode($data);
+
+		if($this->input->post()):
+			echo json_encode($data);
+		else:
+			$data['title'] = 'Editar Serviço Nº '.$id_servico;
+			$data['page'] = 'servicos/servicos_form';
+			$this->load->view('index', $data, FALSE);
+		endif;
 	}
 
 
