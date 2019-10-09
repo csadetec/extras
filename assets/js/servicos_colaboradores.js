@@ -48,12 +48,12 @@ $(document).ready(function(){
             obj,
             function(data){
                 data = JSON.parse(data)
-                console.log(data.where)
-                console.log(data.msg)
+                console.log(data)
                 if(data.msg){
                     msg = data.msg
                     if(msg != 'cadastrado'){
-                    //    alert(msg)
+                        alert(msg)
+                        $('#pesquisa_colaborador').val('')
                     }else{
                        $('#pesquisa_colaborador').val('')
                         //$('#pesquisa_colaborador').focusNextInputField()
@@ -61,7 +61,7 @@ $(document).ready(function(){
                     }
                 }else{
                     alert('FAÇA LOGIN NOVAMENTE!')
-                    locatin.href = `${site}/login`
+                    //location.href = `${site}/login`
                 }
               
             }
@@ -91,7 +91,7 @@ $(document).ready(function(){
                         +   `<th scope="row">${cont++}</th>`
                         +   `<td class="d-none">${data[i].id_sc}</td>`
                         +   `<td>${data[i].nome_colaborador} | <i>${cargo}</i></td>`
-                        +   `<td>${data[i].data}</td>`
+                        //+   `<td>${data[i].data}</td>`
                         +   `<td>${data[i].horas_inicio}</td>`
                         +   `<td>${data[i].horas_fim}</td>`
                         +   `<td>${data[i].diferenca}</td>`

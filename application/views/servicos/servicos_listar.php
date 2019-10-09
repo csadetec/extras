@@ -13,6 +13,7 @@
     <table class="table">
       <thead>
         <tr>
+          <th scope="col">N°</th>
           <th scope="col">DATA</th>
           <th scope="col">INÍCIO</th>
           <th scope="col">FIM</th>
@@ -23,8 +24,9 @@
 
         <?php foreach($servicos as $r): ?>
         <tr>
-          <th scope="row"><?php echo $r->data ?></th>
+          <th scope="row"><?php echo $r->id_servico ?></th>
           <td class="d-none"><?php echo $r->id_servico ?></td>
+          <td><?php echo $r->data ?></td>
           <td><?php echo $r->horas_inicio ?></td>
           <td><?php echo $r->horas_fim ?></td>
           <td><?php echo $r->nome_motivo ?></td>

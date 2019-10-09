@@ -86,13 +86,11 @@ $(document).ready(function(){
 	                	$('#add_colaborador').text('SALVAR')
 					}else{
 						alert('Faça login Novamente')
-						location.href = '${site}login'
+						location.href = `${site}login`
 					}
 				//	console.log(data)
 				}
 			)
-
-
 		}
 	//	console.log(id_servico)
 	}

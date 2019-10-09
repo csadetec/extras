@@ -12,7 +12,7 @@ class Servicos_colaboradores_model extends CI_Model {
 	public function select_where($where)
 	{
 		$this->db->where($where);
-		return $this->db->get('servicos_colaboradores')->row();
+		return $this->db->get('servicos_colaboradores')->result();
 	}
 
 	public function select_colaboradores_by_id_servico($id_servico)

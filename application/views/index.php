@@ -80,7 +80,7 @@
   <script src="<?php echo base_url('assets/js/usuarios.js?201909301521') ?>"></script>
   <script src="<?php echo base_url('assets/js/colaboradores.js?20191004a') ?>"></script>
   <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?20191008aaaa') ?>"></script>
-  <script src="<?php echo base_url('assets/js/servicos.js?20191008a') ?>"></script>
+  <script src="<?php echo base_url('assets/js/servicos.js?20191008aaa') ?>"></script>
   <script src="<?php echo base_url('assets/js/motivos.js?20191003') ?>"></script>
   <!-- -->
 </body>

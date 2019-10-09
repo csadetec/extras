@@ -23,7 +23,7 @@ class Servicos_colaboradores extends CI_Controller {
 	{
 		$this->form_validation->set_rules('id_servico', 'SERVICO', 'trim|required');
 		$this->form_validation->set_rules('chapa', 'CHAPA', 'trim|required');
-		$data = null;
+		$data['msg'] = null;
 		if ($this->form_validation->run() == false):
 			# code...
 			if(validation_errors()):
@@ -43,20 +43,29 @@ class Servicos_colaboradores extends CI_Controller {
 					'chapa' => $post['chapa'],
 					'data'  => $post['data']
 				);
-			
-				if(!$this->servicos_colaboradores_model->select_where($where)):
-					$data['msg'] = 'ja tem servico este dia';
-				elseif($this->servicos_colaboradores_model->insert($post)):
-					$data['msg'] = 'cadastrado';
-				endif;
-				/*
 				
-				/**/
+				$data['post'] = $post;
+				if($sc = $this->servicos_colaboradores_model->select_where($where)):
+					
+					if(!$sc = verifica_disponibilidade($sc, $post['horas_inicio'], $post['horas_fim'])):
+						if($this->servicos_colaboradores_model->insert($post)):
+							$data['msg'] = 'cadastrado';
+							$data['msg_teste'] = 'cadastrado por nao estar batendo às horas';
+						endif;
+					else:
+					
+						$data['msg'] = "Colaborador Já esta agendado neste horário\nNo serviço N° ".$sc->id_servico;
+					endif;
+					/**/
+				else:
+					if($this->servicos_colaboradores_model->insert($post)):
+						$data['msg'] = 'cadastrado';
+						$data['msg_teste'] = 'cadastrado por nao esta na data';
+					endif;
+				endif;					
 			else:
 				$data['msg'] = 'Serviço não encontrado!';
 			endif;
-			
-			
 		endif;	
 		echo json_encode($data);
 	}

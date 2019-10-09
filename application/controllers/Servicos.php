@@ -79,7 +79,8 @@ class Servicos extends CI_Controller {
 			endif;
 		else:
 			# code...
-			$post = $this->input->post();	
+			$post = $this->input->post();
+			
 			if($this->servicos_model->update($post, $id_servico)):
 				$post['diferenca'] = diff_date($post['horas_inicio'], $post['horas_fim']);
 				if($this->servicos_colaboradores_model->update_id_servico($post, $id_servico)):

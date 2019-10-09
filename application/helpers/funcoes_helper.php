@@ -46,12 +46,14 @@ function strclear($string)
     return $string;
 }
 
-function verfica_disponibilidade($inicio, $fim, $horas)
+function verifica_disponibilidade($sc, $inicio_new, $fim_new)
 {
+    foreach ($sc as $r) {
+        if($r->horas_inicio <= $inicio_new && $inicio_new <= $r->horas_fim)return $r;
+        if($r->horas_inicio <= $fim_new && $fim_new <= $r->horas_fim)return $r;
+    }
    
-    if($inicio <= $horas && $horas <= $fim)return false;
-    return true;
-       
+  
+    return false;
 }
-
 ?>
