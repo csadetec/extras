@@ -5,7 +5,8 @@ class Setup extends CI_Controller {
 
 	public function index()
 	{
-
+		$data['logged'] = $this->session->userdata('logged');
+		echo json_encode($data);
 
 	}
 

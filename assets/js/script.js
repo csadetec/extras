@@ -6,5 +6,7 @@ $(document).ready(function(){
         visiografo = `http://${site}/visiografo/`
         site= `http://${site}/extras/`
     }
+
+    
    
 })

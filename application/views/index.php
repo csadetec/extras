@@ -39,6 +39,19 @@
             </a>
           </li>
         </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <?php echo $this->session->userdata('nome'); ?>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
+           
+            <a class="dropdown-item" href="<?php echo base_url("sair") ?>">
+              <i class="fas fa-fw fa-sign-out-alt"></i> Sair
+            </a>
+          </div>
+        </li>
+      </ul> 
       </div>
     </nav>
     <!--/.Navbar-->
@@ -80,7 +93,7 @@
   <script src="<?php echo base_url('assets/js/usuarios.js?201909301521') ?>"></script>
   <script src="<?php echo base_url('assets/js/colaboradores.js?20191004a') ?>"></script>
   <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?20191008aaaa') ?>"></script>
-  <script src="<?php echo base_url('assets/js/servicos.js?20191008aaa') ?>"></script>
+  <script src="<?php echo base_url('assets/js/servicos.js?20191009') ?>"></script>
   <script src="<?php echo base_url('assets/js/motivos.js?20191003') ?>"></script>
   <!-- -->
 </body>

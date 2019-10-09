@@ -41,14 +41,7 @@ $(document).ready(function(){
           			+	`${data.msg}`
           			+`</div>`
 	                $("#alert_servico").prepend(msg)
-				}else{
-					var msg =  ``
-					+`<div class="alert alert-danger col-12" role="alert">`                
-          			+	`Não é Possível Cadastrar`
-          			+`</div>`
-	                $("#alert_servico").prepend(msg)
 				}
-
 			}
 		)		
 		return false
@@ -68,6 +61,7 @@ $(document).ready(function(){
 	editar_servico()
 	function editar_servico()
 	{
+		logged()
 		var id_servico = $('h3.modal-title').text()
 		id_servico = id_servico.substring(18)
 		if(id_servico > 0){
@@ -75,20 +69,16 @@ $(document).ready(function(){
 				`${site}servicos/listar/${id_servico}`,
 				function(data){
 					data = JSON.parse(data)
-					if(data.servico){
-						servico = data.servico
-						$('#id_servico').val(servico.id_servico)
-						$('#id_motivo').val(servico.id_motivo)
-						$('#data').val(servico.data)
-						$('#horas_inicio').val(servico.horas_inicio)
-						$('#horas_fim').val(servico.horas_fim)
-						$('#input_pesquisa').removeClass('d-none')
-	                	$('#add_colaborador').text('SALVAR')
-					}else{
-						alert('Faça login Novamente')
-						location.href = `${site}login`
-					}
-				//	console.log(data)
+					servico = data.servico
+					$('#id_servico').val(servico.id_servico)
+					$('#id_motivo').val(servico.id_motivo)
+
+					$('#data').val(servico.data).attr('disabled', true)
+					
+					$('#horas_inicio').val(servico.horas_inicio).attr('disabled', true)
+					$('#horas_fim').val(servico.horas_fim).attr('disabled', true)
+					$('#input_pesquisa').removeClass('d-none')
+                	$('#add_colaborador').text('SALVAR')
 				}
 			)
 		}
@@ -101,5 +91,21 @@ $(document).ready(function(){
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         })
     })
+
+
+    function logged()
+    {
+        $.get(
+            `${site}setup`,
+            function(data){
+                data = JSON.parse(data)
+                if(!data.logged){
+                    alert('FAÇA LOGIN NOVAMENTE!')
+                    location.reload()
+                }
+            }
+
+        )
+    }
 
 })

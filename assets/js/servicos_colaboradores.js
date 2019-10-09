@@ -2,7 +2,8 @@ $(document).ready(function(){
     
     
     $("#pesquisa_colaborador").on("keyup", function(){
-    
+        logged()
+
         var value = $(this).val().toLowerCase()
         //console.log('click '+value)
         var escolhido = value
@@ -38,17 +39,13 @@ $(document).ready(function(){
 
     function cadastrar_colaborador_servico(chapa, id_servico)
     {
-
-
+        logged()
         var obj = {chapa:chapa, id_servico:id_servico}
-       // console.log(obj)
-        
         $.post(
             `${site}servicos_colaboradores/cadastrar`,
             obj,
             function(data){
-                data = JSON.parse(data)
-                console.log(data)
+               data = JSON.parse(data)
                 if(data.msg){
                     msg = data.msg
                     if(msg != 'cadastrado'){
@@ -59,20 +56,17 @@ $(document).ready(function(){
                         //$('#pesquisa_colaborador').focusNextInputField()
                         listar_servicos_colaboradores()
                     }
-                }else{
-                    alert('FAÇA LOGIN NOVAMENTE!')
-                    //location.href = `${site}/login`
                 }
               
             }
 
         )
-        /**/
     }
 
     listar_servicos_colaboradores()
     function listar_servicos_colaboradores()
     {   
+        logged()
         var id_servico = $('h3.modal-title').text()
         id_servico = id_servico.substring(18)
         if(id_servico > 0){
@@ -109,6 +103,7 @@ $(document).ready(function(){
     //montagem do form para editar/excluir colaborador do servico
     function form_servico_colaboradores()
     {
+        logged()
         var id_sc = $(this).find('td').eq(0).text()
         var url = `${site}servicos_colaboradores/editar/${id_sc}`
         
@@ -116,31 +111,23 @@ $(document).ready(function(){
             url,
             function(data){
                 data = JSON.parse(data)
-                //console.log(data)
-                if(data.servico_colaborador){
-                    sc = data.servico_colaborador
-              
-                    $('#servicos_colaboradores_form').modal('show')
-                    $('#sc_cargo').text(sc.cargo)
-                    $('#sc_id').val(sc.id_sc)
-                    $('#sc_nome').text(sc.nome_colaborador)
-                    $('#sc_data').text(sc.nome_motivo+ ' - '+sc.data)
-                    $('#sc_img').attr('src', `${visiografo}${sc.chapa}.JPG`)
-                    $('#sc_horas_inicio').val(sc.horas_inicio)
-                    $('#sc_horas_fim').val(sc.horas_fim)
-                    
-                }else{
-                    alert('FAÇA LOGIN NOVAMENTE')
-                    //location.href = `${site}login`
-                }
-
+                sc = data.servico_colaborador
+                $('#servicos_colaboradores_form').modal('show')
+                $('#sc_cargo').text(sc.cargo)
+                $('#sc_id').val(sc.id_sc)
+                $('#sc_nome').text(sc.nome_colaborador)
+                $('#sc_data').text(sc.nome_motivo+ ' - '+sc.data)
+                $('#sc_img').attr('src', `${visiografo}${sc.chapa}.JPG`)
+                $('#sc_horas_inicio').val(sc.horas_inicio)
+                $('#sc_horas_fim').val(sc.horas_fim)
+       
             }
 
         )
     }
 
     $('form#servicos_colaboradores_form').submit(function(){
-        ///console.log('teve submit')
+        logged()
         var id_sc = $('#sc_id').val()
         var obj = $(this).serialize()
         var url = `${site}servicos_colaboradores/editar/${id_sc}`
@@ -150,24 +137,13 @@ $(document).ready(function(){
             obj,
             function(data){
                 data = JSON.parse(data)
-              //  console.log(data.msg)
-                if(data.msg){
-                    var msg = data.msg
-                    msg = ``
-                    +`<div class="alert alert-success mt-2 mb-2 modal-title w-100" role="alert" >`
-                    +`  ${msg}`
-                    +`</div>`
-                    $('#alert_servicos_colaboradores').empty()
-                    $('#alert_servicos_colaboradores').prepend(msg)
-                }else{
-                    console.log(data)
-                    /*
-                    alert('FAÇA LOGIN NOVAMENTE!')
-                    location.href = `${site}login`
-
-                    /**/
-                }
-
+                var msg = data.msg
+                msg = ``
+                +`<div class="alert alert-success mt-2 mb-2 modal-title w-100" role="alert" >`
+                +`  ${msg}`
+                +`</div>`
+                $('#alert_servicos_colaboradores').empty()
+                $('#alert_servicos_colaboradores').prepend(msg)
             }
         )
 
@@ -177,7 +153,7 @@ $(document).ready(function(){
 
 
     $('#btn_excluir_sc').click(function(){
-        ///console.log('teve submit')
+        logged()
         var id_sc = $('#sc_id').val()
         var nome = $('#sc_nome').text()
         var cargo = $('#sc_cargo').text()
@@ -189,24 +165,14 @@ $(document).ready(function(){
                 url,
                 function(data){
                     data = JSON.parse(data)
-                  //  console.log(data.msg)
-                    if(data.msg){
-                        var msg = data.msg
-                        msg = ``
-                        +`<div class="alert alert-info mt-2 mb-2 modal-title w-100" role="alert" >`
-                        +`  ${msg}`
-                        +`</div>`
-                        $('#btn_salvar_sc').attr('disabled', true)
-                        $('#alert_servicos_colaboradores').empty()
-                        $('#alert_servicos_colaboradores').prepend(msg)
-                    }else{
-                       // console.log(data)
-                        
-                        alert('FAÇA LOGIN NOVAMENTE!')
-                        location.href = `${site}login`
-                        /**/
-                    }
-
+                    var msg = data.msg
+                    msg = ``
+                    +`<div class="alert alert-info mt-2 mb-2 modal-title w-100" role="alert" >`
+                    +`  ${msg}`
+                    +`</div>`
+                    $('#btn_salvar_sc').attr('disabled', true)
+                    $('#alert_servicos_colaboradores').empty()
+                    $('#alert_servicos_colaboradores').prepend(msg)
                 }
             )
         }
@@ -216,5 +182,20 @@ $(document).ready(function(){
         return false
     })
 
+    function logged()
+    {
+        //console.log('logado')
+        $.get(
+            `${site}setup`,
+            function(data){
+                data = JSON.parse(data)
+                if(!data.logged){
+                    alert('FAÇA LOGIN NOVAMENTE!')
+                    location.reload()
+                }
+            }
+
+        )
+    }
 
 })

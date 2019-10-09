@@ -29,7 +29,7 @@
     </ul>
     <ul class="navbar-nav">
 
-        <li class="nav-item dropdown">
+      <li class="nav-item dropdown">
         <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           lucas de sousa
         </a>

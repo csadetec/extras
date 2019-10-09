@@ -14,9 +14,8 @@ $(document).ready(function(){
                 console.log(data)
                
                 if(data == 'success'){
-                    //console.log('success')
+                
                     location.href =  `${site}`
-                  
                 }else{
                     var alert = ``
                     +`<div class="alert alert-info mt-2" role="alert" >`

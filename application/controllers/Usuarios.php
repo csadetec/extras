@@ -16,7 +16,7 @@ class Usuarios extends CI_Controller {
 	}
 	public function index()
 	{
-		//verifica_login();
+		verifica_login();
 	//	if(!verifica_admin())redirect('alunos');
 		$usuarios = $this->usuarios_model->select_all();
 		echo json_encode($usuarios);
@@ -49,7 +49,11 @@ class Usuarios extends CI_Controller {
 					$this->session->set_userdata('nome', $q->nome);
 					$this->session->set_userdata('usuario', $q->usuario);
 					$this->session->set_userdata('nome_perfil', $q->nome_perfil);
-					
+					/*
+					echo '<pre>';
+					print_r($_SESSION);
+					echo '<pre>';
+					/**/
 					echo 'success';
 				else:
 					echo 'Senha Incorreta!';
@@ -143,18 +147,11 @@ class Usuarios extends CI_Controller {
 		//set_msg('Obrigado pela Visita :)', 'info');
 		$this->session->unset_userdata('logged');
 		$this->session->unset_userdata('id_usuario');
+		$this->session->unset_userdata('nome');
 		$this->session->unset_userdata('usuario');
 		$this->session->unset_userdata('nome_perfil');
-		$this->session->unset_userdata('codcur');
-		$this->session->unset_userdata('codper');
-		$this->session->unset_userdata('email');
-		$this->session->unset_userdata('email_sup');
-		$this->session->unset_userdata('nome');
-
-
-
-
-		//redirect('login');
+		
+		redirect('');
 	}
 
 }

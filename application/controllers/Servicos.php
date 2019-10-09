@@ -11,7 +11,7 @@ class Servicos extends CI_Controller {
 		$this->load->helper(array('funcoes_helper'));
 		
 
-		//verifica_login();
+		verifica_login();
 
 	}
 	public function index()
@@ -66,10 +66,11 @@ class Servicos extends CI_Controller {
 	public function editar($id_servico = null)
 	{
 		$this->form_validation->set_rules('id_motivo', 'MOTIVO', 'trim|required');
+		/*
 		$this->form_validation->set_rules('data', 'DATA', 'trim|required');
 		$this->form_validation->set_rules('horas_inicio', 'INÍCIO', 'trim|required');
 		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
-	
+		/**/
 		if(!$this->servicos_model->select_id($id_servico)):
 			$data['msg'] = 'Serviço não Cadastrado';
 		elseif($this->form_validation->run() == false):
@@ -82,10 +83,13 @@ class Servicos extends CI_Controller {
 			$post = $this->input->post();
 			
 			if($this->servicos_model->update($post, $id_servico)):
+				$data['msg'] = 'editado';
+				/*
 				$post['diferenca'] = diff_date($post['horas_inicio'], $post['horas_fim']);
 				if($this->servicos_colaboradores_model->update_id_servico($post, $id_servico)):
 					$data['msg'] = 'editado';
 				endif;
+				/**/
 			else:
 				$data['msg'] =  'error';
 			endif;

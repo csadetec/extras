@@ -9,7 +9,7 @@ class Servicos_colaboradores extends CI_Controller {
 		$this->load->model(array('servicos_colaboradores_model','colaboradores_model', 'servicos_model'));
 		$this->load->library(array('form_validation'));
 		$this->load->helper(array('funcoes_helper'));
-		//verifica_login();
+		verifica_login();
 	//	$this->output->enable_profiler(TRUE);
 	
 	}
