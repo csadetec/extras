@@ -1,6 +1,6 @@
 <!--Modal: Login with Avatar Form-->
 <div class="modal fade" id="servicos_colaboradores_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
+  aria-hidden="true" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog cascading-modal modal-avatar" role="document">
     <!--Content-->
     <div class="modal-content">
@@ -10,6 +10,7 @@
       </div>
       <!--Body-->
       <div class="modal-body mb-1">
+        <div class="row" id="alert_servicos_colaboradores"></div>
         <div class="row">
           <div class="col-9">
             <div id="sc_cargo"></div>
@@ -38,9 +39,9 @@
           </div>
           <hr>
           <div class="form-row justify-content-center">
-            <input type="hidden" id="sc_id">
-            <button class="btn btn-indigo" type="submit">Cadastrar</button>
-            <button class="btn btn-secondary" id="btn_cancelar" data-dismiss="modal">Cancelar</button> 
+            <input type="hidden"  id="sc_id">
+            <button class="btn btn-indigo" type="submit" id="btn_salvar_sc">Salvar</button>
+            <button class="btn btn-secondary" type="button" onclick="location.reload()">Fechar</button> 
           </div>
           <!-- -->
         </form>

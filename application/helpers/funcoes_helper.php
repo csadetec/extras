@@ -46,4 +46,12 @@ function strclear($string)
     return $string;
 }
 
+function verfica_disponibilidade($inicio, $fim, $horas)
+{
+   
+    if($inicio <= $horas && $horas <= $fim)return false;
+    return true;
+       
+}
+
 ?>

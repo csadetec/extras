@@ -9,6 +9,12 @@ class Servicos_colaboradores_model extends CI_Model {
 		return $this->db->insert_id();
 	}
 
+	public function select_where($where)
+	{
+		$this->db->where($where);
+		return $this->db->get('servicos_colaboradores')->row();
+	}
+
 	public function select_colaboradores_by_id_servico($id_servico)
 	{
 		$this->db->select('sc.id_sc, sc.id_servico, sc.id_motivo, sc.chapa, sc.horas_inicio, sc.horas_fim,  sc.diferenca, sc.data, '
@@ -38,6 +44,18 @@ class Servicos_colaboradores_model extends CI_Model {
 		return $this->db->update('servicos_colaboradores', $dados);
 	}
 
+	public function update($dados, $id_sc)
+	{
+		$this->db->where('id_sc', $id_sc);
+		return $this->db->update('servicos_colaboradores', $dados);
+	}
+
+
+	public function delete($id_sc)
+	{	
+		$this->db->where('id_sc', $id_sc);
+		return $this->db->delete('servicos_colaboradores');
+	}
 }
 
 /* End of file Servicos_colaboradores_model.php */

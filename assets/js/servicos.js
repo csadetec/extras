@@ -25,26 +25,16 @@ $(document).ready(function(){
 				data = JSON.parse(data)
 				console.log(data.msg)
 				if(data.msg == 'cadastrado'){
-					var msg =  ``
-					+`<div class="alert alert-success col-12" role="alert">`                
-          			+	`Esta indo tudo certo. 	&#128521 <br>Agore Pesquise os nomes das pessoas.`
-          			+`</div>`
-	                $("#alert_servico").prepend(msg)
-	                $('h3.modal-title').text(`Editar Serviço Nº ${data.id_servico}`)
-	                $('#input_pesquisa').removeClass('d-none')
-	                $('#add_colaborador').text('SALVAR')
-	                $('#id_servico').val(data.id_servico)
+					location.href = `${site}servicos/editar/${data.id_servico}`
+					
 	            }else if(data.msg == 'editado'){
 					var msg =  ``
 					+`<div class="alert alert-info col-12" role="alert">`                
           			+	`Editado com Sucesso. :)`
           			+`</div>`
 	                $("#alert_servico").prepend(msg)
-	                //$('#input_pesquisa').removeClass('d-none')
 	                setTimeout(function(){location.reload()}, 2000)
-				//	$('#servicos_form').modal('hide')
-					servicos_form()
-	                
+			
 				}else if(data.msg){
 					var msg =  ``
 					+`<div class="alert alert-warning col-12" role="alert">`                

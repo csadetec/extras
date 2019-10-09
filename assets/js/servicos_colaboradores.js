@@ -14,7 +14,9 @@ $(document).ready(function(){
             function(data){
                 //console.log(data)
                 var options = ``
-                var id_servico = $('#id_servico').val()
+                //var id_servico = $('#id_servico').val()
+                var id_servico = $('h3.modal-title').text()
+                id_servico = id_servico.substring(18)
                 for(var i in data){
                     var cargo = data[i].cargo == 'ANALISTA DE ÁREA DO CONHECIMENTO SÊNIOR'?'ANALISTA DE ÁREA':data[i].cargo
                     var colaborador = `${data[i].nome_colaborador} | ${cargo}`
@@ -39,17 +41,29 @@ $(document).ready(function(){
 
 
         var obj = {chapa:chapa, id_servico:id_servico}
-        console.log(obj)
+       // console.log(obj)
         
         $.post(
             `${site}servicos_colaboradores/cadastrar`,
             obj,
             function(data){
                 data = JSON.parse(data)
-                //console.log(data)
-                $('#pesquisa_colaborador').val('')
-                //$('#pesquisa_colaborador').focusNextInputField()
-                listar_servicos_colaboradores()
+                console.log(data.where)
+                console.log(data.msg)
+                if(data.msg){
+                    msg = data.msg
+                    if(msg != 'cadastrado'){
+                    //    alert(msg)
+                    }else{
+                       $('#pesquisa_colaborador').val('')
+                        //$('#pesquisa_colaborador').focusNextInputField()
+                        listar_servicos_colaboradores()
+                    }
+                }else{
+                    alert('FAÇA LOGIN NOVAMENTE!')
+                    locatin.href = `${site}/login`
+                }
+              
             }
 
         )
@@ -59,18 +73,14 @@ $(document).ready(function(){
     listar_servicos_colaboradores()
     function listar_servicos_colaboradores()
     {   
-       
         var id_servico = $('h3.modal-title').text()
         id_servico = id_servico.substring(18)
-       
-
-        //console.log(id_servico)
         if(id_servico > 0){
             $.get(
                 `${site}servicos_colaboradores/listar/${id_servico}`,
                 function(data){
                     data = JSON.parse(data)
-                    console.log(data)
+                   // console.log(data)
                     var row = ``
                     var cont = 1
                     for(var i in data){
@@ -81,6 +91,7 @@ $(document).ready(function(){
                         +   `<th scope="row">${cont++}</th>`
                         +   `<td class="d-none">${data[i].id_sc}</td>`
                         +   `<td>${data[i].nome_colaborador} | <i>${cargo}</i></td>`
+                        +   `<td>${data[i].data}</td>`
                         +   `<td>${data[i].horas_inicio}</td>`
                         +   `<td>${data[i].horas_fim}</td>`
                         +   `<td>${data[i].diferenca}</td>`
@@ -93,15 +104,7 @@ $(document).ready(function(){
                 }
             )
         }
-
-       
     }
-
-    $('#btn_excluir_sc').click(function(){
-        var id_sc = $('#sc_id').val()
-
-        console.log(id_sc)
-    })
 
     //montagem do form para editar/excluir colaborador do servico
     function form_servico_colaboradores()
@@ -134,13 +137,84 @@ $(document).ready(function(){
             }
 
         )
-
     }
 
+    $('form#servicos_colaboradores_form').submit(function(){
+        ///console.log('teve submit')
+        var id_sc = $('#sc_id').val()
+        var obj = $(this).serialize()
+        var url = `${site}servicos_colaboradores/editar/${id_sc}`
+        //console.log(url)
+        $.post(
+            url,
+            obj,
+            function(data){
+                data = JSON.parse(data)
+              //  console.log(data.msg)
+                if(data.msg){
+                    var msg = data.msg
+                    msg = ``
+                    +`<div class="alert alert-success mt-2 mb-2 modal-title w-100" role="alert" >`
+                    +`  ${msg}`
+                    +`</div>`
+                    $('#alert_servicos_colaboradores').empty()
+                    $('#alert_servicos_colaboradores').prepend(msg)
+                }else{
+                    console.log(data)
+                    /*
+                    alert('FAÇA LOGIN NOVAMENTE!')
+                    location.href = `${site}login`
+
+                    /**/
+                }
+
+            }
+        )
 
 
+        return false
+    })
 
 
+    $('#btn_excluir_sc').click(function(){
+        ///console.log('teve submit')
+        var id_sc = $('#sc_id').val()
+        var nome = $('#sc_nome').text()
+        var cargo = $('#sc_cargo').text()
+        var url = `${site}servicos_colaboradores/excluir/${id_sc}`
+        //console.log(url)
+        var r = confirm(`Deseja excluir do Serviço extra\n${cargo}\n ${nome}?`)
+        if(r){
+            $.get(
+                url,
+                function(data){
+                    data = JSON.parse(data)
+                  //  console.log(data.msg)
+                    if(data.msg){
+                        var msg = data.msg
+                        msg = ``
+                        +`<div class="alert alert-info mt-2 mb-2 modal-title w-100" role="alert" >`
+                        +`  ${msg}`
+                        +`</div>`
+                        $('#btn_salvar_sc').attr('disabled', true)
+                        $('#alert_servicos_colaboradores').empty()
+                        $('#alert_servicos_colaboradores').prepend(msg)
+                    }else{
+                       // console.log(data)
+                        
+                        alert('FAÇA LOGIN NOVAMENTE!')
+                        location.href = `${site}login`
+                        /**/
+                    }
+
+                }
+            )
+        }
+      
+        
+
+        return false
+    })
 
 
 })
