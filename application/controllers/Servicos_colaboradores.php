@@ -39,13 +39,8 @@ class Servicos_colaboradores extends CI_Controller {
 				$post['id_motivo'] = $servico->id_motivo;
 				$post['diferenca'] = diff_date($post['horas_inicio'], $post['horas_fim']);
 				//$data['msg'] = $post;
-				$where = array(
-					'chapa' => $post['chapa'],
-					'data'  => $post['data']
-				);
-				
-				$data['post'] = $post;
-				if($sc = $this->servicos_colaboradores_model->select_where($where)):
+			
+				if($sc = $this->servicos_colaboradores_model->select_data_chapa($post['data'], $post['chapa'])):
 					
 					if(!$sc = verifica_disponibilidade($sc, $post['horas_inicio'], $post['horas_fim'])):
 						if($this->servicos_colaboradores_model->insert($post)):

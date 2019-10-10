@@ -113,7 +113,7 @@ $(document).ready(function(){
                 data = JSON.parse(data)
                 sc = data.servico_colaborador
                 $('#servicos_colaboradores_form').modal('show')
-                $('#sc_cargo').text(sc.cargo)
+                $('#sc_cargo').html(`<strong>${sc.cargo}</strong>`)
                 $('#sc_id').val(sc.id_sc)
                 $('#sc_nome').text(sc.nome_colaborador)
                 $('#sc_data').text(sc.nome_motivo+ ' - '+sc.data)
@@ -166,13 +166,19 @@ $(document).ready(function(){
                 function(data){
                     data = JSON.parse(data)
                     var msg = data.msg
+                    alert(msg)
+                    location.reload()
+                    /*
                     msg = ``
                     +`<div class="alert alert-info mt-2 mb-2 modal-title w-100" role="alert" >`
                     +`  ${msg}`
                     +`</div>`
+                    /**/
+                    /*
                     $('#btn_salvar_sc').attr('disabled', true)
                     $('#alert_servicos_colaboradores').empty()
                     $('#alert_servicos_colaboradores').prepend(msg)
+                    /**/
                 }
             )
         }

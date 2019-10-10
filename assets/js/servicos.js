@@ -73,10 +73,9 @@ $(document).ready(function(){
 					$('#id_servico').val(servico.id_servico)
 					$('#id_motivo').val(servico.id_motivo)
 
-					$('#data').val(servico.data).attr('disabled', true)
-					
-					$('#horas_inicio').val(servico.horas_inicio).attr('disabled', true)
-					$('#horas_fim').val(servico.horas_fim).attr('disabled', true)
+					$('#data').val(servico.data)
+					$('#horas_inicio').val(servico.horas_inicio)
+					$('#horas_fim').val(servico.horas_fim)
 					$('#input_pesquisa').removeClass('d-none')
                 	$('#add_colaborador').text('SALVAR')
 				}

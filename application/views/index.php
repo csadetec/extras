@@ -11,7 +11,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
-  <link  href="<?php echo base_url('assets/css/style.css?20191008') ?>" rel="stylesheet">
+  <link  href="<?php echo base_url('assets/css/style.css?2149') ?>" rel="stylesheet">
   <title><?php echo isset($title) ?$title:'Serviços Extras' ?></title>
 </head>
 <body>
@@ -19,7 +19,7 @@
   <header>
    
     <nav class="navbar navbar-expand-lg  navbar-dark primary-color fixed-top pt-3 pb-3">
-      <a class="navbar-brand" href="" >EXTRAS</a>
+      <a class="navbar-brand" href="<?php echo base_url() ?>" >EXTRAS</a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
           aria-expanded="false" aria-label="Toggle navigation">
@@ -29,12 +29,17 @@
       <div class="collapse navbar-collapse" id="basicExampleNav">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('servicos') ?>" id="a_servicos">Serviços
+            <a class="nav-link" href="<?php echo base_url('servicos') ?>" >Serviços
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('colaboradores') ?>" id="a_colaboradores">Colaboradores
+            <a class="nav-link" href="<?php echo base_url('colaboradores') ?>" >Colaboradores
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('relatorios') ?>" >Relatórios
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -92,7 +97,7 @@
   <script src="<?php echo base_url('assets/js/script.js?201909')?>"></script>
   <script src="<?php echo base_url('assets/js/usuarios.js?201909301521') ?>"></script>
   <script src="<?php echo base_url('assets/js/colaboradores.js?20191004a') ?>"></script>
-  <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?20191008aaaa') ?>"></script>
+  <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?1527') ?>"></script>
   <script src="<?php echo base_url('assets/js/servicos.js?20191009') ?>"></script>
   <script src="<?php echo base_url('assets/js/motivos.js?20191003') ?>"></script>
   <!-- -->

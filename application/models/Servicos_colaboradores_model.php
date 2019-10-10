@@ -9,9 +9,10 @@ class Servicos_colaboradores_model extends CI_Model {
 		return $this->db->insert_id();
 	}
 
-	public function select_where($where)
+	public function select_data_chapa($data, $chapa)
 	{
-		$this->db->where($where);
+		$this->db->where('data', $data);
+		$this->db->where('chapa', $chapa);
 		return $this->db->get('servicos_colaboradores')->result();
 	}
 
@@ -55,6 +56,12 @@ class Servicos_colaboradores_model extends CI_Model {
 	{	
 		$this->db->where('id_sc', $id_sc);
 		return $this->db->delete('servicos_colaboradores');
+	}
+
+
+	public function select_data_chapa_not_sc($data, $chapa, $sc)
+	{
+
 	}
 }
 

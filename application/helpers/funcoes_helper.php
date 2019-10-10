@@ -22,8 +22,7 @@ function verifica_login()
 {
     $CI = & get_instance();
 
-    if ($CI->session->userdata('logged') != TRUE):
-      //  set_msg('Acesso Restrito! Faça Login para continuar. ', 'warning');
+    if (!$CI->session->userdata('logged')):
         redirect('login');
     endif;
 }
