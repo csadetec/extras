@@ -22,17 +22,17 @@ function verifica_login()
 {
     $CI = & get_instance();
 
-    if (!$CI->session->userdata('logged')):
-        redirect('login');
-    endif;
+    if (!$CI->session->userdata('logged'))redirect('login');
 }
 
-function verifica_admin()
+function is_admin($leave  = false)
 {
+    verifica_login();
     $CI = & get_instance();
 
-    if ($CI->session->userdata('nome_perfil') == 'ADMINISTRADOR')return true;
 
+    if($CI->session->userdata('nome_perfil') == 'ADMINISTRADOR')return true;
+    if($leave)redirect('');
     return false;
 }
 function strclear($string)

@@ -12,7 +12,7 @@
   <!-- Material Design Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
   <link  href="assets/css/style.css?201909281403" rel="stylesheet">
-  <title></title>
+  <title>Login | Extras</title>
 </head>
 <body>
 

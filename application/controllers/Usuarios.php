@@ -16,10 +16,19 @@ class Usuarios extends CI_Controller {
 	}
 	public function index()
 	{
-		verifica_login();
-	//	if(!verifica_admin())redirect('alunos');
-		$usuarios = $this->usuarios_model->select_all();
-		echo json_encode($usuarios);
+		is_admin(true);
+		$data['usuarios'] = $this->usuarios_model->select();
+		$data['page'] = 'usuarios/usuarios_listar';
+		$data['title'] = 'Usuários';
+		//echo json_encode($usuarios);
+		$this->load->view('index', $data, FALSE);
+	}
+
+	public function listar($id_usuario = null)
+	{
+		is_admin();
+		$data  = $this->usuarios_model->select_id($id_usuario);
+		echo json_encode($data);
 	}
 
 
@@ -66,7 +75,6 @@ class Usuarios extends CI_Controller {
 
 		endif;
 		if(!$this->input->post())$this->load->view('usuarios/usuarios_login');
-		
 	}
 
 	public function cadastrar()
@@ -103,26 +111,22 @@ class Usuarios extends CI_Controller {
 
 	public function editar($id = null)
 	{
-		verifica_login();
-		if(!verifica_admin())redirect('alunos');
+		is_admin(true);
 
 		if(!$usuario = $this->usuarios_model->select_id($id))redirect('usuarios');
 		if(!$post = $this->input->post())echo json_encode($usuario);
 
 		$this->form_validation->set_rules('nome', 'NOME', 'trim|required');
 		//$this->form_validation->set_rules('usuario', 'USUÁRIO', 'trim|required|is_unique[usuarios.usuario]');
-		
-		$this->form_validation->set_rules('email', 'EMAIL', 'trim|required');
-		$this->form_validation->set_rules('email_sup', 'EMAIL SUPERVISOR', 'trim|required');
-
-		$this->form_validation->set_rules('codcur', 'CODCUR', 'trim|required|greater_than[0]');
-		$this->form_validation->set_rules('codper', 'CORPER', 'trim|required|greater_than[0]');
 		$this->form_validation->set_rules('id_perfil', 'PERFIL', 'trim|required');
 		
 		if ($this->form_validation->run() == false):
+			echo validation_errors() == true ? validation_errors():'';
+			/*
 			if(validation_errors()):
 				echo validation_errors();
 			endif;
+			/**/
 		else:
 			if($post['senha']):
 				$post['senha'] = md5($post['senha']);

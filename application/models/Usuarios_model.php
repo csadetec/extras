@@ -5,13 +5,6 @@ class Usuarios_model extends CI_Model {
 
 	private $usuarios = 'usuarios';
 
-	public function select_teste()
-	{
-		$this->db->select('id_usuario, nome, senha');
-		$this->db->from($this->usuarios);
-		return $this->db->get()->result();
-	}
-
 	public function select_login($dados)
 	{
 		$this->db->select('u.id_usuario, u.nome, u.usuario, p.nome_perfil');
@@ -30,14 +23,20 @@ class Usuarios_model extends CI_Model {
 
 	public function select()
 	{
+		$this->db->select('u.id_usuario, u.nome, u.usuario, '
+			.'p.nome_perfil'
+		);
 		$this->db->order_by('nome', 'asc');
-
-		return $this->db->get('usuarios')->result();
+		$this->db->from('usuarios as u');
+		$this->db->join('perfis as p', 'u.id_perfil = p.id_perfil');
+		return $this->db->get()->result();
 	}
 
 	public function select_id($id = null){
+		$this->db->select('u.id_usuario, u.nome, u.usuario, u.id_perfil');
+		$this->db->from('usuarios as u');
 		$this->db->where('id_usuario', $id);
-		return $this->db->get('usuarios')->row();
+		return $this->db->get()->row();
 	}
 
 	public function update($id, $dados){

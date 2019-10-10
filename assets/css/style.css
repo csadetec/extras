@@ -46,3 +46,15 @@ tbody > tr:hover{
 #lista_servico_colaboradores > tr:hover{
     background: #aaaaaa29
 }
+
+.dropdown-menu a:hover{
+    /*
+    width: 90%;
+    margin-left: 9px;
+    /**/
+    background: #007bff;
+    color: #fff;
+    box-shadow: 0 5px 11px rgba(0,0,0,.18);
+    border-radius: .125rem;
+
+}

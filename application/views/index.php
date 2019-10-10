@@ -17,51 +17,7 @@
 <body>
   <!--Main Navigation-->
   <header>
-   
-    <nav class="navbar navbar-expand-lg  navbar-dark primary-color fixed-top pt-3 pb-3">
-      <a class="navbar-brand" href="<?php echo base_url() ?>" >EXTRAS</a>
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
-          aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="basicExampleNav">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('servicos') ?>" >Serviços
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('colaboradores') ?>" >Colaboradores
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('relatorios') ?>" >Relatórios
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-        </ul>
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <?php echo $this->session->userdata('nome'); ?>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
-           
-            <a class="dropdown-item" href="<?php echo base_url("sair") ?>">
-              <i class="fas fa-fw fa-sign-out-alt"></i> Sair
-            </a>
-          </div>
-        </li>
-      </ul> 
-      </div>
-    </nav>
-    <!--/.Navbar-->
-
-   
+    <?php $this->load->view('navbar'); ?>
   </header>
   <!--Main Navigation-->
 
@@ -69,6 +25,7 @@
   <main class="mb-5">
     <!--Main container-->
     <div class="container-fluid mt-2" id="conteudo">
+      <div class="row" id="alerts"></div>
       <?php $this->load->view($page, FALSE); ?>      
 
     </div>
@@ -76,7 +33,7 @@
   </main>
   <!--Main layout-->
   <!-- Footer -->
-  <footer class="page-footer font-small blue mt-4 fixed-bottom">
+  <footer class="page-footer font-small primary-color mt-4 fixed-bottom">
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">
       2019 Copyright: Beard Dev
@@ -95,7 +52,7 @@
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script> 
   <script src="<?php echo base_url('assets/js/script.js?201909')?>"></script>
-  <script src="<?php echo base_url('assets/js/usuarios.js?201909301521') ?>"></script>
+  <script src="<?php echo base_url('assets/js/usuarios.js?1106') ?>"></script>
   <script src="<?php echo base_url('assets/js/colaboradores.js?20191004a') ?>"></script>
   <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?1527') ?>"></script>
   <script src="<?php echo base_url('assets/js/servicos.js?20191009') ?>"></script>
