@@ -7,13 +7,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
     <ul class="navbar-nav mr-auto">
-      <!--
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <!-- -->
+
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url('servicos') ?>">Serviços</a>
       </li>
@@ -33,7 +27,9 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-default"
           aria-labelledby="navbarDropdownMenuLink-333">
           <a class="dropdown-item" href="#"><?php echo $this->session->userdata('nome_perfil'); ?></a>
+          <?php if(is_admin()): ?>
           <a class="dropdown-item" href="<?php echo base_url('usuarios') ?>">Usuários</a>
+          <?php endif; ?>
           <a class="dropdown-item" href="<?php echo base_url('sair') ?>">Sair</a>
         </div>
       </li>

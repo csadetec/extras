@@ -49,13 +49,43 @@ $(document).ready(function(){
     $('form#usuarios_form').submit(function(){
         logged()
         var obj = $(this).serialize()
-        console.log(obj)
+        var id_usuario = $('#id_usuario').val()
+        var url = id_usuario ? `${site}usuarios/editar/${id_usuario}` : `${site}usuarios/cadastrar`
+
+        console.log(url)
+        $.post(
+            url,
+            obj,
+            function(data)
+            {   
+                data = JSON.parse(data)
+                console.log(data)
+                
+                var msg = data
+                if(msg == 'cadastrado'){
+                    $('#usuarios_form').modal('hide')
+                    $('#centralModalSuccess').modal('show')
+                }else{
+                    msg = ``
+                    +`<div class="alert alert-info mt-2" role="alert" >`
+                    +`  ${msg}`
+                    +`</div>`
+                    $('#alert_usuarios').html(msg)
+                }
+
+                /** */
+             
+                
+            }
+        )
 
         
 
         return false
     })
-     $('#usuarios_form').modal('show')
+    //$('#usuarios_form').modal('show')
+  //  $('#centralModalSuccess').modal('show')
+    
     $('#btn_cadastrar_usuario').click(function(){
         $('#usuarios_form').modal('show')
     })

@@ -26,7 +26,9 @@
     <!--Main container-->
     <div class="container-fluid mt-2" id="conteudo">
       <div class="row" id="alerts"></div>
-      <?php $this->load->view($page, FALSE); ?>      
+      <?php $this->load->view($page, FALSE); ?> 
+      <?php $this->load->view('alerts/success', FALSE); ?> 
+           
 
     </div>
     <!--Main container-->
@@ -57,6 +59,7 @@
   <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?10102039') ?>"></script>
   <script src="<?php echo base_url('assets/js/servicos.js?20191009') ?>"></script>
   <script src="<?php echo base_url('assets/js/relatorios.js?1010ab') ?>"></script>
+  <script src="<?php echo base_url('assets/js/modals.js') ?>"></script>
   <!-- -->
 </body>
 </html>

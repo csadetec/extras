@@ -80,7 +80,8 @@ $(document).ready(function(){
                     for(var i in data){
                         var cargo = data[i].cargo == 'ANALISTA DE ÁREA DO CONHECIMENTO SÊNIOR'?'ANALISTA DE ÁREA':data[i].cargo
                      //   console.log(data)
-
+                        diferenca = data[i].diferenca
+                        diferenca = minutos_horas(diferenca)
                       
                         row +=``
                         +`<tr>`
@@ -90,7 +91,7 @@ $(document).ready(function(){
                         //+   `<td>${data[i].data}</td>`
                         +   `<td>${data[i].horas_inicio}</td>`
                         +   `<td>${data[i].horas_fim}</td>`
-                        +   `<td>${minutos_horas(data[i].diferenca)}</td>`
+                        +   `<td>${diferenca}</td>`
                         +`</tr>`
                     }
                 

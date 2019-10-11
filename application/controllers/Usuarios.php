@@ -33,8 +33,6 @@ class Usuarios extends CI_Controller {
 
 	public function login()
 	{
-		//	$this->output->enable_profiler(TRUE);
-
 		$this->form_validation->set_rules('usuario', 'USUÁRIO', 'trim|required');
 		$this->form_validation->set_rules('senha', 'SENHA', 'trim|required|md5');
 		if ($this->form_validation->run() == false):
@@ -43,7 +41,6 @@ class Usuarios extends CI_Controller {
 			$post = $this->input->post();
 			if ($usuario = $this->usuarios_model->select_login(array('usuario' => $post['usuario']))):
 				if ($this->usuarios_model->select_login($post)):
-
 					$this->session->set_userdata('logged', true);
 					$this->session->set_userdata('id_usuario', $usuario->id_usuario);
 					$this->session->set_userdata('nome', $usuario->nome);
@@ -72,19 +69,21 @@ class Usuarios extends CI_Controller {
 		$this->form_validation->set_rules('cad_usuario', 'USUÁRIO', 'trim|required|is_unique[usuarios.usuario]');
 		$this->form_validation->set_rules('cad_senha', 'SENHA', 'trim|required');		
 		$this->form_validation->set_rules('id_perfil', 'PERFIL', 'trim|required');
-
+		$data = null;
 		if ($this->form_validation->run() == false):
-			echo validation_errors() == true ? validation_errors():false;
+			$data['msg'] = validation_errors() ? validation_errors():false;
 		else:
 			$post = $this->input->post();
 			$post['senha'] = md5($post['cad_senha']);
-
+			$post['usuario'] = $post['cad_usuario'];
 			unset($post['cad_senha']);
 			unset($post['cad_usuario']);
-			print_r($post);
-//			echo $this->usuarios_model->insert($post) == true ? 'cadastrado':false;
+			
+			$usuario =  $this->usuarios_model->insert($post);
+			$data['usuario'] =  $usuario  ? $this->usuarios_model->select_id($usuario) :false;
 
 		endif;
+		echo json_encode($data);
 	}
 
 	public function editar($id = null)
