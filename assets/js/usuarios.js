@@ -6,17 +6,16 @@ $(document).ready(function(){
 
         $.get(
             `${site}usuarios/listar/${id_usuario}`,
-            function(data){
+            function(data)
+            {
                 usuario = JSON.parse(data)
                 $('#usuarios_form').modal('show')
-                $('.modal-title').text(usuario.usuario)
                 $('#nome').val(usuario.nome)
                 //$('#id_perfil').va(usuario.id_perfil)
 
                 console.log(usuario)
             }
         )
-
     })
 
     $('form#form_login').submit(function()
@@ -48,11 +47,28 @@ $(document).ready(function(){
     })
 
     $('form#usuarios_form').submit(function(){
-        console.log('submittt')
+        logged()
+        var obj = $(this).serialize()
+        console.log(obj)
+
+        
+
         return false
     })
-    
+     $('#usuarios_form').modal('show')
+    $('#btn_cadastrar_usuario').click(function(){
+        $('#usuarios_form').modal('show')
+    })
+    $("#btn_cancelar_cad_usuario").click(function(){
+        $('#usuarios_form').modal('hide')
+    })
 
+    $("#myInput").on("keyup", function(){
+        var value = $(this).val().toLowerCase();
+        $("#lista_usuarios tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        })
+    })
     function logged()
     {
         $.get(

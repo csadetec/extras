@@ -4,27 +4,45 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Dados do Usuário</h5>
        
       </div>
       <form id="usuarios_form" class="" action="post">
         <div class="modal-body">
           <div class="form-row mb-3">
             <div class="col-12">
-              <label for="nome">Nome</label>
-              <input type="text" name="nome" id="nome" class="form-control" required>
+              <label for="cad_usuario">Usuário</label>
+              <input type="text" name="cad_usuario" id="cad_usuario" placeholder="nome.sobrenome" class="form-control" require>
             </div>
           </div>
           <div class="form-row mb-3">
             <div class="col-12">
-              <label for="senha">Senha</label>
-              <input type="password" name="senha" id="senha" class="form-control">
+              <label for="cad_senha">Senha</label>
+              <input type="password" name="cad_senha" id="cad_senha" class="form-control" require>
+            </div>
+          </div>
+          <hr>
+          <div class="form-row mb-3">
+            <div class="col-12">
+              <label for="nome">Nome</label>
+              <input type="text" name="nome" id="nome" placeholder="Nome Completo" class="form-control" require>
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <div class="col-12">
+              <label for="nome">PERFIL</label>
+              <select name="id_perfil" id="id_perfil"  class="form-control" require>
+                <option value="">SELECIONE UM OPÇÃO</option>
+                <?php foreach ($perfis as $key => $r): ?>
+                  <option value="<?php echo $r->id_perfil ?> "><?php echo $r->nome_perfil ?></option>
+                <?php  endforeach; ?>
+              </select>
             </div>
           </div>
           <div class="modal-footer justify-content-center">
-            <input type="hidden" id="id_servico">
+            <input type="hidden" id="id_usuario">
             <button type="submit" class="btn btn-indigo">Salvar</button>
-            <button  class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="reset"  class="btn btn-secondary" id="btn_cancelar_cad_usuario" >Cancelar</button>
           </div>
         </div>
       </form>

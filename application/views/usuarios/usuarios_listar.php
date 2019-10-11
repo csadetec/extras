@@ -1,11 +1,11 @@
 <div class="row justify-content-center pt-list">
     <div class="col-md-8">
-      <a href="<?php echo base_url('usuarios/cadastrar') ?>" class="btn btn-primary float-right">CADASTRAR USUÁRIO</a>
+      <a href="#" id="btn_cadastrar_usuario" class="btn btn-primary float-right">CADASTRAR USUÁRIO</a>
     </div>
 </div>
 <div class="row justify-content-center" id="">
     <div class="col-md-8">
-      <input class="form-control form-control-lg mb-2" type="search" placeholder="Pesquisar Serviços" aria-label="Pesquisar Serviços" id="myInput" data-list="list-group">
+      <input class="form-control form-control-lg mb-2" type="search" placeholder="Pesquisar Usuários" aria-label="Pesquisar Usuários" id="myInput" data-list="list-group">
     </div>
 </div>
 <div class="row justify-content-center">

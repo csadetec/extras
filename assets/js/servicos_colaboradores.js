@@ -80,6 +80,8 @@ $(document).ready(function(){
                     for(var i in data){
                         var cargo = data[i].cargo == 'ANALISTA DE ÁREA DO CONHECIMENTO SÊNIOR'?'ANALISTA DE ÁREA':data[i].cargo
                      //   console.log(data)
+
+                      
                         row +=``
                         +`<tr>`
                         +   `<th scope="row">${cont++}</th>`
@@ -88,7 +90,7 @@ $(document).ready(function(){
                         //+   `<td>${data[i].data}</td>`
                         +   `<td>${data[i].horas_inicio}</td>`
                         +   `<td>${data[i].horas_fim}</td>`
-                        +   `<td>${data[i].diferenca}</td>`
+                        +   `<td>${minutos_horas(data[i].diferenca)}</td>`
                         +`</tr>`
                     }
                 
@@ -187,6 +189,19 @@ $(document).ready(function(){
 
         return false
     })
+
+    function minutos_horas(m)
+    {
+      
+        var horas = Math.floor(m/60);
+        var minutos = m%60;
+
+        horas = horas <= 9 ? `0${horas}`:horas;
+        minutos = minutos <= 9 ?`0${minutos}`:minutos;
+
+
+        return horas+':'+minutos
+    }
 
     function logged()
     {

@@ -9,10 +9,10 @@ class Usuarios extends CI_Controller {
 		$this->load->model(array('usuarios_model', 'perfis_model'));
 		$this->load->library('form_validation');
 		$this->load->helper('funcoes_helper');
+		echo false;
 		
 
 		//$this->output->enable_profiler(TRUE);
-
 	}
 	public function index()
 	{
@@ -20,7 +20,7 @@ class Usuarios extends CI_Controller {
 		$data['usuarios'] = $this->usuarios_model->select();
 		$data['page'] = 'usuarios/usuarios_listar';
 		$data['title'] = 'Usuários';
-		//echo json_encode($usuarios);
+		$data['perfis'] = $this->perfis_model->select();
 		$this->load->view('index', $data, FALSE);
 	}
 
@@ -31,38 +31,25 @@ class Usuarios extends CI_Controller {
 		echo json_encode($data);
 	}
 
-
 	public function login()
 	{
 		//	$this->output->enable_profiler(TRUE);
 
-		$this->form_validation->set_rules('usuarioLogin', 'USUÁRIO', 'trim|required');
-		$this->form_validation->set_rules('senhaLogin', 'SENHA', 'trim|required|md5');
+		$this->form_validation->set_rules('usuario', 'USUÁRIO', 'trim|required');
+		$this->form_validation->set_rules('senha', 'SENHA', 'trim|required|md5');
 		if ($this->form_validation->run() == false):
-			if (validation_errors()):
-				echo validation_errors();
-			endif;
+			echo validation_errors() == true ? validation_errors():false;
 		else:
 			$post = $this->input->post();
-			$post['usuario'] = $post['usuarioLogin'];
-			$post['senha'] = $post['senhaLogin'];
-			unset($post['senhaLogin']);
-			unset($post['usuarioLogin']);
-			//print_r($post);
-			
-			if ($q = $this->usuarios_model->select_login(array('usuario' => $post['usuario']))):
+			if ($usuario = $this->usuarios_model->select_login(array('usuario' => $post['usuario']))):
 				if ($this->usuarios_model->select_login($post)):
 
 					$this->session->set_userdata('logged', true);
-					$this->session->set_userdata('id_usuario', $q->id_usuario);
-					$this->session->set_userdata('nome', $q->nome);
-					$this->session->set_userdata('usuario', $q->usuario);
-					$this->session->set_userdata('nome_perfil', $q->nome_perfil);
-					/*
-					echo '<pre>';
-					print_r($_SESSION);
-					echo '<pre>';
-					/**/
+					$this->session->set_userdata('id_usuario', $usuario->id_usuario);
+					$this->session->set_userdata('nome', $usuario->nome);
+					$this->session->set_userdata('usuario', $usuario->usuario);
+					$this->session->set_userdata('nome_perfil', $usuario->nome_perfil);
+		
 					echo 'success';
 				else:
 					echo 'Senha Incorreta!';
@@ -79,33 +66,24 @@ class Usuarios extends CI_Controller {
 
 	public function cadastrar()
 	{
-		verifica_login();
-		if(!verifica_admin())redirect('alunos');
-		$this->form_validation->set_rules('nome', 'NOME', 'trim|required');
-		$this->form_validation->set_rules('usuario', 'USUÁRIO', 'trim|required|is_unique[usuarios.usuario]');
+		is_admin(true);
 		
-		$this->form_validation->set_rules('senha', 'SENHA', 'trim|required');		
-		$this->form_validation->set_rules('email', 'EMAIL', 'trim|required');
-		$this->form_validation->set_rules('email_sup', 'EMAIL SUPERVISOR', 'trim|required');
-
-		$this->form_validation->set_rules('codcur', 'CODCUR', 'trim|required|greater_than[0]');
-		$this->form_validation->set_rules('codper', 'CORPER', 'trim|required|greater_than[0]');
+		$this->form_validation->set_rules('nome', 'NOME', 'trim|required');
+		$this->form_validation->set_rules('cad_usuario', 'USUÁRIO', 'trim|required|is_unique[usuarios.usuario]');
+		$this->form_validation->set_rules('cad_senha', 'SENHA', 'trim|required');		
 		$this->form_validation->set_rules('id_perfil', 'PERFIL', 'trim|required');
 
 		if ($this->form_validation->run() == false):
-			if(validation_errors()):
-				echo validation_errors();
-			endif;
+			echo validation_errors() == true ? validation_errors():false;
 		else:
 			$post = $this->input->post();
-			$post['senha'] = md5($post['senha']);
-			unset($post['id_usuario']);
-			if($this->usuarios_model->insert($post)):
-				echo 'cadastrado';
-			else:
-				echo "Falha ao Cadastrar o Usuário";
-			endif;
-			/**/
+			$post['senha'] = md5($post['cad_senha']);
+
+			unset($post['cad_senha']);
+			unset($post['cad_usuario']);
+			print_r($post);
+//			echo $this->usuarios_model->insert($post) == true ? 'cadastrado':false;
+
 		endif;
 	}
 

@@ -11,11 +11,13 @@ function rename_title($t)
     return $t;
 }
 
-function diff_date($inicio, $fim)
+function diff_hours($inicio, $fim)
 {
         
     $dif =  gmdate('H:i', strtotime($fim) - strtotime($inicio));
-    return $dif;
+    list($h, $m) = explode(':', $dif);
+    $minutos_total = $h*60+$m;
+    return $minutos_total;
 }
 
 function verifica_login()

@@ -37,7 +37,7 @@ class Servicos_colaboradores extends CI_Controller {
 				$post['horas_inicio'] = $servico->horas_inicio;
 				$post['horas_fim'] = $servico->horas_fim;
 				$post['id_motivo'] = $servico->id_motivo;
-				$post['diferenca'] = diff_date($post['horas_inicio'], $post['horas_fim']);
+				$post['diferenca'] = diff_hours($post['horas_inicio'], $post['horas_fim']);
 				//$data['msg'] = $post;
 			
 				if($sc = $this->servicos_colaboradores_model->select_data_chapa($post['data'], $post['chapa'])):
@@ -69,25 +69,17 @@ class Servicos_colaboradores extends CI_Controller {
 	{
 		$this->form_validation->set_rules('horas_inicio', 'INÍCIO', 'trim|required');
 		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
-
-
+		
 		if(!$data['servico_colaborador'] = $this->servicos_colaboradores_model->select_id($id_sc)):
 			$data['msg'] = 'Não encontrado';
 		elseif ($this->form_validation->run() == false):
 			# code...
-			if(validation_errors()):
-				$data['msg'] =  validation_errors();
-			endif;
+			$data['msg'] = validation_errors() == true ? validation_errors():false;
 		else:
 			# code...
 			$post = $this->input->post();
-			$post['diferenca'] = diff_date($post['horas_inicio'], $post['horas_fim']);
-			
-			if($servico = $this->servicos_colaboradores_model->update($post, $id_sc)):
-				$data['msg'] = 'Editado com Sucesso!';
-			endif;
-			/**/
-			
+			$post['diferenca'] = diff_hours($post['horas_inicio'], $post['horas_fim']);
+			$data['msg'] = $this->servicos_colaboradores_model->update($post, $id_sc) == true?'Editado com Sucesso!':false;
 		endif;	
 		echo json_encode($data);
 	}

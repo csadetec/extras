@@ -81,7 +81,6 @@ $(document).ready(function(){
 				}
 			)
 		}
-	//	console.log(id_servico)
 	}
 
 	$("#myInput").on("keyup", function(){

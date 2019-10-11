@@ -24,7 +24,37 @@ class Relatorios_model extends CI_Model {
 		$this->db->join('colaboradores as c', 'sc.chapa = c.chapa');
 		$this->db->order_by('c.nome_colaborador', 'asc');
 		return $this->db->get()->result();
-	
+	}
+
+	public function select_chapa($chapa)
+	{
+		$this->db->select('sc.chapa, c.nome_colaborador, sc.horas_inicio, sc.horas_fim, '
+			.'sc.id_motivo, sc.diferenca, sc.id_servico, date_format(sc.data, "%d/%m/%Y") as data, '
+			.'m.nome_motivo'
+		);
+		$this->db->from('servicos_colaboradores as sc');
+		$this->db->join('colaboradores as c', 'sc.chapa = c.chapa');
+		$this->db->join('motivos as m', 'm.id_motivo = sc.id_motivo');
+		$this->db->where('sc.chapa', $chapa);
+		$this->db->order_by('data', 'asc');
+		$this->db->order_by('m.nome_motivo', 'asc');
+
+		return $this->db->get()->result();
+	}
+
+	public function select_chapa_sum($chapa)
+	{
+		$this->db->select('sc.chapa, c.nome_colaborador, sc.id_motivo, sum(sc.diferenca) as diferenca,'
+			.'m.nome_motivo'
+		);
+		$this->db->from('servicos_colaboradores as sc');
+		$this->db->join('colaboradores as c', 'sc.chapa = c.chapa');
+		$this->db->join('motivos as m', 'm.id_motivo = sc.id_motivo');
+		$this->db->where('sc.chapa', $chapa);
+		$this->db->group_by('sc.id_motivo');
+		$this->db->order_by('m.nome_motivo', 'asc');
+		
+		return $this->db->get()->result();
 	}
 
 

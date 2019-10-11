@@ -19,12 +19,13 @@ class Relatorios extends CI_Controller {
 		$this->load->view('index', $data, FALSE);
 		//echo json_encode($data);		
 	}
-	public function teste()
+	
+	public function listar($chapa = null)
 	{
-		$data['colaboradores'] = $this->relatorios_model->select_distinct_colaboradores();
-		echo '<pre>';
-		print_r($data);
-		echo '</pre>';
+		//$this->output->enable_profiler(TRUE);
+		$data['individual'] = $this->relatorios_model->select_chapa($chapa);
+		$data['somado'] = $this->relatorios_model->select_chapa_sum($chapa);
+		echo json_encode($data);
 	}
 
 }

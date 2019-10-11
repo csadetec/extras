@@ -52,11 +52,11 @@
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script> 
   <script src="<?php echo base_url('assets/js/script.js?201909')?>"></script>
-  <script src="<?php echo base_url('assets/js/usuarios.js?1106') ?>"></script>
+  <script src="<?php echo base_url('assets/js/usuarios.js?10102127') ?>"></script>
   <script src="<?php echo base_url('assets/js/colaboradores.js?20191004a') ?>"></script>
-  <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?1527') ?>"></script>
+  <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?10102039') ?>"></script>
   <script src="<?php echo base_url('assets/js/servicos.js?20191009') ?>"></script>
-  <script src="<?php echo base_url('assets/js/motivos.js?20191003') ?>"></script>
+  <script src="<?php echo base_url('assets/js/relatorios.js?1010ab') ?>"></script>
   <!-- -->
 </body>
 </html>

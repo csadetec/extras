@@ -38,13 +38,13 @@
                         <form class="text-center" style="color: #757575;" action="" id="form_login" method="post">
                             <!-- Email -->
                             <div class="md-form">
-                                <input type="text" id="usuarioLogin" name="usuarioLogin" class="form-control" autofocus >
-                                <label for="usuarioLoginI" >Usuário</label>
+                                <input type="text" id="usuario" name="usuario" class="form-control" autofocus >
+                                <label for="usuario" >Usuário</label>
                             </div>
                             <!-- Password -->
                             <div class="md-form">
-                                <input type="password" id="senhaLogin" name="senhaLogin" class="form-control" autofocus > 
-                                <label for="senhaLogin">Password</label>
+                                <input type="password" id="senha" name="senha" class="form-control" autofocus > 
+                                <label for="senha">Password</label>
                             </div>
 
                             <!-- Sign in button -->
