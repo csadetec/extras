@@ -18,10 +18,6 @@ class Servicos extends CI_Controller {
 	{
 		$data['servicos'] = $this->servicos_model->select();
 		$data['page'] = 'servicos/servicos_listar';
-		/*
-		print_r($data['servicos']);
-		$data['servicos'] = [];
-		/**/
 		$this->load->view('index', $data, false);
 	}
 
@@ -77,19 +73,25 @@ class Servicos extends CI_Controller {
 			$post = $this->input->post();
 			
 			$sc = $this->servicos_colaboradores_model->select_colaboradores_by_id_servico($id_servico);
-			$data['sc'] = $sc;			
-			$data['teste'] = verifica_disponibilidade_group($sc);
-			/*
-			if($this->servicos_model->update($post, $id_servico)):
-				$post['diferenca'] = diff_hours($post['horas_inicio'], $post['horas_fim']);
-				$data['servico'] = $this->servicos_model->select_id($id_servico);
-				if($this->servicos_colaboradores_model->update_id_servico($post, $id_servico)):
-					$data['msg'] = 'editado';
+		
+			$disponibilidade = verifica_all_sc($sc, $post, 'update');
+			//$data['teste'] = $disponibilidade;
+			
+			if($disponibilidade['status']):
+				if($this->servicos_model->update($post, $id_servico)):
+					$post['diferenca'] = diff_hours($post['horas_inicio'], $post['horas_fim']);
+					$data['servico'] = $this->servicos_model->select_id($id_servico);
+					if($this->servicos_colaboradores_model->update_id_servico($post, $id_servico)):
+						$data['msg'] = 'editado';
+					endif;
+				else:
+					$data['msg'] =  'error';
 				endif;
 			else:
-				$data['msg'] =  'error';
+				$data['teste'] = 'teste';
+				$data['msg'] = $disponibilidade['msg'];
 			endif;
-			/**/
+			/** */
 		endif;
 
 		if($this->input->post()):

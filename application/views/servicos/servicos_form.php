@@ -1,6 +1,9 @@
-<div class="row pt-65 pb-2">
-  <div class="col-12 breadcrumb">
+<div class="row breadcrumb pt-65 pb-2">
+  <div class="col-md-6 ">
     <h3 class="modal-title"><?php echo $title ?></h3>
+  </div>
+  <div class="col-md-6">
+    <a href="<?php echo base_url('servicos/cadastrar') ?>" class="btn btn-primary float-right">CADASTRAR OUTRO SERVIÇO</a>
   </div>
 </div>
 <div class="row" id="alert_servico"></div>

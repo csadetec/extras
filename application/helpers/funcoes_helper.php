@@ -46,11 +46,19 @@ function strclear($string)
     return $string;
 }
 
-function verifica_disponibilidade_group($sc)
+function verifica_all_sc($sc, $post, $tipo)
 {
+    //crie a var $post para relacionar com a funcao verifica_disponibilidade()
+    //
     foreach($sc as $r):
-        
+        $post['chapa'] = $r->chapa;
+        $post['id_servico'] = $r->id_servico;
+        // return $post;
+        $d = verifica_disponibilidade($post, $tipo);
+        if(!$d['status'])return $d;
+          /** */  
     endforeach;
+    return array('status'=> 'true');
 }
 
 function verifica_disponibilidade($post, $tipo)
@@ -78,10 +86,10 @@ function verifica_disponibilidade($post, $tipo)
     if($sc_match and $tipo == 'update'):
         foreach($sc_match as $r):
             if($r->horas_inicio <= $post['horas_inicio'] && $post['horas_inicio'] <= $r->horas_fim):    
-                return array('msg'=>'Colaborador Já esta agendado neste horário<br>No serviço N° '.$r->id_servico.'<br>Data: '.$r->data_editada.'<br>Início: '.$r->horas_inicio.'<br>Fim: '.$r->horas_fim, 'status'=>false);          
+                return array('msg'=> $r->nome_colaborador.'<hr> Esta agendado neste horário<br>No serviço N° '.$r->id_servico.'<br>Data: '.$r->data_editada.'<br>Horário: '.$r->horas_inicio.' às '.$r->horas_fim, 'status'=>false);          
             endif;
             if($r->horas_inicio <= $post['horas_fim'] && $post['horas_fim'] <= $r->horas_fim):    
-                return array('msg'=>'Colaborador Já esta agendado neste horário<br>No serviço N° '.$r->id_servico.'<br>Data: '.$r->data_editada.'<br>Início: '.$r->horas_inicio.'<br>Fim: '.$r->horas_fim, 'status'=>false);         
+                return array('msg'=>$r->nome_colaborador.'<hr> Esta agendado neste horário<br>No serviço N° '.$r->id_servico.'<br>Data: '.$r->data_editada.'<br>Horário: '.$r->horas_inicio.' às '.$r->horas_fim, 'status'=>false);         
             endif;
         endforeach;
     endif;

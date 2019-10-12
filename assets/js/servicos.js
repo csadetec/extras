@@ -20,7 +20,7 @@ $(document).ready(function(){
 
 				if(msg == 'cadastrado'){
 					location.href = `${site}servicos/editar/${servico}`
-	            }else if(data.msg == 'editado' && servico){
+	            }else if(msg == 'editado' && servico){
 					var html = ``
 					+`<div><strong>N°. Serviço: </strong>${servico.id_servico}</div>`
 					+`<div><strong>Motivo: </strong>${servico.nome_motivo}</div>`
@@ -33,11 +33,12 @@ $(document).ready(function(){
                     $('#alert_head').text('Atualizado com Sucesso')
                     $('#centralModalSuccess').modal('show')
 
-				}else if(data.msg){
+				}else if(msg){
 					var msg =  ``
 					+`<div class="alert alert-warning col-12" role="alert">`                
           			+	`${data.msg}`
-          			+`</div>`
+					+`</div>`
+					$('#alert_servico').empty()  
 	                $("#alert_servico").prepend(msg)
 				}
 				/** */
@@ -55,6 +56,35 @@ $(document).ready(function(){
 
 		location.href = url
 	})
+
+
+    $('#lista_servicos tr').hover(function(){
+		logged()
+		var id_servico = $(this).find('td').eq(0).text()
+		var url = `${site}servicos_colaboradores/listar/${id_servico}`
+		var escolhido = $(this)
+		
+		$.get(
+			url,
+			function(data)
+			{
+				var sc = JSON.parse(data)
+			//	console.log(sc)
+				var title =  sc[0]? `Serviço N° ${id_servico}\n`:`Editar Serviço`
+				for(var i in sc){
+					title+=`\n`
+					+`${sc[i].nome_colaborador} | ${sc[i].chapa}`
+				
+				}
+				escolhido.attr('title',title)
+			
+			}
+
+		)
+		
+		
+	})
+
 	/**/
 
 
@@ -77,7 +107,7 @@ $(document).ready(function(){
 					$('#horas_inicio').val(servico.horas_inicio)
 					$('#horas_fim').val(servico.horas_fim)
 					$('#input_pesquisa').removeClass('d-none')
-                	$('#add_colaborador').text('SALVAR')
+                	$('#add_colaborador').text('ATUALIZAR')
 				}
 			)
 		}

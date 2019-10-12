@@ -31,7 +31,7 @@ class Servicos_colaboradores_model extends CI_Model {
 
 	public function select_data_chapa_id_servico_diferente($data, $chapa, $id_servico)
 	{
-		$this->db->select('sc.id_sc, sc.id_servico, sc.chapa, sc.horas_inicio, sc.horas_fim, DATE_FORMAT(sc.data, "%d/%m/%Y") as data_editada, '
+		$this->db->select('sc.id_sc, c.nome_colaborador, sc.id_servico, sc.chapa, sc.horas_inicio, sc.horas_fim, DATE_FORMAT(sc.data, "%d/%m/%Y") as data_editada, '
 		.'c.nome_colaborador, c.cargo, m.nome_motivo');
 		$this->db->from('servicos_colaboradores as sc');
 		$this->db->join('colaboradores as c', 'sc.chapa = c.chapa');

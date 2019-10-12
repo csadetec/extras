@@ -211,7 +211,7 @@ $(document).ready(function(){
 
         )
     })
-
+    
 
     function minutos_horas(m)
     {
