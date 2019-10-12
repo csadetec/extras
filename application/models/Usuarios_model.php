@@ -33,13 +33,17 @@ class Usuarios_model extends CI_Model {
 	}
 
 	public function select_id($id = null){
-		$this->db->select('u.id_usuario, u.nome, u.usuario, u.id_perfil');
+		$this->db->select('u.id_usuario, u.nome, u.usuario, u.id_perfil, '
+		.'p.nome_perfil'
+		);
 		$this->db->from('usuarios as u');
+		$this->db->join('perfis as p', 'p.id_perfil = u.id_perfil');
+		
 		$this->db->where('id_usuario', $id);
 		return $this->db->get()->row();
 	}
 
-	public function update($id, $dados){
+	public function update($dados, $id){
 		$this->db->where('id_usuario', $id);
 		return $this->db->update('usuarios', $dados);
 	}

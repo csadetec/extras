@@ -28,6 +28,7 @@
       <div class="row" id="alerts"></div>
       <?php $this->load->view($page, FALSE); ?> 
       <?php $this->load->view('alerts/success', FALSE); ?> 
+   
            
 
     </div>
@@ -54,11 +55,11 @@
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script> 
   <script src="<?php echo base_url('assets/js/script.js?201909')?>"></script>
-  <script src="<?php echo base_url('assets/js/usuarios.js?10102127') ?>"></script>
+  <script src="<?php echo base_url('assets/js/usuarios.js?1110a') ?>"></script>
   <script src="<?php echo base_url('assets/js/colaboradores.js?20191004a') ?>"></script>
-  <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?10102039') ?>"></script>
-  <script src="<?php echo base_url('assets/js/servicos.js?20191009') ?>"></script>
-  <script src="<?php echo base_url('assets/js/relatorios.js?1010ab') ?>"></script>
+  <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?1110a') ?>"></script>
+  <script src="<?php echo base_url('assets/js/servicos.js?1110a') ?>"></script>
+  <script src="<?php echo base_url('assets/js/relatorios.js?1110') ?>"></script>
   <script src="<?php echo base_url('assets/js/modals.js') ?>"></script>
   <!-- -->
 </body>

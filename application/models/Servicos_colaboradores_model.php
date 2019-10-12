@@ -9,6 +9,14 @@ class Servicos_colaboradores_model extends CI_Model {
 		return $this->db->insert_id();
 	}
 
+	public function select_chapa_id_servico($chapa, $id_servico)
+	{
+		$this->db->where('chapa', $chapa);
+		$this->db->where('id_servico', $id_servico);
+		return $this->db->get('servicos_colaboradores')->row();
+	}
+
+
 	public function select_data_chapa($data, $chapa)
 	{
 		$this->db->where('data', $data);

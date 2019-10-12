@@ -19,16 +19,16 @@ class Servicos_colaboradores extends CI_Controller {
 		
 	}
 
+
+
 	public function cadastrar()
 	{
 		$this->form_validation->set_rules('id_servico', 'SERVICO', 'trim|required');
 		$this->form_validation->set_rules('chapa', 'CHAPA', 'trim|required');
-		$data['msg'] = null;
+		$data = null;
 		if ($this->form_validation->run() == false):
-			# code...
-			if(validation_errors()):
-				$data['msg'] =  validation_errors();
-			endif;
+			
+			$data['msg'] =  validation_errors();
 		else:
 			# code...
 			$post = $this->input->post();
@@ -38,26 +38,12 @@ class Servicos_colaboradores extends CI_Controller {
 				$post['horas_fim'] = $servico->horas_fim;
 				$post['id_motivo'] = $servico->id_motivo;
 				$post['diferenca'] = diff_hours($post['horas_inicio'], $post['horas_fim']);
-				//$data['msg'] = $post;
 			
-				if($sc = $this->servicos_colaboradores_model->select_data_chapa($post['data'], $post['chapa'])):
-					
-					if(!$sc = verifica_disponibilidade($sc, $post['horas_inicio'], $post['horas_fim'])):
-						if($this->servicos_colaboradores_model->insert($post)):
-							$data['msg'] = 'cadastrado';
-							$data['msg_teste'] = 'cadastrado por nao estar batendo às horas';
-						endif;
-					else:
-					
-						$data['msg'] = "Colaborador Já esta agendado neste horário\nNo serviço N° ".$sc->id_servico;
-					endif;
-					/**/
-				else:
-					if($this->servicos_colaboradores_model->insert($post)):
-						$data['msg'] = 'cadastrado';
-						$data['msg_teste'] = 'cadastrado por nao esta na data';
-					endif;
-				endif;					
+				$data['teste'] = verifica_disponibilidade($post, 'insert');
+				$data['sc'] = $post;
+				$data['tipo'] = 'insert';
+			
+								
 			else:
 				$data['msg'] = 'Serviço não encontrado!';
 			endif;
@@ -69,17 +55,24 @@ class Servicos_colaboradores extends CI_Controller {
 	{
 		$this->form_validation->set_rules('horas_inicio', 'INÍCIO', 'trim|required');
 		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
+		//$this->form_validation->set_rules('teste', 'teste', 'trim|required');
 		
 		if(!$data['servico_colaborador'] = $this->servicos_colaboradores_model->select_id($id_sc)):
 			$data['msg'] = 'Não encontrado';
-		elseif ($this->form_validation->run() == false):
+		elseif (!$this->form_validation->run()):
 			# code...
-			$data['msg'] = validation_errors() == true ? validation_errors():false;
+			$data['msg'] = validation_errors()? validation_errors():false;
 		else:
 			# code...
 			$post = $this->input->post();
 			$post['diferenca'] = diff_hours($post['horas_inicio'], $post['horas_fim']);
-			$data['msg'] = $this->servicos_colaboradores_model->update($post, $id_sc) == true?'Editado com Sucesso!':false;
+			if($this->servicos_colaboradores_model->update($post, $id_sc)):
+				$data['msg'] = 'editado';
+				$data['sc'] = $this->servicos_colaboradores_model->select_id($id_sc);
+			else:
+				$data['msg'] = 'Falha ao editar';
+			endif;
+			
 		endif;	
 		echo json_encode($data);
 	}
@@ -91,12 +84,13 @@ class Servicos_colaboradores extends CI_Controller {
 			$data['msg'] = 'Colaborador não encontrado';
 
 		elseif($this->servicos_colaboradores_model->delete($id_sc)):
-			$data['msg'] = 'Deletado com Sucesso!';
+			$data['msg'] = 'deletado';
 		endif;
 
 		echo json_encode($data);
 	}
 
+	
 
 	public function listar($id_servico = null)
 	{

@@ -40,19 +40,12 @@ class Servicos extends CI_Controller {
 		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
 		$data = null;
 		if ($this->form_validation->run() == false):
-			# code...
-			if(validation_errors()):
-				$data['msg'] =  validation_errors();
-			endif;
-		else:
-			# code...
-			$post = $this->input->post();
-					
-			if($data['id_servico'] = $this->servicos_model->insert($post)):
-				$data['msg'] = 'cadastrado';
-			endif;
-
 			
+			$data['msg'] =  validation_errors() ? validation_errors():false;
+		else:
+			$post = $this->input->post();
+			$data['servico'] = $this->servicos_model->insert($post);
+			$data['msg'] = $data['servico'] ? 'cadastrado':'Falha ao Cadastrar';
 		endif;			
 		if($this->input->post()):
 			echo json_encode($data);
@@ -66,13 +59,13 @@ class Servicos extends CI_Controller {
 	public function editar($id_servico = null)
 	{
 		$this->form_validation->set_rules('id_motivo', 'MOTIVO', 'trim|required');
-		/*
 		$this->form_validation->set_rules('data', 'DATA', 'trim|required');
 		$this->form_validation->set_rules('horas_inicio', 'INÍCIO', 'trim|required');
 		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
-		/**/
+	
 		if(!$this->servicos_model->select_id($id_servico)):
-			$data['msg'] = 'Serviço não Cadastrado';
+			//$data['msg'] = 'Serviço não Cadastrado';
+			redirect('servicos');
 		elseif($this->form_validation->run() == false):
 			# code...
 			if(validation_errors()):
@@ -83,13 +76,11 @@ class Servicos extends CI_Controller {
 			$post = $this->input->post();
 			
 			if($this->servicos_model->update($post, $id_servico)):
-				$data['msg'] = 'editado';
-				/*
-				$post['diferenca'] = diff_date($post['horas_inicio'], $post['horas_fim']);
+				$post['diferenca'] = diff_hours($post['horas_inicio'], $post['horas_fim']);
+				$data['servico'] = $this->servicos_model->select_id($id_servico);
 				if($this->servicos_colaboradores_model->update_id_servico($post, $id_servico)):
 					$data['msg'] = 'editado';
 				endif;
-				/**/
 			else:
 				$data['msg'] =  'error';
 			endif;

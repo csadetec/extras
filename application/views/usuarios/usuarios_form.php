@@ -18,7 +18,7 @@
           <div class="form-row mb-3">
             <div class="col-12">
               <label for="cad_senha">Senha</label>
-              <input type="password" name="cad_senha" id="cad_senha" class="form-control" required>
+              <input type="password" name="cad_senha" id="cad_senha" class="form-control">
             </div>
           </div>
           <hr>

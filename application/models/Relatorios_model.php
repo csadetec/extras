@@ -36,8 +36,8 @@ class Relatorios_model extends CI_Model {
 		$this->db->join('colaboradores as c', 'sc.chapa = c.chapa');
 		$this->db->join('motivos as m', 'm.id_motivo = sc.id_motivo');
 		$this->db->where('sc.chapa', $chapa);
-		$this->db->order_by('data', 'asc');
 		$this->db->order_by('m.nome_motivo', 'asc');
+		$this->db->order_by('data', 'asc');
 
 		return $this->db->get()->result();
 	}

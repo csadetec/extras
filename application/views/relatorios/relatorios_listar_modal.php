@@ -63,9 +63,9 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
+                    <th scope="col">MOTIVO</th>
                     <th scope="col">DATA</th>
                     <th scope="col">SERVIÇO</th>
-                    <th scope="col">MOTIVO</th>
                     <th scope="col">INÍCIO</th>
                     <th scope="col">FIM</th>
                     <th scope="col">DIFERENÇA</th>

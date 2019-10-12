@@ -20,9 +20,9 @@ $(document).ready(function(){
                     td += ``
                     +`<tr>`
                     +   `<th scope="row">${++cont}</th>`
+                    +    `<td>${individual[i].nome_motivo}</td>`
                     +    `<td>${individual[i].data}</td>`
                     +    `<td>N° ${individual[i].id_servico}</td>`
-                    +    `<td>${individual[i].nome_motivo}</td>`
                     +    `<td>${individual[i].horas_inicio}</td>`
                     +    `<td>${individual[i].horas_fim}</td>`
                     +    `<td>${minutos_horas(individual[i].diferenca)}</td>`

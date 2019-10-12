@@ -47,8 +47,20 @@ function strclear($string)
     return $string;
 }
 
-function verifica_disponibilidade($sc, $inicio_new, $fim_new)
+function verifica_disponibilidade($sc, $tipo)
 {
+    $CI = & get_instance();
+
+    //if($s = $CI->servicos_colaboradores_model->select_chapa_id_servico($sc['chapa'], $sc['id_servico']) and $tipo == 'insert')return  array('msg'=>'Colaborador Já esta agendado neste serviço', 'status'=>false);
+
+    if($s = $CI->servicos_colaboradores_model->select_data_chapa($sc['data'], $sc['chapa']) and $tipo == 'insert'):
+        return $s;
+    endif;
+    //return  array('msg'=>'nao foi cadastrado neste serviço');
+
+  
+
+    /*
     foreach ($sc as $r) {
         if($r->horas_inicio <= $inicio_new && $inicio_new <= $r->horas_fim)return $r;
         if($r->horas_inicio <= $fim_new && $fim_new <= $r->horas_fim)return $r;
@@ -56,5 +68,6 @@ function verifica_disponibilidade($sc, $inicio_new, $fim_new)
    
   
     return false;
+    /** */
 }
 ?>

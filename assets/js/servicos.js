@@ -1,40 +1,36 @@
 $(document).ready(function(){
 	
-	$('form#servicos_form').click(function(){
-       $("#alert_servico").empty()
-
-	})
-
-
 	//cadastrar e editar o servico
 
 	$('form#servicos_form').submit(function(){
+		logged()
 		var obj = $(this).serialize()
 		var id_servico = $('#id_servico').val()
-		var url = ''
-		if(id_servico > 0){
-			var url = `${site}servicos/editar/${id_servico}`
-		}else{
-			var url = `${site}servicos/cadastrar`
-		}
-
+		var url = id_servico ? `${site}servicos/editar/${id_servico}` : `${site}servicos/cadastrar`
+	
 		$.post(
 			url,
 			obj,
-			function(data){
+			function(data)
+			{	
 				data = JSON.parse(data)
-				console.log(data.msg)
-				if(data.msg == 'cadastrado'){
-					location.href = `${site}servicos/editar/${data.id_servico}`
-					
-	            }else if(data.msg == 'editado'){
-					var msg =  ``
-					+`<div class="alert alert-info col-12" role="alert">`                
-          			+	`Editado com Sucesso. :)`
-          			+`</div>`
-	                $("#alert_servico").prepend(msg)
-	                setTimeout(function(){location.reload()}, 2000)
-			
+				var msg = data.msg
+				var servico = data.servico
+
+				if(msg == 'cadastrado'){
+					location.href = `${site}servicos/editar/${servico}`
+	            }else if(data.msg == 'editado' && servico){
+					var html = ``
+                    +`<div><strong>N°. Serviço: </strong>${servico.id_servico}</div>`
+                    +`<div><strong>Data: </strong>${servico.data_editada}</div>`
+                    +`<div><strong>Início: </strong>${servico.horas_inicio}</div>`
+					+`<div><strong>Fim: </strong>${servico.horas_fim}</div>`
+					+`<hr>`
+					+`<div><strong>TODOS OS COLABORADORES DESSE SERVIÇO FORAM ATUALIZADOS</div>`
+                    $('#alert_conteudo').prepend(html)
+                    $('#alert_head').text('Atualizado com Sucesso')
+                    $('#centralModalSuccess').modal('show')
+
 				}else if(data.msg){
 					var msg =  ``
 					+`<div class="alert alert-warning col-12" role="alert">`                
@@ -42,6 +38,7 @@ $(document).ready(function(){
           			+`</div>`
 	                $("#alert_servico").prepend(msg)
 				}
+				/** */
 			}
 		)		
 		return false
@@ -50,6 +47,7 @@ $(document).ready(function(){
 	//editar servico
 	
 	$('#lista_servicos tr').click(function(){
+		logged()
 		var id_servico = $(this).find('td').eq(0).text()
 		var url = `${site}servicos/editar/${id_servico}`
 

@@ -100,4 +100,7 @@
   </div>
 </div>
 <?php $this->load->view('servicos/servicos_colaboradores_form'); ?>
+<?php $this->load->view('servicos/alert_danger'); ?>
+<?php $this->load->view('servicos/alert_info'); ?>
+
 

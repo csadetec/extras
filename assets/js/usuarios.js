@@ -11,9 +11,12 @@ $(document).ready(function(){
                 usuario = JSON.parse(data)
                 $('#usuarios_form').modal('show')
                 $('#nome').val(usuario.nome)
-                //$('#id_perfil').va(usuario.id_perfil)
+                $('#cad_usuario').val(usuario.usuario).attr('disabled', true)
+                $('#id_perfil').val(usuario.id_perfil)
+                $('#id_usuario').val(usuario.id_usuario)
+                $('#cad_senha').val('')
 
-                console.log(usuario)
+            //    console.log(usuario)
             }
         )
     })
@@ -52,18 +55,37 @@ $(document).ready(function(){
         var id_usuario = $('#id_usuario').val()
         var url = id_usuario ? `${site}usuarios/editar/${id_usuario}` : `${site}usuarios/cadastrar`
 
-        console.log(url)
+        //   console.log(url)
         $.post(
             url,
             obj,
             function(data)
             {   
                 data = JSON.parse(data)
-                console.log(data)
-                
-                var msg = data
-                if(msg == 'cadastrado'){
+                var msg = data.msg
+                var usuario = data.usuario
+                console.log(msg)
+                if(msg == 'editado' && usuario){
+                    var html = ``
+                    +`<div><strong>ID: </strong>${usuario.id_usuario}</div>`
+                    +`<div><strong>Usuário: </strong>${usuario.usuario}</div>`
+                    +`<div><strong>Nome: </strong>${usuario.nome}</div>`
+                    +`<div><strong>Perfil: </strong>${usuario.nome_perfil}</div>`
+
                     $('#usuarios_form').modal('hide')
+                    $('#alert_conteudo').prepend(html)
+                    $('#alert_head').text('Atualizado com Sucesso')
+                    $('#centralModalSuccess').modal('show')
+                }else if(usuario){
+                    var html = ``
+                    +`<div><strong>ID: </strong>${usuario.id_usuario}</div>`
+                    +`<div><strong>Usuário: </strong>${usuario.usuario}</div>`
+                    +`<div><strong>Nome: </strong>${usuario.nome}</div>`
+                    +`<div><strong>Perfil: </strong>${usuario.nome_perfil}</div>`
+
+                    $('#usuarios_form').modal('hide')
+                    $('#alert_conteudo').prepend(html)
+                    $('#alert_head').text('Cadastrado Com Sucesso')
                     $('#centralModalSuccess').modal('show')
                 }else{
                     msg = ``
@@ -91,6 +113,8 @@ $(document).ready(function(){
     })
     $("#btn_cancelar_cad_usuario").click(function(){
         $('#usuarios_form').modal('hide')
+        $('#cad_usuario').attr('disabled', false)
+        
     })
 
     $("#myInput").on("keyup", function(){

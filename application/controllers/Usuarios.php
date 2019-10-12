@@ -89,40 +89,30 @@ class Usuarios extends CI_Controller {
 	public function editar($id = null)
 	{
 		is_admin(true);
-
-		if(!$usuario = $this->usuarios_model->select_id($id))redirect('usuarios');
-		if(!$post = $this->input->post())echo json_encode($usuario);
-
 		$this->form_validation->set_rules('nome', 'NOME', 'trim|required');
-		//$this->form_validation->set_rules('usuario', 'USUÁRIO', 'trim|required|is_unique[usuarios.usuario]');
 		$this->form_validation->set_rules('id_perfil', 'PERFIL', 'trim|required');
 		
-		if ($this->form_validation->run() == false):
-			echo validation_errors() == true ? validation_errors():'';
-			/*
-			if(validation_errors()):
-				echo validation_errors();
-			endif;
-			/**/
+		$data = null;
+		if(!$this->usuarios_model->select_id($id)):
+			$data['msg'] = 'Usuário não cadastrado';
+		elseif ($this->form_validation->run() == false):
+			$data['msg'] =  validation_errors() ? validation_errors():'';
 		else:
-			if($post['senha']):
-				$post['senha'] = md5($post['senha']);
-			else:
-				unset($post['senha']);
+			$post = $this->input->post();
+			if($post['cad_senha']):
+				$post['senha'] = md5($post['cad_senha']);
 			endif;
-			//print_r($post);
-
-			if($this->usuarios_model->update($usuario->id_usuario, $post)):
-				echo 'editado';
-			else:
-				echo 'Falha ao editar o Usuário';
-			endif;
-			
-		endif;
-	}
+			unset($post['cad_senha']);
 	
-
-
+			if($this->usuarios_model->update($post, $id)):
+				$data['usuario'] = $this->usuarios_model->select_id($id);
+				$data['msg'] = 'editado';
+			else:
+				$data['msg'] = 'Falha ao Editar o Usuário';
+			endif;
+		endif;
+		echo json_encode($data);
+	}
 	public function sair() 
 	{
 		//set_msg('Obrigado pela Visita :)', 'info');

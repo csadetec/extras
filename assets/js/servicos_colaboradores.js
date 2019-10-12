@@ -1,6 +1,6 @@
 $(document).ready(function(){
     
-    
+ 
     $("#pesquisa_colaborador").on("keyup", function(){
         logged()
 
@@ -45,19 +45,19 @@ $(document).ready(function(){
             `${site}servicos_colaboradores/cadastrar`,
             obj,
             function(data){
-               data = JSON.parse(data)
-                if(data.msg){
-                    msg = data.msg
-                    if(msg != 'cadastrado'){
-                        alert(msg)
-                        $('#pesquisa_colaborador').val('')
-                    }else{
-                       $('#pesquisa_colaborador').val('')
-                        //$('#pesquisa_colaborador').focusNextInputField()
-                        listar_servicos_colaboradores()
-                    }
+                data = JSON.parse(data)
+                console.log(data)
+                /*
+                msg = data.msg
+                if(msg == 'cadastrado'){
+                    $('#pesquisa_colaborador').val('')
+                    listar_servicos_colaboradores()
+                }else{
+                    $('#alert_conteudo_info').prepend(msg)
+                    $('#centralModalInfo').modal('show')
+                    $('#pesquisa_colaborador').val('')
                 }
-              
+                /** */
             }
 
         )
@@ -141,12 +141,34 @@ $(document).ready(function(){
             function(data){
                 data = JSON.parse(data)
                 var msg = data.msg
-                msg = ``
-                +`<div class="alert alert-success mt-2 mb-2 modal-title w-100" role="alert" >`
-                +`  ${msg}`
-                +`</div>`
-                $('#alert_servicos_colaboradores').empty()
-                $('#alert_servicos_colaboradores').prepend(msg)
+                var sc = data.sc
+                if(msg=='editado' && sc){
+                    var html = ``
+                    +`<div><strong>Cargo: </strong>${sc.cargo}</div>`
+                    +`<div><strong>Nome </strong>${sc.nome_colaborador}</div>`
+                    +`<div><strong>N°. Serviço: </strong>${sc.id_servico}</div>`
+                    +`<div><strong>Data: </strong>${sc.data}</div>`
+                    +`<div><strong>Motivo: </strong>${sc.nome_motivo}</div>`
+                    +`<hr>`
+                    +`<div><strong>Início: </strong>${sc.horas_inicio}</div>`
+					+`<div><strong>Fim: </strong>${sc.horas_fim}</div>`
+				
+                    $('#servicos_colaboradores_form').modal('hide')
+                    $('#alert_conteudo').prepend(html)
+                    $('#alert_head').text('Atualizado com Sucesso')
+                    $('#centralModalSuccess').modal('show')
+
+                    
+                }else{
+                    msg = ``
+                    +`<div class="alert alert-success mt-2 mb-2 modal-title w-100" role="alert" >`
+                    +`  ${msg}`
+                    +`</div>`
+                    $('#alert_servicos_colaboradores').empty()
+                    $('#alert_servicos_colaboradores').prepend(msg)
+                }
+
+               
             }
         )
 
@@ -161,35 +183,35 @@ $(document).ready(function(){
         var nome = $('#sc_nome').text()
         var cargo = $('#sc_cargo').text()
         var url = `${site}servicos_colaboradores/excluir/${id_sc}`
-        //console.log(url)
-        var r = confirm(`Deseja excluir do Serviço extra\n${cargo}\n ${nome}?`)
-        if(r){
-            $.get(
-                url,
-                function(data){
-                    data = JSON.parse(data)
-                    var msg = data.msg
-                    alert(msg)
-                    location.reload()
-                    /*
-                    msg = ``
-                    +`<div class="alert alert-info mt-2 mb-2 modal-title w-100" role="alert" >`
-                    +`  ${msg}`
-                    +`</div>`
-                    /**/
-                    /*
-                    $('#btn_salvar_sc').attr('disabled', true)
-                    $('#alert_servicos_colaboradores').empty()
-                    $('#alert_servicos_colaboradores').prepend(msg)
-                    /**/
-                }
-            )
-        }
-      
-        
-
-        return false
+        var text = ``
+        +`<div><strong>Deseja Excluir do Serviço Extra</strong></div>`
+        +`${cargo}<br>`
+        +`${nome}`
+        $('#alert_conteudo_danger').empty()
+        $('#alert_conteudo_danger').prepend(text)
+        $('#centralModalDanger').modal('show')      
     })
+
+    $('#btn_excluir_sc_confirma').click(function(){
+        logged()
+        var id_sc = $('#sc_id').val()
+        var url = `${site}servicos_colaboradores/excluir/${id_sc}`
+        $.get(
+            url,
+            function(data)
+            {
+                data = JSON.parse(data)
+                msg = data.msg
+                if(msg == 'deletado'){
+                    location.reload()
+                }else{
+                    alert(msg)
+                }
+            }
+
+        )
+    })
+
 
     function minutos_horas(m)
     {
