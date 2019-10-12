@@ -19,9 +19,29 @@ class Servicos_colaboradores_model extends CI_Model {
 
 	public function select_data_chapa($data, $chapa)
 	{
-		$this->db->where('data', $data);
-		$this->db->where('chapa', $chapa);
-		return $this->db->get('servicos_colaboradores')->result();
+		$this->db->select('sc.id_sc, sc.id_servico, sc.chapa, sc.horas_inicio, sc.horas_fim, DATE_FORMAT(sc.data, "%d/%m/%Y") as data_editada, '
+		.'c.nome_colaborador, c.cargo, m.nome_motivo');
+		$this->db->from('servicos_colaboradores as sc');
+		$this->db->join('colaboradores as c', 'sc.chapa = c.chapa');
+		$this->db->join('motivos as m', 'sc.id_motivo = m.id_motivo');
+		$this->db->where('sc.data', $data);
+		$this->db->where('sc.chapa', $chapa);
+		return $this->db->get()->result();
+	}
+
+	public function select_data_chapa_id_servico_diferente($data, $chapa, $id_servico)
+	{
+		$this->db->select('sc.id_sc, sc.id_servico, sc.chapa, sc.horas_inicio, sc.horas_fim, DATE_FORMAT(sc.data, "%d/%m/%Y") as data_editada, '
+		.'c.nome_colaborador, c.cargo, m.nome_motivo');
+		$this->db->from('servicos_colaboradores as sc');
+		$this->db->join('colaboradores as c', 'sc.chapa = c.chapa');
+		$this->db->join('motivos as m', 'sc.id_motivo = m.id_motivo');
+		$this->db->where('sc.data', $data);
+		$this->db->where('sc.chapa', $chapa);
+		$this->db->where('sc.id_servico !=', $id_servico);
+		
+
+		return $this->db->get()->result();
 	}
 
 	public function select_colaboradores_by_id_servico($id_servico)
@@ -37,7 +57,7 @@ class Servicos_colaboradores_model extends CI_Model {
 	
 	public function select_id($id_sc)
 	{
-		$this->db->select('sc.id_sc, sc.id_servico, sc.chapa, sc.horas_inicio, sc.horas_fim, DATE_FORMAT(sc.data, "%d/%m/%Y") as data, '
+		$this->db->select('sc.id_sc, sc.id_servico, sc.chapa, sc.horas_inicio, sc.horas_fim, DATE_FORMAT(sc.data, "%d/%m/%Y") as data_editada, sc.data, '
 		.'c.nome_colaborador, c.cargo, m.nome_motivo');
 		$this->db->from('servicos_colaboradores as sc');
 		$this->db->join('colaboradores as c', 'sc.chapa = c.chapa');
@@ -67,10 +87,7 @@ class Servicos_colaboradores_model extends CI_Model {
 	}
 
 
-	public function select_data_chapa_not_sc($data, $chapa, $sc)
-	{
 
-	}
 }
 
 /* End of file Servicos_colaboradores_model.php */

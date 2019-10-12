@@ -62,8 +62,9 @@ class Servicos extends CI_Controller {
 		$this->form_validation->set_rules('data', 'DATA', 'trim|required');
 		$this->form_validation->set_rules('horas_inicio', 'INÍCIO', 'trim|required');
 		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
-	
-		if(!$this->servicos_model->select_id($id_servico)):
+		
+
+		if(!$data['servico'] = $this->servicos_model->select_id($id_servico)):
 			//$data['msg'] = 'Serviço não Cadastrado';
 			redirect('servicos');
 		elseif($this->form_validation->run() == false):
@@ -75,6 +76,10 @@ class Servicos extends CI_Controller {
 			# code...
 			$post = $this->input->post();
 			
+			$sc = $this->servicos_colaboradores_model->select_colaboradores_by_id_servico($id_servico);
+			$data['sc'] = $sc;			
+			$data['teste'] = verifica_disponibilidade_group($sc);
+			/*
 			if($this->servicos_model->update($post, $id_servico)):
 				$post['diferenca'] = diff_hours($post['horas_inicio'], $post['horas_fim']);
 				$data['servico'] = $this->servicos_model->select_id($id_servico);

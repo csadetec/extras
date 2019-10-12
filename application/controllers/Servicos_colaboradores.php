@@ -10,16 +10,12 @@ class Servicos_colaboradores extends CI_Controller {
 		$this->load->library(array('form_validation'));
 		$this->load->helper(array('funcoes_helper'));
 		verifica_login();
-	//	$this->output->enable_profiler(TRUE);
-	
 	}
 
 	public function index()
 	{
 		
 	}
-
-
 
 	public function cadastrar()
 	{
@@ -39,11 +35,13 @@ class Servicos_colaboradores extends CI_Controller {
 				$post['id_motivo'] = $servico->id_motivo;
 				$post['diferenca'] = diff_hours($post['horas_inicio'], $post['horas_fim']);
 			
-				$data['teste'] = verifica_disponibilidade($post, 'insert');
-				$data['sc'] = $post;
-				$data['tipo'] = 'insert';
-			
-								
+				$disponivel = verifica_disponibilidade($post, 'insert');
+				if($disponivel['status']):
+					$sc = $this->servicos_colaboradores_model->insert($post);
+					$data['msg'] = $sc ? 'cadastrado':'Falha ao Cadastrar';
+				else:
+					$data['msg'] = $disponivel['msg'];
+				endif;
 			else:
 				$data['msg'] = 'Serviço não encontrado!';
 			endif;
@@ -57,22 +55,34 @@ class Servicos_colaboradores extends CI_Controller {
 		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
 		//$this->form_validation->set_rules('teste', 'teste', 'trim|required');
 		
-		if(!$data['servico_colaborador'] = $this->servicos_colaboradores_model->select_id($id_sc)):
+		if(!$data['sc'] = $this->servicos_colaboradores_model->select_id($id_sc)):
 			$data['msg'] = 'Não encontrado';
 		elseif (!$this->form_validation->run()):
 			# code...
 			$data['msg'] = validation_errors()? validation_errors():false;
 		else:
-			# code...
 			$post = $this->input->post();
-			$post['diferenca'] = diff_hours($post['horas_inicio'], $post['horas_fim']);
-			if($this->servicos_colaboradores_model->update($post, $id_sc)):
-				$data['msg'] = 'editado';
-				$data['sc'] = $this->servicos_colaboradores_model->select_id($id_sc);
-			else:
-				$data['msg'] = 'Falha ao editar';
-			endif;
 			
+			$post['diferenca'] = diff_hours($post['horas_inicio'], $post['horas_fim']);
+			$post['data'] = $data['sc']->data;
+			$post['chapa'] = $data['sc']->chapa;
+			$post['id_servico'] = $data['sc']->id_servico;
+		//	$data['post'] = $post;
+			
+			$disponivel = verifica_disponibilidade($post, 'update');
+		
+			
+			if($disponivel['status']):
+				if($this->servicos_colaboradores_model->update($post, $id_sc)):
+					$data['sc'] = $this->servicos_colaboradores_model->select_id($id_sc);
+					$data['msg'] = 'editado';
+				else:
+					$data['msg'] = 'Falha ao Editar';
+				endif;
+			else:
+				$data['msg'] = $disponivel['msg'];
+			endif;
+			/** */
 		endif;	
 		echo json_encode($data);
 	}

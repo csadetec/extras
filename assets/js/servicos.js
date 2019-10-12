@@ -14,6 +14,7 @@ $(document).ready(function(){
 			function(data)
 			{	
 				data = JSON.parse(data)
+				console.log(data)
 				var msg = data.msg
 				var servico = data.servico
 
@@ -21,7 +22,8 @@ $(document).ready(function(){
 					location.href = `${site}servicos/editar/${servico}`
 	            }else if(data.msg == 'editado' && servico){
 					var html = ``
-                    +`<div><strong>N°. Serviço: </strong>${servico.id_servico}</div>`
+					+`<div><strong>N°. Serviço: </strong>${servico.id_servico}</div>`
+					+`<div><strong>Motivo: </strong>${servico.nome_motivo}</div>`
                     +`<div><strong>Data: </strong>${servico.data_editada}</div>`
                     +`<div><strong>Início: </strong>${servico.horas_inicio}</div>`
 					+`<div><strong>Fim: </strong>${servico.horas_fim}</div>`

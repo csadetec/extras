@@ -46,13 +46,12 @@ $(document).ready(function(){
             obj,
             function(data){
                 data = JSON.parse(data)
-                console.log(data)
-                /*
                 msg = data.msg
                 if(msg == 'cadastrado'){
                     $('#pesquisa_colaborador').val('')
                     listar_servicos_colaboradores()
                 }else{
+                    $('#alert_conteudo_info').empty()
                     $('#alert_conteudo_info').prepend(msg)
                     $('#centralModalInfo').modal('show')
                     $('#pesquisa_colaborador').val('')
@@ -114,7 +113,7 @@ $(document).ready(function(){
             url,
             function(data){
                 data = JSON.parse(data)
-                sc = data.servico_colaborador
+                sc = data.sc
                 $('#servicos_colaboradores_form').modal('show')
                 $('#sc_cargo').html(`<strong>${sc.cargo}</strong>`)
                 $('#sc_id').val(sc.id_sc)
@@ -140,6 +139,7 @@ $(document).ready(function(){
             obj,
             function(data){
                 data = JSON.parse(data)
+                console.log(data)
                 var msg = data.msg
                 var sc = data.sc
                 if(msg=='editado' && sc){
@@ -147,7 +147,7 @@ $(document).ready(function(){
                     +`<div><strong>Cargo: </strong>${sc.cargo}</div>`
                     +`<div><strong>Nome </strong>${sc.nome_colaborador}</div>`
                     +`<div><strong>N°. Serviço: </strong>${sc.id_servico}</div>`
-                    +`<div><strong>Data: </strong>${sc.data}</div>`
+                    +`<div><strong>Data: </strong>${sc.data_editada}</div>`
                     +`<div><strong>Motivo: </strong>${sc.nome_motivo}</div>`
                     +`<hr>`
                     +`<div><strong>Início: </strong>${sc.horas_inicio}</div>`
@@ -161,7 +161,7 @@ $(document).ready(function(){
                     
                 }else{
                     msg = ``
-                    +`<div class="alert alert-success mt-2 mb-2 modal-title w-100" role="alert" >`
+                    +`<div class="alert alert-warning mt-2 mb-2 modal-title w-100" role="alert" >`
                     +`  ${msg}`
                     +`</div>`
                     $('#alert_servicos_colaboradores').empty()
