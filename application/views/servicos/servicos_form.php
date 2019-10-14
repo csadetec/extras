@@ -1,8 +1,8 @@
 <div class="row breadcrumb pt-65 pb-2">
-  <div class="col-md-6 ">
+  <div class="col-md-6">
     <h3 class="modal-title"><?php echo $title ?></h3>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6 ">
     <a href="<?php echo base_url('servicos/cadastrar') ?>" class="btn btn-primary float-right">CADASTRAR OUTRO SERVIÇO</a>
   </div>
 </div>
@@ -14,31 +14,10 @@
         <div class="col-6" >
           <select name="id_motivo" id="id_motivo" class="form-control" required>
             <option value="">SELECIONE O MOTIVO</option>
-            <optgroup label="Ensino Fundamental I">
-              <option value="1">APLICAÇÃO DE PROVA EF I </option>
-              <option value="4">ATIVIDADE EXTRA EF I</option>
-              <option value="14">REUNIÕES INF/EF I</option>
-              <option value="11">SUBSTITUIÇÃO INF/EF I</option>
-              <option value="8">AULA EXTRA EF I</option>
-            </optgroup>
-            <optgroup label="Ensino Fundamental II">
-              <option value="2">APLICAÇÃO DE PROVA EF II </option>
-              <option value="15">REUNIÕES EF II</option>
-              <option value="12">SUBSTITUIÇÃO EF II</option>
-              <option value="9">AULA EXTRA EF II</option>
-              <option value="5">ATIVIDADE EXTRA EF II</option>
-            </optgroup>
-            <optgroup label="Ensino Médio">
-              <option value="10">AULA EXTRA EM</option>
-              <option value="6">ATIVIDADE EXTRA EM</option>
-              <option value="13">SUBSTITUIÇÃO EM</option>
-              <option value="3">APLICAÇÃO DE PROVA EM</option>
-              <option value="16">REUNIÕES EM</option>
-            </optgroup>
-            <optgroup label="TODOS">
-              <option value="7">ATIVIDADES EXTRA</option>
-              <option value="17">FALTAS</option>
-            </optgroup>
+            <?php foreach($motivos as $r): ?>
+              <option value="<?php echo $r->id_motivo ?>"><?php echo $r->nome_motivo ?></option>
+            <?php endforeach; ?>
+
           </select>
         </div>
         <div class="col-6">

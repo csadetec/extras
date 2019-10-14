@@ -51,12 +51,15 @@ $(document).ready(function(){
 	
 	$('#lista_servicos tr').click(function(){
 		logged()
+	
 		var id_servico = $(this).find('td').eq(0).text()
 		var url = `${site}servicos/editar/${id_servico}`
+		$('#id_servico_opcao').val(id_servico)
+		$('.modal-title').text(`Serviço N° ${id_servico}`)
+		$('#a_editar_servico').attr('href', url )
+		$('#servicos_opcoes').modal('show')
 
-		location.href = url
 	})
-
 
     $('#lista_servicos tr').hover(function(){
 		logged()
@@ -85,7 +88,6 @@ $(document).ready(function(){
 		
 	})
 
-	/**/
 
 
 	editar_servico()
@@ -107,11 +109,27 @@ $(document).ready(function(){
 					$('#horas_inicio').val(servico.horas_inicio)
 					$('#horas_fim').val(servico.horas_fim)
 					$('#input_pesquisa').removeClass('d-none')
-                	$('#add_colaborador').text('ATUALIZAR')
+					$('#add_colaborador').text('ATUALIZAR')
+					$('#btn_duplicar_servico').removeClass('d-none')
 				}
 			)
 		}
 	}
+
+	$('#btn_duplicate_servico').click(function(){
+		logged()
+		var id_servico = $('#id_servico_opcao').val()
+		location.href = `${site}servicos/duplicar/${id_servico}`
+
+	})
+	
+	$('form#servico_duplicate_form').submit(function(){
+
+		var obj = $(this).serialize()
+		var id_servico = $('#id_servico')
+		alert(obj)
+		return false
+	})
 
 	$("#myInput").on("keyup", function(){
         var value = $(this).val().toLowerCase();
@@ -119,7 +137,6 @@ $(document).ready(function(){
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         })
     })
-
 
     function logged()
     {

@@ -98,15 +98,15 @@ function verifica_horas($sc, $inicio_new, $fim_new)
     $inicio = strtotime($sc->horas_inicio);
     $fim = strtotime($sc->horas_fim);        
 
-    if($inicio < $inicio_new && $inicio_new < $fim)return array('status'=>false, 'msg'=>msg($sc));          
-    if($inicio < $fim_new && $fim_new < $fim)return array('status'=>false, 'msg'=>msg($sc));          
-    if($inicio_new < $inicio && $inicio < $fim_new)return array('status'=>false, 'msg'=>msg($sc));          
-    if($inicio_new < $fim && $fim < $fim_new)return array('status'=>false, 'msg'=>msg($sc));          
+    if($inicio <= $inicio_new && $inicio_new <= $fim)return array('status'=>false, 'msg'=>msg($sc));          
+    if($inicio <= $fim_new && $fim_new <= $fim)return array('status'=>false, 'msg'=>msg($sc));          
+    if($inicio_new <= $inicio && $inicio <= $fim_new)return array('status'=>false, 'msg'=>msg($sc));          
+    if($inicio_new <= $fim && $fim <= $fim_new)return array('status'=>false, 'msg'=>msg($sc));          
     return array('status'=>true);
 }
 
 function msg($sc)
 {
-    return  $sc->nome_colaborador.'<hr> Esta agendado neste horário<br>No serviço N° '.$sc->id_servico.'<br>Data: '.$sc->data_editada.'<br>Horário: '.$sc->horas_inicio.' às '.$sc->horas_fim; 
+    return  $sc->nome_colaborador.' | Já esta agendada <b>No serviço N° '.$sc->id_servico.'!</b><hr>Data: '.$sc->data_editada.'<br>Horário: '.$sc->horas_inicio.' às '.$sc->horas_fim; 
 }
 ?>

@@ -36,4 +36,5 @@
     </table>
   </div>
 </div>
-
+<?php $this->load->view('servicos/servicos_opcoes'); ?>
+<?php $this->load->view('servicos/servicos_duplicate_form'); ?>

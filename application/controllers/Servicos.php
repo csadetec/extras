@@ -6,7 +6,7 @@ class Servicos extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('colaboradores_model', 'servicos_model', 'servicos_colaboradores_model'));
+		$this->load->model(array('colaboradores_model', 'servicos_model', 'servicos_colaboradores_model', 'motivos_model'));
 		$this->load->library(array('form_validation'));
 		$this->load->helper(array('funcoes_helper'));
 		
@@ -48,6 +48,7 @@ class Servicos extends CI_Controller {
 		else:
 			$data['title'] = 'Cadastrar Serviço';
 			$data['page'] = 'servicos/servicos_form';
+			$data['motivos'] = $this->motivos_model->select();
 			$this->load->view('index', $data, FALSE);
 		endif;
 	}
@@ -99,8 +100,54 @@ class Servicos extends CI_Controller {
 		else:
 			$data['title'] = 'Editar Serviço Nº '.$id_servico;
 			$data['page'] = 'servicos/servicos_form';
+			$data['motivos'] = $this->motivos_model->select();
+
 			$this->load->view('index', $data, FALSE);
 		endif;
+	}
+
+	public function duplicar($id_servico = null)
+	{
+	
+		if(!$s = $this->servicos_model->select_id($id_servico)):
+			//$data['msg'] = 'Serviço não Cadastrado';
+			redirect('servicos');
+		else:
+			$sc = $this->servicos_colaboradores_model->select_colaboradores_by_id_servico($id_servico);
+			$insert = array(
+				'id_motivo'=>$s->id_motivo, 'horas_inicio'=>$s->horas_inicio, 'horas_fim'=>$s->horas_fim
+			);
+			$s = $this->servicos_model->insert($insert);
+			if($s){
+				$insert = null;
+				foreach($sc as $r){
+					$insert['chapa'] = $r->chapa;
+					$insert['id_servico'] = $s;
+					$insert['id_motivo'] = $r->id_motivo;
+					$insert['horas_inicio'] = $r->horas_inicio;
+					$insert['horas_fim'] = $r->horas_fim;
+					$insert['diferenca'] = $r->diferenca;
+
+					if(!$this->servicos_colaboradores_model->insert($insert)){
+						$msg = 'Erro ao duplicar Serviço';
+						echo '<script>alert("'.$msg.'")</script>';
+						$url = 'http://'.$_SERVER['SERVER_NAME'].'/extras/servicos';
+						echo '<script>location.href = "'.$url.'"</script>';
+					}
+
+				}
+				redirect('servicos/editar/'.$s);
+			}else{
+				$msg = 'Erro ao duplicar Serviço';
+				echo '<script>alert("'.$msg.'")</script>';
+				$url = 'http://'.$_SERVER['SERVER_NAME'].'/extras/servicos';
+				echo '<script>location.href = "'.$url.'"</script>';
+							
+			}		
+		
+		endif;
+
+		
 	}
 
 

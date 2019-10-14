@@ -1,13 +1,13 @@
--- MySQL dump 10.17  Distrib 10.3.16-MariaDB, for Win64 (AMD64)
+-- MySQL dump 10.13  Distrib 5.7.27, for Linux (x86_64)
 --
 -- Host: localhost    Database: extras
 -- ------------------------------------------------------
--- Server version	10.3.16-MariaDB
+-- Server version	5.7.27-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -114,7 +114,7 @@ CREATE TABLE `servicos` (
 
 LOCK TABLES `servicos` WRITE;
 /*!40000 ALTER TABLE `servicos` DISABLE KEYS */;
-INSERT INTO `servicos` VALUES (1,1,'2019-10-03','18:47','19:47'),(2,1,'2019-10-03','19:25','20:25'),(3,1,'2019-10-03','19:42','20:42');
+INSERT INTO `servicos` VALUES (1,11,'2019-10-14','15:00','16:00'),(2,1,'2019-10-13','20:00','20:00'),(3,4,'2019-10-14','16:00','18:00');
 /*!40000 ALTER TABLE `servicos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,8 +133,9 @@ CREATE TABLE `servicos_colaboradores` (
   `horas_inicio` varchar(6) NOT NULL,
   `horas_fim` varchar(6) NOT NULL,
   `data` varchar(12) NOT NULL,
+  `diferenca` int(11) NOT NULL,
   PRIMARY KEY (`id_sc`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +144,7 @@ CREATE TABLE `servicos_colaboradores` (
 
 LOCK TABLES `servicos_colaboradores` WRITE;
 /*!40000 ALTER TABLE `servicos_colaboradores` DISABLE KEYS */;
-INSERT INTO `servicos_colaboradores` VALUES (1,1,1,'0022301','18:47','19:47','2019-10-03'),(2,1,1,'0022841','18:47','19:47','2019-10-03'),(3,1,1,'0022301','18:47','19:47','2019-10-03');
+INSERT INTO `servicos_colaboradores` VALUES (2,2,1,'0022920','20:00','20:00','2019-10-13',0),(3,1,11,'0022920','15:00','16:00','2019-10-14',60),(4,1,11,'0022831','15:00','16:00','2019-10-14',60),(5,3,4,'0022920','16:00','18:00','2019-10-14',120),(6,3,4,'0022715','16:00','18:00','2019-10-14',120),(7,3,4,'0022831','16:00','18:00','2019-10-14',120),(8,3,4,'0022734','16:00','18:00','2019-10-14',120);
 /*!40000 ALTER TABLE `servicos_colaboradores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,7 +163,7 @@ CREATE TABLE `usuarios` (
   `email` varchar(150) DEFAULT NULL,
   `id_perfil` int(11) NOT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,7 +172,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Lucas de Sousa Assunção','lucas.assuncao','10309785650',NULL,1),(2,'Usuário teste','teste','698dc19d489c4e4db73e28a713eab07b',NULL,4),(3,'ASSISTENTE MÉDIO','medio','71954c968ae9c3a50488ef0c9eae6f52',NULL,3),(4,'ASSISTENTE FUNDAMENTAL','fundamental','e01ac89f09c553a7b7bf0d7dec58a21c',NULL,2),(5,'USUÁRIO DETEC','detec','3e6ccfb77e5b68db59884ccc38a46752',NULL,1),(6,'TESTE','teste2','698dc19d489c4e4db73e28a713eab07b',NULL,1),(7,'BRUNO JULIO MOREIRA DUARTE','bruno.duarte','35607bc4097b930211761990928a68d7',NULL,1),(8,'TESTE','testecantina','698dc19d489c4e4db73e28a713eab07b',NULL,4),(9,'teste','teste3','7348cba539160cf399993a4b23832856',NULL,5);
+INSERT INTO `usuarios` VALUES (1,'Lucas de Sousa Assunção','lucas.assuncao','97a1884a632e6827e5b95271f8cee262',NULL,1),(2,'Usuário teste','teste','698dc19d489c4e4db73e28a713eab07b',NULL,4),(3,'ASSISTENTE MÉDIO','medio','71954c968ae9c3a50488ef0c9eae6f52',NULL,3),(4,'ASSISTENTE FUNDAMENTAL','fundamental','e01ac89f09c553a7b7bf0d7dec58a21c',NULL,2),(5,'USUÁRIO DETEC','detec','3e6ccfb77e5b68db59884ccc38a46752',NULL,1),(6,'TESTE','teste2','698dc19d489c4e4db73e28a713eab07b',NULL,1),(7,'BRUNO JULIO MOREIRA DUARTE','bruno.duarte','35607bc4097b930211761990928a68d7',NULL,1),(8,'TESTE','testecantina','698dc19d489c4e4db73e28a713eab07b',NULL,4),(9,'teste','teste3','7348cba539160cf399993a4b23832856',NULL,5),(10,'lucas','lucas','202cb962ac59075b964b07152d234b70',NULL,1),(11,'Lucas de Sousa Assunção','lucas.assuncao1','202cb962ac59075b964b07152d234b70',NULL,2),(12,'lucas','lucas123','aa41efe0a1b3eeb9bf303e4561ff8392',NULL,3),(13,'dsf','lasd','dd982884edf68487cb8ff664b3dfdf12',NULL,1),(14,'dsf','lasd','dd982884edf68487cb8ff664b3dfdf12',NULL,1),(15,'sdf','asdf','d9729feb74992cc3482b350163a1a010',NULL,2),(16,'sdf','asdf','d9729feb74992cc3482b350163a1a010',NULL,2),(17,'sdf','asdfzxc','d9729feb74992cc3482b350163a1a010',NULL,2);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -184,4 +185,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-03 21:36:45
+-- Dump completed on 2019-10-14 13:19:56
