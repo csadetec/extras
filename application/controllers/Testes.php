@@ -47,31 +47,51 @@ class Testes extends CI_Controller {
 		//echo $h1+$h2;
 	}
 
-	public function intervalo($h = '20:00')
+	public function intervalo($inicio= '15:00', $fim='17:00',$inicio_new = '20:00', $fim_new='10:00')
 
 	{	
-
-		echo '18:00';
+		echo '<pre>';
+		echo 'Inicio '.$inicio;
 		echo '<br>';
-		echo '19:00';
+		echo 'Fim: '.$fim;
 		echo '<br>';
-
-		$inicio = strtotime('18:00');
-		$fim = strtotime('19:00');
-
+		echo 'Inicio novo: '.$inicio_new;
+		echo '<br>';
+		echo 'Fim novo: '.$fim_new;
+		echo '<br>';
 		
-		$agora = strtotime($h);
+		$inicio = strtotime($inicio);
+		$fim = strtotime($fim);
 
-		if($inicio <= $agora and $agora <= $fim){
+		$inicio_new = strtotime($inicio_new);
+		$fim_new = strtotime($fim_new);
+
+		$total = $inicio + $fim;
+		echo '<br>'.'Total:      '.$total;
+
+		$total_new = $inicio_new + $fim_new;
+		echo '<br>'.'Total Novo: '.$total_new;
+
+		echo '<br>';
+		echo '<br>';
+		if($inicio < $inicio_new and $inicio_new < $fim){
 			echo 'Esta no Intervalo';
+		}elseif($inicio < $fim_new and $fim_new < $fim){
+			echo 'Esta no Intervalo';
+		}elseif($inicio_new < $inicio and $inicio < $fim_new){
+			echo 'Esta no Intervalo';
+		}elseif($inicio_new < $fim  and $fim < $fim_new){
+			echo 'Esta no Invervalo';
 		}else{
-			echo 'Esta fora';
+			echo 'Nao esta no intervalo';
+		
 		}
-
+		
 
 
 	}
 
+	
 }
 
 /* End of file Testes.php */

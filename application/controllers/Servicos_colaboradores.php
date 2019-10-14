@@ -67,10 +67,10 @@ class Servicos_colaboradores extends CI_Controller {
 			$post['data'] = $data['sc']->data;
 			$post['chapa'] = $data['sc']->chapa;
 			$post['id_servico'] = $data['sc']->id_servico;
-		//	$data['post'] = $post;
+			//	$data['post'] = $post;
 			
 			$disponivel = verifica_disponibilidade($post, 'update');
-		
+			//$data['teste'] = $disponivel;
 			
 			if($disponivel['status']):
 				if($this->servicos_colaboradores_model->update($post, $id_sc)):

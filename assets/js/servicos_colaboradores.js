@@ -118,7 +118,7 @@ $(document).ready(function(){
                 $('#sc_cargo').html(`<strong>${sc.cargo}</strong>`)
                 $('#sc_id').val(sc.id_sc)
                 $('#sc_nome').text(sc.nome_colaborador)
-                $('#sc_data').text(sc.nome_motivo+ ' - '+sc.data)
+                $('#sc_data').text(sc.nome_motivo+ ' - '+sc.data_editada)
                 $('#sc_img').attr('src', `${visiografo}${sc.chapa}.JPG`)
                 $('#sc_horas_inicio').val(sc.horas_inicio)
                 $('#sc_horas_fim').val(sc.horas_fim)
