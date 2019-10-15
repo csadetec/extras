@@ -36,6 +36,14 @@ class Servicos_model extends CI_Model {
 		return $this->db->update('servicos', $dados);
 	}
 	
+	public function delete($id_servico)
+	{
+		$this->db->where('id_servico', $id_servico);
+		return $this->db->delete('servicos');
+		
+	}
+
+
 
 }
 

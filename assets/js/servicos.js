@@ -138,6 +138,40 @@ $(document).ready(function(){
         })
     })
 
+
+    $('#btn_excluir_servico').click(function(){
+        logged()
+		var id_servico = $('#id_servico').val()
+        var text = `<div><strong>Deseja Excluir o Serviço N° ${id_servico}</strong></div>`
+
+		$('#alert_conteudo_danger').empty()
+		$('#alert_conteudo_danger').prepend(text)
+		$('#btn_excluir_sc_confirma').addClass('d-none')
+		$('#btn_excluir_servico_confirma').removeClass('d-none')
+		$('#centralModalDanger').modal('show')      
+
+    })
+
+	$('#btn_excluir_servico_confirma').click(function(){
+        logged()
+        var id_servico = $('#id_servico').val()
+        var url = `${site}servicos/excluir/${id_servico}`
+        $.get(
+            url,
+            function(data)
+            {
+                data = JSON.parse(data)
+                msg = data.msg
+                if(msg == 'deletado'){
+                    location.reload()
+                }else{
+                    alert(msg)
+                }
+            }
+
+        )
+    })
+    
     function logged()
     {
         $.get(

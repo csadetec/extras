@@ -183,6 +183,8 @@ $(document).ready(function(){
         var nome = $('#sc_nome').text()
         var cargo = $('#sc_cargo').text()
         var url = `${site}servicos_colaboradores/excluir/${id_sc}`
+        $('#btn_excluir_sc_confirma').removeClass('d-none')
+		$('#btn_excluir_servico_confirma').addClass('d-none')
         var text = ``
         +`<div><strong>Deseja Excluir do Serviço Extra</strong></div>`
         +`${cargo}<br>`

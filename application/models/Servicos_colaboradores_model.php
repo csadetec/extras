@@ -86,6 +86,12 @@ class Servicos_colaboradores_model extends CI_Model {
 		return $this->db->delete('servicos_colaboradores');
 	}
 
+	public function delete_by_id_servico($id_servico)
+	{
+		$this->db->where('id_servico', $id_servico);
+		return $this->db->delete('servicos_colaboradores');
+		
+	}
 
 
 }

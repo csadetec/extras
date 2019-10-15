@@ -11,7 +11,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
-  <link  href="<?php echo base_url('assets/css/style.css?20191014') ?>" rel="stylesheet">
+  <link  href="<?php echo base_url('assets/css/style.css?20191014a') ?>" rel="stylesheet">
   <title><?php echo isset($title) ?$title:'Serviços Extras' ?></title>
 </head>
 <body>
@@ -54,8 +54,8 @@
   <script src="<?php echo base_url('assets/js/script.js?1715')?>"></script>
   <script src="<?php echo base_url('assets/js/usuarios.js?1110a') ?>"></script>
   <script src="<?php echo base_url('assets/js/colaboradores.js?20191004a') ?>"></script>
-  <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?1210') ?>"></script>
-  <script src="<?php echo base_url('assets/js/servicos.js?20191014a') ?>"></script>
+  <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?20191014') ?>"></script>
+  <script src="<?php echo base_url('assets/js/servicos.js?20191014ab') ?>"></script>
   <script src="<?php echo base_url('assets/js/relatorios.js?1110') ?>"></script>
   <script src="<?php echo base_url('assets/js/modals.js') ?>"></script>
   <script src="<?php echo base_url('assets/js/horas.js?20') ?>"></script>

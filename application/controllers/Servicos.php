@@ -150,6 +150,27 @@ class Servicos extends CI_Controller {
 		
 	}
 
+	public function excluir($id_servico = null)
+	{
+	
+		if(!$this->servicos_model->select_id($id_servico)):
+			$data['msg'] = 'Serviço não Cadastrado';
+		else:
+			if(!$this->servicos_colaboradores_model->delete_by_id_servico($id_servico)){
+				$data['msg'] = 'Erro ao deletar os colaboradores do serviço';
+			}elseif(!$this->servicos_model->delete($id_servico)){
+				$data['msg'] = 'Erro ao deletar os colaboradores do serviço';
+			}else{
+				$data['msg'] = 'deletado';
+			}
+		
+		endif;
+		echo json_encode($data);
+
+
+		
+	}
+
 
 
 

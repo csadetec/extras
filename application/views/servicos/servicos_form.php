@@ -3,7 +3,8 @@
     <h3 class="modal-title"><?php echo $title ?></h3>
   </div>
   <div class="col-md-6 ">
-    <a href="<?php echo base_url('servicos/cadastrar') ?>" class="btn btn-primary float-right">CADASTRAR OUTRO SERVIÇO</a>
+    <button id="btn_excluir_servico" class="btn btn-danger float-right">Excluir Serviço</button>
+    <a href="<?php echo base_url('servicos/cadastrar') ?>" class="btn btn-primary float-right">Cadastrar outro Serviço</a>
   </div>
 </div>
 <div class="row" id="alert_servico"></div>

@@ -1,7 +1,7 @@
 <!-- Central Modal Medium Danger -->
 <div class="modal fade" id="centralModalDanger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
-  <div class="modal-dialog modal-notify modal-danger" role="document">
+  <div class="modal-dialog modal-notify modal-danger mt-10" role="document">
     <!--Content-->
     <div class="modal-content">
       <!--Header-->
@@ -26,6 +26,7 @@
       <!--Footer-->
       <div class="modal-footer justify-content-center">
         <button  class="btn btn-danger" id="btn_excluir_sc_confirma">Excluir</a>
+        <button  class="btn btn-danger" id="btn_excluir_servico_confirma">Excluir Serviço</a>
         <button type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
