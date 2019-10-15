@@ -55,8 +55,8 @@
   <script src="<?php echo base_url('assets/js/usuarios.js?1110a') ?>"></script>
   <script src="<?php echo base_url('assets/js/colaboradores.js?20191004a') ?>"></script>
   <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?20191014') ?>"></script>
-  <script src="<?php echo base_url('assets/js/servicos.js?20191014ab') ?>"></script>
-  <script src="<?php echo base_url('assets/js/relatorios.js?1110') ?>"></script>
+  <script src="<?php echo base_url('assets/js/servicos.js?20191015') ?>"></script>
+  <script src="<?php echo base_url('assets/js/relatorios.js?20191015') ?>"></script>
   <script src="<?php echo base_url('assets/js/modals.js') ?>"></script>
   <script src="<?php echo base_url('assets/js/horas.js?20') ?>"></script>
   

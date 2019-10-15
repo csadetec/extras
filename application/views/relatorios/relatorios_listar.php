@@ -1,50 +1,41 @@
 <div class="row justify-content-center pt-list mb-3">
     <div class="col-md-8">
-        <div class="row">
-            <div class="col-md-4">
-                <label for="inicio">Início</label>
-                <input type="date" class="form-control">
+        <form method="post" id="relatorios_form" class="">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <label for="inicio">Início</label>
+                    <input type="date" id="relatorio_inicio" class="form-control" >
+                </div>
+                <div class="col-md-6">
+                    <label for="inicio">Fim</label>
+                    <input type="date" id="relatorio_fim" class="form-control" >
+                </div>
+                <!--
+                <div class="col-md-4">
+                    <label for="inicio">Ordenar</label>
+                    <select name="" id="relatorio_ordenar" class="form-control">
+                        <option value="">Selecione</option>
+                        <option value="data">Data</option>
+                        <option value="id_motivo">Motivo</option>
+                    </select>
+                </div>
+                <!-- -->
             </div>
-            <div class="col-md-4">
-                <label for="inicio">Fim</label>
-                <input type="date" class="form-control">
-            </div>
-            <div class="col-md-4">
-                <label for="inicio">Ordenar</label>
-                <select name="" id="ordenar">
-                    <option value=""></option>
-                </select>
-            </div>         
-        </div>
+       </form>
     </div>
 </div>
 
 <div class="row justify-content-center mb-5">
 
     <div class="col-md-8">
-      <input class="form-control form-control-lg" type="search" placeholder="Pesquisar Colaborador" aria-label="Pesquisar Colaborador" id="myInput" data-list="list-group">
+      <input class="form-control form-control-lg d-none" type="search" placeholder="Pesquisar Colaborador" id="input_relatorio">
     </div>
 </div>
 
 <div class="row justify-content-center">
 
-    <div class="col-md-8">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">DATA</th>
-                    <th scope="col">CHAPA</th>
-                    <th scope="col">NOME</th>
-                    <th scope="col">MOTIVO</th>
-                    <th scope="col">HORAS</th>
-                    
-                </tr>
-            </thead>
-            <tbody id="lista_relatorios" class="cursor-pointer">
-                
-            </tbody>
-        </table>
+    <div class="col-md-8" id="table_relatorios">
+       
     </div>
 </div>
 

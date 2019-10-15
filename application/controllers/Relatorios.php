@@ -29,7 +29,7 @@ class Relatorios extends CI_Controller {
 	}
 
 
-	public function filter($inicio = '2019-01-01', $fim = '2100-01-01', $order = null)
+	public function filter($inicio = '2019-01-01', $fim = '2100-01-01', $order = 'data')
 	{	
 		
 		$colaboradores = $this->relatorios_model->filter($inicio, $fim, $order);

@@ -170,7 +170,8 @@ $(document).ready(function(){
             }
 
         )
-    })
+	})
+
     
     function logged()
     {
