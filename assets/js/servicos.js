@@ -61,6 +61,7 @@ $(document).ready(function(){
 
 	})
 
+	//Quando o úsuario passar o mouse em cima de um serviço, listar o nome dos colaboradores
     $('#lista_servicos tr').hover(function(){
 		logged()
 		var id_servico = $(this).find('td').eq(0).text()
@@ -88,8 +89,7 @@ $(document).ready(function(){
 		
 	})
 
-
-
+	//editar serviço
 	editar_servico()
 	function editar_servico()
 	{
@@ -116,21 +116,16 @@ $(document).ready(function(){
 		}
 	}
 
+	//Quando usuario quiser duplicar o serviço, carregando motivo, horas e colobaradores, necessitando 
+	//setar a nova data do evento 
 	$('#btn_duplicate_servico').click(function(){
 		logged()
 		var id_servico = $('#id_servico_opcao').val()
 		location.href = `${site}servicos/duplicar/${id_servico}`
 
 	})
-	
-	$('form#servico_duplicate_form').submit(function(){
 
-		var obj = $(this).serialize()
-		var id_servico = $('#id_servico')
-		alert(obj)
-		return false
-	})
-
+	//Filtro para pesquisar serviços
 	$("#myInput").on("keyup", function(){
         var value = $(this).val().toLowerCase();
         $("#lista_servicos tr").filter(function () {
@@ -138,7 +133,7 @@ $(document).ready(function(){
         })
     })
 
-
+	//botao para abrir modal de exclusão do serviço
     $('#btn_excluir_servico').click(function(){
         logged()
 		var id_servico = $('#id_servico').val()
@@ -152,6 +147,7 @@ $(document).ready(function(){
 
     })
 
+	//btn para confirmar exclusão do serviço
 	$('#btn_excluir_servico_confirma').click(function(){
         logged()
         var id_servico = $('#id_servico').val()
@@ -172,6 +168,7 @@ $(document).ready(function(){
         )
 	})
 
+	
     
     function logged()
     {
