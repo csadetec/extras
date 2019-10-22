@@ -1,9 +1,11 @@
 $(document).ready(function(){
+    /*
     $('#horas_inicio').change(verifica_horas)
     $('#horas_fim').change(verifica_horas)
     $('#sc_horas_inicio').change(verifica_horas_sc)
     $('#sc_horas_fim').change(verifica_horas_sc)
 
+    /*
     function verifica_horas()
     {
         var inicio = $('#horas_inicio').val()
@@ -23,5 +25,6 @@ $(document).ready(function(){
             $('#sc_horas_fim').val(inicio)
         }
     }   
-
+    
+    /**/
 })

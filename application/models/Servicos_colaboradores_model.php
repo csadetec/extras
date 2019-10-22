@@ -46,11 +46,13 @@ class Servicos_colaboradores_model extends CI_Model {
 
 	public function select_colaboradores_by_id_servico($id_servico)
 	{
-		$this->db->select('sc.id_sc, sc.id_servico, sc.id_motivo, sc.chapa, sc.horas_inicio, sc.horas_fim,  sc.diferenca, sc.data, '
-			.'c.nome_colaborador, c.cargo');
+		$this->db->select('sc.id_sc, sc.id_servico, sc.id_motivo, sc.chapa, sc.horas_inicio, sc.horas_fim,  sc.diferenca, sc.data,  '
+			.'c.nome_colaborador, c.cargo, '
+			.'m.nome_motivo'
+		);
 		$this->db->from('servicos_colaboradores as sc');
 		$this->db->join('colaboradores as c', 'sc.chapa = c.chapa');
-
+		$this->db->join('motivos as m', 'm.id_motivo = sc.id_motivo');
 		$this->db->where('id_servico', $id_servico);
 		return $this->db->get()->result();
 	}

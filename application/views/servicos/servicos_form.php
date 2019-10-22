@@ -10,7 +10,7 @@
 <div class="row" id="alert_servico"></div>
 <div class="row">
   <div class="col-6">
-    <form id="servicos_form" class="text-center" action="post">
+    <form id="servicos_form"  action="post">
       <div class="form-row mb-3">
         <div class="col-6" >
           <select name="id_motivo" id="id_motivo" class="form-control" required>
@@ -28,11 +28,11 @@
       </div>
       <div class="form-row mb-3">
         <div class="col-6">
-          <label for="horas_inicio" class="float-left">Início</label>
+          <label for="horas_inicio" >Início</label>
           <input type="time" name="horas_inicio" id="horas_inicio" class="form-control" required>
         </div>
         <div class="col-6">
-          <label for="horas_fim" class="float-left">Fim</label>
+          <label for="horas_fim">Fim</label>
           <input type="time" name="horas_fim" id="horas_fim" class="form-control" required>
         </div>
       </div>

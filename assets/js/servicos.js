@@ -85,8 +85,6 @@ $(document).ready(function(){
 			}
 
 		)
-		
-		
 	})
 
 	//editar serviço
@@ -122,7 +120,6 @@ $(document).ready(function(){
 		logged()
 		var id_servico = $('#id_servico_opcao').val()
 		location.href = `${site}servicos/duplicar/${id_servico}`
-
 	})
 
 	//Filtro para pesquisar serviços
@@ -144,7 +141,6 @@ $(document).ready(function(){
 		$('#btn_excluir_sc_confirma').addClass('d-none')
 		$('#btn_excluir_servico_confirma').removeClass('d-none')
 		$('#centralModalDanger').modal('show')      
-
     })
 
 	//btn para confirmar exclusão do serviço
@@ -167,9 +163,12 @@ $(document).ready(function(){
 
         )
 	})
-
-	
     
+	//caso tenha feito alguma alteração no formulário, hide input q busca os colaboradores para add.
+	$('#id_motivo, #data, #horas_inicio, #horas_fim').change(function(){
+		$('#pesquisa_colaborador').hide()
+	})
+
     function logged()
     {
         $.get(

@@ -72,31 +72,23 @@ $(document).ready(function(){
             $.get(
                 `${site}servicos_colaboradores/listar/${id_servico}`,
                 function(data){
-                    data = JSON.parse(data)
-                   // console.log(data)
+                    sc = JSON.parse(data)
                     var row = ``
                     var cont = 1
-                    for(var i in data){
-                        var cargo = data[i].cargo == 'ANALISTA DE ÁREA DO CONHECIMENTO SÊNIOR'?'ANALISTA DE ÁREA':data[i].cargo
-                     //   console.log(data)
-                        diferenca = data[i].diferenca
-                        diferenca = minutos_horas(diferenca)
-                      
-                        row +=``
+                    row = sc.map(sc =>
+                        `<tr>`
+                        +   `<th>${cont++}</td>`
+                        +   `<td class="d-none">${sc.id_sc}</td>`
+                        +   `<td>${sc.nome_colaborador} | ${sc.cargo != 'PROFESSOR' ? 'ANALISTA DE ÁREA': sc.cargo}</td>`
+                        +   `<td>${sc.nome_motivo}</td>`
+                        +   `<td>${sc.horas_inicio}</td>`
+                        +   `<td>${sc.horas_fim}</td>`
                         +`<tr>`
-                        +   `<th scope="row">${cont++}</th>`
-                        +   `<td class="d-none">${data[i].id_sc}</td>`
-                        +   `<td>${data[i].nome_colaborador} | <i>${cargo}</i></td>`
-                        //+   `<td>${data[i].data}</td>`
-                        +   `<td>${data[i].horas_inicio}</td>`
-                        +   `<td>${data[i].horas_fim}</td>`
-                        +   `<td>${diferenca}</td>`
-                        +`</tr>`
-                    }
-                
+                    )
                     $('#lista_servico_colaboradores').empty()
                     $('#lista_servico_colaboradores').prepend(row)
                     $('#lista_servico_colaboradores tr').click(form_servico_colaboradores)
+                    /**/
                 }
             )
         }
