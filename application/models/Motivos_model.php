@@ -5,7 +5,7 @@ class Motivos_model extends CI_Model {
 
 	public function select()
 	{
-		$this->db->order_by('segmento', 'asc');
+		$this->db->order_by('nome_motivo', 'asc');
 		return $this->db->get('motivos')->result();
 	}
 	

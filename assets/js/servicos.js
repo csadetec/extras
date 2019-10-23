@@ -106,6 +106,7 @@ $(document).ready(function(){
 					$('#data').val(servico.data)
 					$('#horas_inicio').val(servico.horas_inicio)
 					$('#horas_fim').val(servico.horas_fim)
+					$('#obs').val(servico.obs)
 					$('#input_pesquisa').removeClass('d-none')
 					$('#add_colaborador').text('ATUALIZAR')
 					$('#btn_duplicar_servico').removeClass('d-none')

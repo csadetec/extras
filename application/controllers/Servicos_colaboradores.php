@@ -53,7 +53,7 @@ class Servicos_colaboradores extends CI_Controller {
 	{
 		$this->form_validation->set_rules('horas_inicio', 'INÍCIO', 'trim|required');
 		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
-		//$this->form_validation->set_rules('teste', 'teste', 'trim|required');
+		$this->form_validation->set_rules('id_motivo', 'MOTIVO', 'trim|required');
 		
 		if(!$data['sc'] = $this->servicos_colaboradores_model->select_id($id_sc)):
 			$data['msg'] = 'Não encontrado';

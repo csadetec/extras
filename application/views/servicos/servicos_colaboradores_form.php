@@ -26,14 +26,24 @@
        
         <hr>
         <!-- Default form contact -->
-        <form id="servicos_colaboradores_form" class="text-center" action="post">
+        <form id="servicos_colaboradores_form" action="post">
+          <div class="form-row mb-3">
+            <label for="id_motivo">Motivo</label>
+            <select name="id_motivo" id="sc_id_motivo" class="form-control">
+              <option value="">SELECIONE</option>
+              <?php foreach ($motivos as $key => $row): ?>
+                <option value="<?php echo $row->id_motivo ?>"><?php echo $row->nome_motivo ?></option>
+              <?php endforeach; ?>              
+            </select>
+            <?php  ?>
+          </div>
           <div class="form-row mb-3">
             <div class="col-6">
-              <label for="horas_inicio" class="float-left">Início</label>
+              <label for="horas_inicio" >Início</label>
               <input type="time" name="horas_inicio" id="sc_horas_inicio" class="form-control" >
             </div>
             <div class="col-6">
-              <label for="horas_fim" class="float-left">Fim</label>
+              <label for="horas_fim" >Fim</label>
               <input type="time" name="horas_fim" id="sc_horas_fim" class="form-control">
             </div>
           </div>

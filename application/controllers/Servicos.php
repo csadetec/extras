@@ -34,14 +34,18 @@ class Servicos extends CI_Controller {
 		$this->form_validation->set_rules('data', 'DATA', 'trim|required');
 		$this->form_validation->set_rules('horas_inicio', 'INÍCIO', 'trim|required');
 		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
+		$this->form_validation->set_rules('obs', 'OBS', 'trim');
+
 		$data = null;
 		if ($this->form_validation->run() == false):
 			
 			$data['msg'] =  validation_errors() ? validation_errors():false;
 		else:
 			$post = $this->input->post();
+			//$data['msg'] = $post;
 			$data['servico'] = $this->servicos_model->insert($post);
 			$data['msg'] = $data['servico'] ? 'cadastrado':'Falha ao Cadastrar';
+			/**/
 		endif;			
 		if($this->input->post()):
 			echo json_encode($data);
@@ -59,6 +63,7 @@ class Servicos extends CI_Controller {
 		$this->form_validation->set_rules('data', 'DATA', 'trim|required');
 		$this->form_validation->set_rules('horas_inicio', 'INÍCIO', 'trim|required');
 		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
+		$this->form_validation->set_rules('obs', 'OBS', 'trim');
 		
 
 		if(!$data['servico'] = $this->servicos_model->select_id($id_servico)):
@@ -82,6 +87,7 @@ class Servicos extends CI_Controller {
 				if($this->servicos_model->update($post, $id_servico)):
 					$post['diferenca'] = diff_hours($post['horas_inicio'], $post['horas_fim']);
 					$data['servico'] = $this->servicos_model->select_id($id_servico);
+					unset($post['obs']);
 					if($this->servicos_colaboradores_model->update_id_servico($post, $id_servico)):
 						$data['msg'] = 'editado';
 					endif;

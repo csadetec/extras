@@ -60,7 +60,8 @@ class Servicos_colaboradores_model extends CI_Model {
 	public function select_id($id_sc)
 	{
 		$this->db->select('sc.id_sc, sc.id_servico, sc.chapa, sc.horas_inicio, sc.horas_fim, DATE_FORMAT(sc.data, "%d/%m/%Y") as data_editada, sc.data, '
-		.'c.nome_colaborador, c.cargo, m.nome_motivo');
+		.'c.nome_colaborador, c.cargo, '
+		.' m.nome_motivo, m.id_motivo');
 		$this->db->from('servicos_colaboradores as sc');
 		$this->db->join('colaboradores as c', 'sc.chapa = c.chapa');
 		$this->db->join('motivos as m', 'sc.id_motivo = m.id_motivo');

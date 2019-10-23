@@ -83,6 +83,7 @@ $(document).ready(function(){
                         +   `<td>${sc.nome_motivo}</td>`
                         +   `<td>${sc.horas_inicio}</td>`
                         +   `<td>${sc.horas_fim}</td>`
+                        +   `<td>${minutos_horas(sc.diferenca)}</td>`
                         +`<tr>`
                     )
                     $('#lista_servico_colaboradores').empty()
@@ -106,12 +107,14 @@ $(document).ready(function(){
             function(data){
                 data = JSON.parse(data)
                 sc = data.sc
+                console.log(sc)
                 $('#servicos_colaboradores_form').modal('show')
                 $('#sc_cargo').html(`<strong>${sc.cargo}</strong>`)
                 $('#sc_id').val(sc.id_sc)
                 $('#sc_nome').text(sc.nome_colaborador)
                 $('#sc_data').text(sc.nome_motivo+ ' - '+sc.data_editada)
                 $('#sc_img').attr('src', `${visiografo}${sc.chapa}.JPG`)
+                $('#sc_id_motivo').val(sc.id_motivo)                
                 $('#sc_horas_inicio').val(sc.horas_inicio)
                 $('#sc_horas_fim').val(sc.horas_fim)
        

@@ -9,7 +9,7 @@
 </div>
 <div class="row" id="alert_servico"></div>
 <div class="row">
-  <div class="col-6">
+  <div class="col-md-5">
     <form id="servicos_form"  action="post">
       <div class="form-row mb-3">
         <div class="col-6" >
@@ -22,7 +22,6 @@
           </select>
         </div>
         <div class="col-6">
-          <!--<label for="data" class="float-left">Data</label>-->
           <input type="date" name="data" id="data" class="form-control" required>
         </div>
       </div>
@@ -36,6 +35,12 @@
           <input type="time" name="horas_fim" id="horas_fim" class="form-control" required>
         </div>
       </div>
+      <div class="form-row mb-3">
+        <div class="col-md-12">
+          <label for="obs">Observações</label>
+          <textarea class="form-control" name="obs" id="obs"></textarea>       
+        </div>
+      </div>
       <div id="input_pesquisa" class="form-row d-none">
         <input class="form-control form-control-lg mb-2" type="search" autocomplete="off" placeholder="Pesquisar Colaborador"  id="pesquisa_colaborador" list="list-colaboradores">
         <datalist id="list-colaboradores">
@@ -43,39 +48,34 @@
       </div>
       <div class="form-row mb-3">
         <input type="hidden" id="id_servico">
-        <button type="submit" class="btn btn-indigo" id="add_colaborador">Adicionar Colaboradores</button>
-        <a href="<?php echo base_url('servicos/') ?>"  class="btn btn-secondary">Fechar</a>
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-indigo btn-block" id="add_colaborador">Adicionar Colaboradores</button>
+        </div>
+        <div class="col-md-6">
+          <a href="<?php echo base_url('servicos/') ?>"  class="btn btn-secondary btn-block">Fechar</a>
+        </div>
       </div>
     </form>
   </div>
-  <div class="col-6">
+  <div class="col-md-7">
    
     <div class="row">
       <div class="col-12">
-        <!--
-        <ul class="list-group" id="lista_servico_colaboradores"></ul>
-        <!-- -->
         <table class="table">
           <thead>
             <tr>
-              <!--
+              <!--              
               <th scope="col">#</th>
               <th scope="col">NOME</th>
+              <th scope="col">MOTIVO</th>
               <th scope="col">INÍCIO</th>
               <th scope="col">FIM</th>
+              <th scope="col">DIFERANÇA</th>
               <!-- -->
             </tr>
           </thead>
           <tbody id="lista_servico_colaboradores" class="cursor-pointer">
-            <!--
-            <tr>
-              <th scope="row">1</th>
-              <td class="d-none">chapa</td>
-              <td>lucas</td>
-              <td>18:00</td>
-              <td>20:00</td>
-            </tr>
-            <!-- -->
+    
           </tbody>
         </table>
       </div>

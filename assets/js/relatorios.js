@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+    //nao ta sendo usado
     $('#lista_relatorios tr').click(function(){
         logged()
         var chapa = $(this).find('td').eq(0).text()
@@ -60,9 +61,10 @@ $(document).ready(function(){
         logged()
         var inicio = $('#relatorio_inicio').val()
         var fim = $('#relatorio_fim').val()
-        var ordernar = $('#relatorio_ordenar').val()
+        //var ordernar = $('#relatorio_ordenar').val()
 
-        var url =  `${site}relatorios/filter/${inicio}/${fim}/${ordernar}`
+        //var url =  `${site}relatorios/filter/${inicio}/${fim}/${ordernar}`
+        var url =  `${site}relatorios/filter/${inicio}/${fim}/`
        
         $.get(
             url,
@@ -70,31 +72,30 @@ $(document).ready(function(){
             {
                 data = JSON.parse(data)
                 colaboradores = data.colaboradores
-                if(colaboradores != ''){
-                    var row = ``
+                console.log(colaboradores)
+                if(colaboradores.length > 0){
                     var cont = 0
-                    for(var i in colaboradores)
-                    {   
-                        row +=``
-                        +`<tr>`
+                    var row = colaboradores.map(colaborador =>
+                        `<tr>`
                         +   `<th scope="row">${++cont}</th>`
-                        +   `<td class="d-none">${colaboradores[i].id_servico}</td>`
-                        +   `<td>${colaboradores[i].chapa}</td>`
-                        +   `<td>${colaboradores[i].nome_colaborador}</td>`
-                        +   `<td>${colaboradores[i].data}</td>`
-                        +   `<td>${colaboradores[i].nome_motivo}</td>`
-                        +   `<td>${minutos_horas(colaboradores[i].diferenca)}</td>`
+                        +   `<td class="d-none">${colaborador.id_servico}</td>`
+                        //+   `<td>${colaborador.chapa}</td>`
+                        +   `<td>${colaborador.nome_colaborador} | ${colaborador.chapa}</td>`
+                        +   `<td>${colaborador.nome_motivo}</td>`
+                        +   `<td>${colaborador.data}</td>`
+                        +   `<td>${minutos_horas(colaborador.diferenca)}</td>`
                         +`</tr>`
-                    }
+                    )
+
                     var html =``
                     +`<table class="table">`
                     +   `<thead>`
                     +       `<tr>`
                     +           `<th scope="col">#</th>`
-                    +           `<th scope="col">CHAPA</th>`
+                   // +           `<th scope="col">CHAPA</th>`
                     +           `<th scope="col">NOME</th>`
-                    +           `<th scope="col">DATA</th>`
                     +           `<th scope="col">MOTIVO</th>`
+                    +           `<th scope="col">DATA</th>`
                     +           `<th scope="col">HORAS</th>`
                     +       `</tr>`
                     +    `</thead>`
@@ -125,6 +126,8 @@ $(document).ready(function(){
 
 
     }
+
+    //hovver sobre o colaborador, para saber detalhes sobre o serviço extra prestado
     function listar_relatorios_hover()
     {
         logged()
@@ -132,7 +135,7 @@ $(document).ready(function(){
         var title  = $(this)
         
         $.get(
-            `${site}/servicos/listar/${id_servico}`,
+            `${site}servicos/listar/${id_servico}`,
             function(data)
             {
                 data  = JSON.parse(data)
