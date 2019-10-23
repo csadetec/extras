@@ -20,6 +20,16 @@ class Testes extends CI_Controller {
 
 	}
 
+
+	public function restart()
+	{
+		$this->load->model('testes_model');
+		$this->testes_model->restart();
+		redirect('');
+
+	}
+
+
 	public function soma($h1 = '120', $h2='120')
 	{
 	

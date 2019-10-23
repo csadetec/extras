@@ -14,5 +14,12 @@ class Testes_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
+
+	public function restart()
+	{
+		$this->db->truncate('servicos');
+		$this->db->truncate('servicos_colaboradores');
+	}
+
 }
 

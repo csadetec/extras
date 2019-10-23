@@ -28,7 +28,8 @@
           aria-labelledby="navbarDropdownMenuLink-333">
           <a class="dropdown-item" href="#"><?php echo $this->session->userdata('nome_perfil'); ?></a>
           <?php if(is_admin()): ?>
-          <a class="dropdown-item" href="<?php echo base_url('usuarios') ?>">Usuários</a>
+            <a class="dropdown-item" href="<?php echo base_url('usuarios') ?>">Usuários</a>
+            <a class="dropdown-item" href="<?php echo base_url('testes/restart') ?>">RESTART</a>
           <?php endif; ?>
           <a class="dropdown-item" href="<?php echo base_url('sair') ?>">Sair</a>
         </div>

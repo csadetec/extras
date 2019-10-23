@@ -42,7 +42,10 @@ class Servicos extends CI_Controller {
 			$data['msg'] =  validation_errors() ? validation_errors():false;
 		else:
 			$post = $this->input->post();
+
+			$post['id_usuario'] = $this->session->userdata('id_usuario');
 			//$data['msg'] = $post;
+			
 			$data['servico'] = $this->servicos_model->insert($post);
 			$data['msg'] = $data['servico'] ? 'cadastrado':'Falha ao Cadastrar';
 			/**/

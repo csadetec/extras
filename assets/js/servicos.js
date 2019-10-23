@@ -73,13 +73,15 @@ $(document).ready(function(){
 			function(data)
 			{
 				var sc = JSON.parse(data)
-			//	console.log(sc)
-				var title =  sc[0]? `Serviço N° ${id_servico}\n`:`Editar Serviço`
-				for(var i in sc){
-					title+=`\n`
-					+`${sc[i].nome_colaborador} | ${sc[i].chapa}`
+				//	console.log(sc)
+				var title =  sc[0]? `Serviço N° ${id_servico}\n\n`:`Editar Serviço`
 				
+			
+				for(var i in sc){
+					title += `${sc[i].nome_colaborador} | ${sc[i].cargo == 'PROFESSOR'?'PROFESSOR':'ANALISTA'} | ${sc[i].nome_motivo} \n`
+
 				}
+				//title = title.replace(',','')
 				escolhido.attr('title',title)
 			
 			}

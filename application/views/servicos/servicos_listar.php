@@ -18,6 +18,7 @@
           <th scope="col">INÍCIO</th>
           <th scope="col">FIM</th>
           <th scope="col">MOTIVO</th>
+          <th scope="col">CRIADOR</th>
         </tr>
       </thead>
       <tbody id="lista_servicos" class="cursor-pointer">
@@ -30,6 +31,7 @@
           <td><?php echo $r->horas_inicio ?></td>
           <td><?php echo $r->horas_fim ?></td>
           <td><?php echo $r->nome_motivo ?></td>
+          <td><?php echo $r->nome ?></td>
         </tr>
         <?php endforeach; ?>
       </tbody>

@@ -108,6 +108,6 @@ function verifica_horas($sc, $inicio_new, $fim_new)
 
 function msg($sc)
 {
-    return  $sc->nome_colaborador.' | Já esta agendada <b>No serviço N° '.$sc->id_servico.'!</b><hr>Data: '.$sc->data_editada.'<br>Horário: '.$sc->horas_inicio.' às '.$sc->horas_fim; 
+    return  $sc->nome_colaborador.' | Já esta agendado(a) <br><b>No serviço N° '.$sc->id_servico.'!</b><hr>Data: '.$sc->data_editada.'<br>Horário: '.$sc->horas_inicio.' às '.$sc->horas_fim; 
 }
 ?>

@@ -79,7 +79,7 @@ $(document).ready(function(){
                         `<tr>`
                         +   `<th>${cont++}</td>`
                         +   `<td class="d-none">${sc.id_sc}</td>`
-                        +   `<td>${sc.nome_colaborador} | ${sc.cargo != 'PROFESSOR' ? 'ANALISTA DE ÁREA': sc.cargo}</td>`
+                        +   `<td>${sc.nome_colaborador}${sc.cargo != 'PROFESSOR' ? ' | ANALISTA': ''}</td>` 
                         +   `<td>${sc.nome_motivo}</td>`
                         +   `<td>${sc.horas_inicio}</td>`
                         +   `<td>${sc.horas_fim}</td>`
