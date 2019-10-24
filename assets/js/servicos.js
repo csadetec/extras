@@ -53,7 +53,7 @@ $(document).ready(function(){
 		logged()
 	
 		var id_servico = $(this).find('td').eq(0).text()
-		var url = `${site}servicos/editar/${id_servico}`
+		var url = `${site}page/servicos/editar/${id_servico}`
 		$('#id_servico_opcao').val(id_servico)
 		$('.modal-title').text(`Serviço N° ${id_servico}`)
 		$('#a_editar_servico').attr('href', url )

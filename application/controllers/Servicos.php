@@ -14,17 +14,13 @@ class Servicos extends CI_Controller {
 		verifica_login();
 
 	}
-	public function index()
+	public function index($id_servico = null)
 	{
-		$data['servicos'] = $this->servicos_model->select();
-		$data['page'] = 'servicos/servicos_listar';
-		$this->load->view('index', $data, false);
-	}
-
-	public function listar($id_servico = null)
-	{
-		$servico = $this->servicos_model->select_id($id_servico);
-		$data['servico'] = $servico;
+		if($id_servico){
+			$data['servico'] = $this->servicos_model->select_id($id_servico);
+		}else{
+			$data['servicos'] = $this->servicos_model->select();
+		}
 		echo json_encode($data);
 	}
 
@@ -50,14 +46,8 @@ class Servicos extends CI_Controller {
 			$data['msg'] = $data['servico'] ? 'cadastrado':'Falha ao Cadastrar';
 			/**/
 		endif;			
-		if($this->input->post()):
-			echo json_encode($data);
-		else:
-			$data['title'] = 'Cadastrar Serviço';
-			$data['page'] = 'servicos/servicos_form';
-			$data['motivos'] = $this->motivos_model->select();
-			$this->load->view('index', $data, FALSE);
-		endif;
+		echo json_encode($data);
+	
 	}
 
 	public function editar($id_servico = null)
@@ -70,8 +60,8 @@ class Servicos extends CI_Controller {
 		
 
 		if(!$data['servico'] = $this->servicos_model->select_id($id_servico)):
-			//$data['msg'] = 'Serviço não Cadastrado';
-			redirect('servicos');
+			$data['msg'] = 'Serviço não Cadastrado';
+			//redirect('servicos');
 		elseif($this->form_validation->run() == false):
 			# code...
 			if(validation_errors()):
@@ -103,16 +93,7 @@ class Servicos extends CI_Controller {
 			endif;
 			/** */
 		endif;
-
-		if($this->input->post()):
-			echo json_encode($data);
-		else:
-			$data['title'] = 'Editar Serviço Nº '.$id_servico;
-			$data['page'] = 'servicos/servicos_form';
-			$data['motivos'] = $this->motivos_model->select();
-
-			$this->load->view('index', $data, FALSE);
-		endif;
+		echo json_encode($data);
 	}
 
 	public function duplicar($id_servico = null)
@@ -154,9 +135,7 @@ class Servicos extends CI_Controller {
 							
 			}		
 		
-		endif;
-
-		
+		endif;		
 	}
 
 	public function excluir($id_servico = null)
@@ -175,9 +154,6 @@ class Servicos extends CI_Controller {
 		
 		endif;
 		echo json_encode($data);
-
-
-		
 	}
 
 
