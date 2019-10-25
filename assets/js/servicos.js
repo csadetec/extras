@@ -27,6 +27,8 @@ $(document).ready(function(){
 				$("#lista_servicos").empty()
 				$("#lista_servicos").prepend(row)
 				$("#lista_servicos tr").click(duplicar_editar_servico)
+				$("#lista_servicos tr").hover(listar_sc)
+				
 				
 				/**/
 			}
@@ -53,11 +55,12 @@ $(document).ready(function(){
 			{	
 				data = JSON.parse(data)
 				console.log(data)
+				
 				var msg = data.msg
 				var servico = data.servico
-				/*
+				
 				if(msg == 'cadastrado'){
-					location.href = `${site}servicos/editar/${servico}`
+					location.href = `${site}../servicos/editar/${servico}`
 	            }else if(msg == 'editado' && servico){
 					var html = ``
 					+`<div><strong>N°. Serviço: </strong>${servico.id_servico}</div>`
@@ -90,7 +93,7 @@ $(document).ready(function(){
 	function  duplicar_editar_servico(){
 		logged()
 		var id_servico = $(this).find('td').eq(0).text()
-		var url = `${site}../servicos/editar/${id_servico}`
+		var url = `${site}../../servicos/editar/${id_servico}`
 		$('#id_servico_opcao').val(id_servico)
 		$('.modal-title').text(`Serviço N° ${id_servico}`)
 		$('#a_editar_servico').attr('href', url )
@@ -99,7 +102,7 @@ $(document).ready(function(){
 	}
 
 	//Quando o úsuario passar o mouse em cima de um serviço, listar o nome dos colaboradores
-    $('#lista_servicos tr').hover(function(){
+    function listar_sc(){
 		logged()
 		var id_servico = $(this).find('td').eq(0).text()
 		var url = `${site}servicos_colaboradores/listar/${id_servico}`
@@ -124,7 +127,7 @@ $(document).ready(function(){
 			}
 
 		)
-	})
+	}
 
 	//editar serviço
 	editar_servico()
@@ -159,7 +162,7 @@ $(document).ready(function(){
 	$('#btn_duplicate_servico').click(function(){
 		logged()
 		var id_servico = $('#id_servico_opcao').val()
-		location.href = `${site}servicos/duplicar/${id_servico}`
+		location.href = `${api}servicos/duplicar/${id_servico}`
 	})
 
 	//Filtro para pesquisar serviços

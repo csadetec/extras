@@ -53,7 +53,7 @@
           <button type="submit" class="btn btn-indigo btn-block" id="add_colaborador">Adicionar Colaboradores</button>
         </div>
         <div class="col-md-6">
-          <a href="<?php echo base_url('servicos/') ?>"  class="btn btn-secondary btn-block">Fechar</a>
+          <a href="<?php echo base_url('servicos') ?>"  class="btn btn-secondary btn-block">Fechar</a>
         </div>
       </div>
     </form>
