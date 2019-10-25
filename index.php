@@ -13,9 +13,9 @@ function base_url($s = ''){
 	return 'http://'.$_SERVER['SERVER_NAME'].'/extras/'.$s;
 }
 
-//$json = file_get_contents(base_url('api/motivos'));
-
-if ($url[1] == 'servicos' and !isset($url[2])):
+if($url[1] == 'login'):
+	require('./frontendPhp/usuarios/usuarios_login.php');
+elseif ($url[1] == 'servicos' and !isset($url[2])):
 	$page = './frontendPhp/servicos/servicos_listar.php';
 	require('./frontendPhp/load.php');
 
@@ -40,10 +40,7 @@ else:
 endif;
 
 /*page
-if($upagerl[1] == 'login'):
-	$pagepage = './frontendPhp/usuarios/usuarios_login.php';
-	rpageequire($page);
-elsepage
+
 page
 /** *page
 echo page'<pre>';

@@ -26,7 +26,7 @@ $(document).ready(function(){
         var obj = $(this).serialize()
         //console.log(obj)
         
-        var url = `${site}usuarios/login/`
+        var url = `${app}usuarios/login/`
         $.post(
             url,
             obj,
@@ -35,7 +35,7 @@ $(document).ready(function(){
                
                 if(data == 'success'){
                 
-                    location.href =  `${site}`
+                    location.href =  `${app}`
                 }else{
                     var alert = ``
                     +`<div class="alert alert-info mt-2" role="alert" >`
