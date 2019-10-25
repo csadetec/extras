@@ -1,41 +1,5 @@
 $(document).ready(function(){
 	
-
-	//listar servicos
-
-	var lista_servicos = () => {
-		url = `${site}servicos`
-		//console.log(url)
-		$.getJSON(
-			url,
-			function(data)
-			{			
-				servicos = data.servicos
-				//console.log(servicos)
-				var cont = 1
-				var row = servicos.map( servico => 
-					`<tr>`
-			        +  `<th scope="row">${servico.id_servico}</th>`
-			        +  `<td class="d-none">${servico.id_servico}</td>`
-		        	+  `<td>${servico.data}</td>`
-		        	+  `<td>${servico.horas_inicio}</td>`
-		        	+  `<td>${servico.horas_fim}</td>`
-		        	+  `<td>${servico.nome_motivo}</td>`
-		        	+  `<td>${servico.nome}</td>`
-			        +`</tr>`
-				)
-				$("#lista_servicos").empty()
-				$("#lista_servicos").prepend(row)
-				$("#lista_servicos tr").click(duplicar_editar_servico)
-				
-				/**/
-			}
-		)
-	}
-
-	lista_servicos()
-
-
 	//cadastrar e editar o servico
 
 	$('form#servicos_form').submit(function(){
@@ -43,9 +7,7 @@ $(document).ready(function(){
 		var obj = $(this).serialize()
 		var id_servico = $('#id_servico').val()
 		var url = id_servico ? `${site}servicos/editar/${id_servico}` : `${site}servicos/cadastrar`
-		console.log(url, obj)
-
-		
+	
 		$.post(
 			url,
 			obj,
@@ -55,7 +17,7 @@ $(document).ready(function(){
 				console.log(data)
 				var msg = data.msg
 				var servico = data.servico
-				/*
+
 				if(msg == 'cadastrado'){
 					location.href = `${site}servicos/editar/${servico}`
 	            }else if(msg == 'editado' && servico){
@@ -79,24 +41,25 @@ $(document).ready(function(){
 					$('#alert_servico').empty()  
 	                $("#alert_servico").prepend(msg)
 				}
-				/**/
+				/** */
 			}
 		)		
 		return false
 	})
 
-	//opcao servico
+	//editar servico
 	
-	function  duplicar_editar_servico(){
+	$('#lista_servicos tr').click(function(){
 		logged()
+	
 		var id_servico = $(this).find('td').eq(0).text()
-		var url = `${site}../servicos/editar/${id_servico}`
+		var url = `${site}page/servicos/editar/${id_servico}`
 		$('#id_servico_opcao').val(id_servico)
 		$('.modal-title').text(`Serviço N° ${id_servico}`)
 		$('#a_editar_servico').attr('href', url )
 		$('#servicos_opcoes').modal('show')
 
-	}
+	})
 
 	//Quando o úsuario passar o mouse em cima de um serviço, listar o nome dos colaboradores
     $('#lista_servicos tr').hover(function(){
@@ -135,7 +98,7 @@ $(document).ready(function(){
 		id_servico = id_servico.substring(18)
 		if(id_servico > 0){
 			$.get(
-				`${site}servicos/${id_servico}`,
+				`${site}servicos/listar/${id_servico}`,
 				function(data){
 					data = JSON.parse(data)
 					servico = data.servico
@@ -215,14 +178,10 @@ $(document).ready(function(){
             `${site}setup`,
             function(data){
                 data = JSON.parse(data)
-                console.log(data)
-
-                
                 if(!data.logged){
                     alert('FAÇA LOGIN NOVAMENTE!')
                     location.reload()
                 }
-                /**/
             }
 
         )

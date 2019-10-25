@@ -40,10 +40,11 @@ class Servicos extends CI_Controller {
 			$post = $this->input->post();
 
 			$post['id_usuario'] = $this->session->userdata('id_usuario');
-			//$data['msg'] = $post;
+			$data['msg'] = $post;
 			
+			/*
 			$data['servico'] = $this->servicos_model->insert($post);
-			$data['msg'] = $data['servico'] ? 'cadastrado':'Falha ao Cadastrar';
+			//$data['msg'] = $data['servico'] ? 'cadastrado':'Falha ao Cadastrar';
 			/**/
 		endif;			
 		echo json_encode($data);

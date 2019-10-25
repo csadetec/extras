@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $server = $_SERVER['SERVER_NAME'];
 
 if($server == 'dev-app.ddns.net')$server.=':8080';
-$url = 'http://'.$server.'/extras/' ;
+$url = 'http://'.$server.'/extras/api/' ;
 $config['base_url'] = $url;
 
 
