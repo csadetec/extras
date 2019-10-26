@@ -16,6 +16,7 @@ class Usuarios extends CI_Controller {
 	}
 	public function index($id_usuario = null)
 	{
+		is_admin();
 		if($id_usuario){
 			$data['usuario']  = $this->usuarios_model->select_id($id_usuario);
 		}else{

@@ -27,14 +27,13 @@ function verifica_login()
     if (!$CI->session->userdata('logged'))redirect('setup');
 }
 
-function is_admin($leave  = false)
+function is_admin()
 {
     verifica_login();
     $CI = & get_instance();
     
-    if($CI->session->userdata('nome_perfil') == 'ADMINISTRADOR')return true;
-    if($leave)redirect('setup');
-    return false;
+    if($CI->session->userdata('nome_perfil') != 'ADMINISTRADOR')redirect(setup);
+    
 }
 
 function strclear($string)

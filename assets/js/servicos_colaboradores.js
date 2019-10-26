@@ -69,13 +69,13 @@ $(document).ready(function(){
         var id_servico = $('h3.modal-title').text()
         id_servico = id_servico.substring(18)
         if(id_servico > 0){
-            $.get(
+            $.getJSON(
                 `${site}servicos_colaboradores/listar/${id_servico}`,
                 function(data){
-                    sc = JSON.parse(data)
-                    var row = ``
+                   
+                    var { sc } = data
                     var cont = 1
-                    row = sc.map(sc =>
+                    var row = sc.map(sc =>
                         `<tr>`
                         +   `<th>${cont++}</td>`
                         +   `<td class="d-none">${sc.id_sc}</td>`
@@ -223,17 +223,20 @@ $(document).ready(function(){
         return horas+':'+minutos
     }
 
+
     function logged()
     {
-        //console.log('logado')
-        $.get(
+        $.getJSON(
             `${site}setup`,
             function(data){
-                data = JSON.parse(data)
-                if(!data.logged){
-                    alert('FAÇA LOGIN NOVAMENTE!')
-                    location.reload()
+				var {logged, msg} = data
+                
+                if(!logged){
+					alert(msg)
+				
+                    location.href = `${app}`
                 }
+                /**/
             }
 
         )

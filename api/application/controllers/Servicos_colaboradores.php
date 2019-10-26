@@ -24,7 +24,7 @@ class Servicos_colaboradores extends CI_Controller {
 		$data = null;
 		if ($this->form_validation->run() == false):
 			
-			$data['msg'] =  validation_errors();
+			$data['msg'] =  validation_errors() or false;
 		else:
 			# code...
 			$post = $this->input->post();
@@ -108,8 +108,8 @@ class Servicos_colaboradores extends CI_Controller {
 
 	public function listar($id_servico = null)
 	{
-		$colaboradores = $this->servicos_colaboradores_model->select_colaboradores_by_id_servico($id_servico);
-		echo json_encode($colaboradores);
+		$data['sc'] = $this->servicos_colaboradores_model->select_colaboradores_by_id_servico($id_servico);
+		echo json_encode($data);
 	}
 }
 

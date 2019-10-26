@@ -1,6 +1,35 @@
 $(document).ready(function(){
 
-    $('#lista_usuarios tr').click(function(){
+    //lista de usuarios
+    var usuarios = () => {
+        var url = `${site}usuarios`
+        $.getJSON(
+            url,
+            function(data){
+                var { usuarios } = data
+                var cont = 1
+                var row = usuarios.map( usuario =>
+                    `<tr>`
+                    +   `<th scope="row">${cont++}</th>`
+                    +   `<td class="d-none">${usuario.id_usuario}</td>`
+                    +   `<td>${usuario.nome}</td>`
+                    +   `<td>${usuario.usuario}</td>`
+                    +   `<td>${usuario.nome_perfil}</td>`
+                    +`</tr>`
+                )
+             
+                $('#lista_usuarios').empty()
+                $('#lista_usuarios').prepend(row)
+                
+                $('#lista_usuarios tr').click(lista_usuarios_tr_click)
+                
+            }
+
+        )
+    }
+    usuarios()
+    //editar usuario
+    function lista_usuarios_tr_click(){
         logged()
         var id_usuario = $(this).find('td').eq(0).text()
         var url = `${site}usuarios/${id_usuario}`
@@ -22,15 +51,15 @@ $(document).ready(function(){
             }
         )
         
-    })
+    }
 
+    //login do usuario
     $('form#form_login').submit(function()
     {
         var obj = $(this).serialize()
         //console.log(obj)
         
         var url = `${site}usuarios/login/`
-        console.log(url)
         
         $.post(
             url,
@@ -39,9 +68,7 @@ $(document).ready(function(){
                 //console.log(data)
                 data =  JSON.parse(data)
                 var { msg } = data
-                     
                 if(msg == 'success'){
-                
                     location.href =  `${app}servicos`
                 }else{
                     var alert = ``
@@ -50,13 +77,13 @@ $(document).ready(function(){
                     +`</div>`
                     $('#alertLogin').html(alert)
                 }
-                /**/
             }
         )
         /**/
         return false
     })
 
+    //cadastro ou update do usuario
     $('form#usuarios_form').submit(function(){
         logged()
         var obj = $(this).serialize()
@@ -131,16 +158,20 @@ $(document).ready(function(){
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         })
     })
+    
     function logged()
     {
-        $.get(
+        $.getJSON(
             `${site}setup`,
             function(data){
-                data = JSON.parse(data)
-                if(!data.logged){
-                    alert('FAÇA LOGIN NOVAMENTE!')
-                    location.reload()
+				var {logged, msg} = data
+                
+                if(!logged){
+					alert(msg)
+				
+                    location.href = `${app}`
                 }
+                /**/
             }
 
         )

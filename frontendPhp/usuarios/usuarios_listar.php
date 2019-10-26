@@ -20,15 +20,7 @@
         </tr>
       </thead>
       <tbody id="lista_usuarios" class="cursor-pointer">
-        <?php foreach($usuarios as $i=>$r): ?>
-        <tr>
-          <th scope="row"><?php echo ++$i ?></th>
-          <td class="d-none"><?php echo $r->id_usuario ?></td>
-          <td><?php echo $r->nome ?></td>
-          <td><?php echo $r->usuario ?></td>
-          <td><?php echo $r->nome_perfil ?></td>
-        </tr>
-        <?php endforeach; ?>
+
       </tbody>
     </table>
   </div>

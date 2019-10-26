@@ -5,7 +5,7 @@ $REQUEST_URI = filter_input(INPUT_SERVER, 'REQUEST_URI');
 $REQUEST_URI_PASTA = substr($REQUEST_URI, 1);
 
 $url = explode('/', $REQUEST_URI_PASTA);
-$url[1] = ($url[1] != '' ? $url[1] : 'login');
+$url[1] = ($url[1] != '' ? $url[1] : 'servicos');
 
 
 function base_url($s = ''){
@@ -15,9 +15,9 @@ function base_url($s = ''){
 
 //usuario lista
 if($url[1] == 'usuarios'):
-	$data = file_get_contents(base_url('api/usuarios'));
+	$data = file_get_contents(base_url('api/index.php/perfis'));
 	$data = json_decode($data);
-	$usuarios = $data->usuarios;
+	$perfis = $data->perfis;
 	$page = './frontendPhp/usuarios/usuarios_listar.php';
 	require('./frontendPhp/load.php');
 
@@ -56,12 +56,10 @@ else:
 
 endif;
 
+/*
 echo '<pre>';
-
 $url = base_url('api/index.php/setup');
 $data = file_get_contents(base_url('api/index.php/setup'));
 $data = json_decode($data);
-
 print_r($data);
-
 /**/

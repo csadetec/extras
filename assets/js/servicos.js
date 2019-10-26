@@ -1,8 +1,40 @@
 $(document).ready(function(){
 	
+	//listar servicos
+	var servicos = () =>{
+		logged()
+		var url = `${site}servicos`
+
+		$.getJSON(
+			url,
+			function(data){
+				var {servicos} = data
+				var cont = 1
+				var row = servicos.map( servico => 
+					`<tr>`
+			        +  `<th scope="row">${servico.id_servico}</th>`
+			        +  `<td class="d-none">${servico.id_servico}</td>`
+		        	+  `<td>${servico.data || 'DEFINIR'}</td>`
+		        	+  `<td>${servico.horas_inicio}</td>`
+		        	+  `<td>${servico.horas_fim}</td>`
+		        	+  `<td>${servico.nome_motivo}</td>`
+		        	+  `<td>${servico.nome}</td>`
+			        +`</tr>`
+				)
+				$("#lista_servicos").empty()
+				$("#lista_servicos").prepend(row)
+				$("#lista_servicos tr").click(duplicar_editar_servico)
+				$("#lista_servicos tr").hover(listar_sc)
+			}
+
+		)
+
+	}
+	
+	servicos()
+
 
 	//cadastrar e editar o servico
-
 	$('form#servicos_form').submit(function(){
 		logged()
 		var obj = $(this).serialize()
@@ -51,9 +83,12 @@ $(document).ready(function(){
 		return false
 	})
 
+	$("#lista_servicos tr").hover(function(){
+		alert('tests')
+	})
 	//opcao servico
 	
-	$('#lista_servicos tr').click(function(){
+	function duplicar_editar_servico(){
 		logged()
 		var id_servico = $(this).find('td').eq(0).text()
 		var url = `${site}../../servicos/editar/${id_servico}`
@@ -62,35 +97,32 @@ $(document).ready(function(){
 		$('#a_editar_servico').attr('href', url )
 		$('#servicos_opcoes').modal('show')
 
-	})
+	}
 
 	//Quando o úsuario passar o mouse em cima de um serviço, listar o nome dos colaboradores
-    $('#listar_servicos tr').hover(function(){
+    function listar_sc(){
 		logged()
 		var id_servico = $(this).find('td').eq(0).text()
 		var url = `${site}servicos_colaboradores/listar/${id_servico}`
 		var escolhido = $(this)
 
-		$.get(
+		$.getJSON(
 			url,
 			function(data)
-			{
-				var sc = JSON.parse(data)
-				//	console.log(sc)
-				var title =  sc[0]? `Serviço N° ${id_servico}\n\n`:`Editar Serviço`
-				
+			{	
+				var { sc } = data
 			
+				var title =  sc[0]? `Serviço N° ${id_servico}\n\n`:`Editar Serviço`
 				for(var i in sc){
 					title += `${sc[i].nome_colaborador} | ${sc[i].nome_motivo} ${sc[i].cargo != 'PROFESSOR'?' | ANALISTA':''}\n`
-
 				}
-				//console.log(title)
+
 				escolhido.attr('title',title)
-			
+				/** */
 			}
 
 		)
-	})
+	}
 
 	//editar serviço
 	editar_servico()
@@ -100,11 +132,12 @@ $(document).ready(function(){
 		var id_servico = $('h3.modal-title').text()
 		id_servico = id_servico.substring(18)
 		if(id_servico > 0){
-			$.get(
+			$.getJSON(
 				`${site}servicos/${id_servico}`,
 				function(data){
-					data = JSON.parse(data)
-					servico = data.servico
+					var { servico } = data
+					if(!servico)location.href = `${app}servicos`
+						
 					$('#id_servico').val(servico.id_servico)
 					$('#id_motivo').val(servico.id_motivo)
 
@@ -115,9 +148,11 @@ $(document).ready(function(){
 					$('#input_pesquisa').removeClass('d-none')
 					$('#add_colaborador').text('ATUALIZAR')
 					$('#btn_duplicar_servico').removeClass('d-none')
+					/** */
 				}
 			)
 		}
+		
 	}
 
 	//Quando usuario quiser duplicar o serviço, carregando motivo, horas e colobaradores, necessitando 
@@ -133,13 +168,11 @@ $(document).ready(function(){
 			function(data)
 			{
 				var {servico_duplicado, msg} = data
-				console.log(data)
-				/*
+	
 				if(msg == 'duplicado'){
-					location.href = `${api}servicos/editar/${servico}`
+					location.href = `${app}servicos/editar/${servico_duplicado}`
 				}else{
 					alert(msg)
-
 				}
 				/**/
 			}
@@ -198,16 +231,15 @@ $(document).ready(function(){
 
     function logged()
     {
-        $.get(
+        $.getJSON(
             `${site}setup`,
             function(data){
-                data = JSON.parse(data)
-              //  console.log(data)
-
+				var {logged, msg} = data
                 
-                if(!data.logged){
-                    alert('FAÇA LOGIN NOVAMENTE!')
-                    location.href = `${site}`
+                if(!logged){
+					alert(msg)
+				
+                    location.href = `${app}`
                 }
                 /**/
             }

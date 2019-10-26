@@ -72,24 +72,24 @@ $(document).ready(function(){
                 console.log(colaboradores)
                 if(colaboradores.length > 0){
                     var cont = 0
-                    var row = colaboradores.map(colaborador =>
-                        `<tr>`
+                    var row = ``
+                    for(var i in colaboradores){
+                        row +=``
+                        +`<tr>`
                         +   `<th scope="row">${++cont}</th>`
-                        +   `<td class="d-none">${colaborador.id_servico}</td>`
-                        //+   `<td>${colaborador.chapa}</td>`
-                        +   `<td>${colaborador.nome_colaborador} | ${colaborador.chapa}</td>`
-                        +   `<td>${colaborador.nome_motivo}</td>`
-                        +   `<td>${colaborador.data}</td>`
-                        +   `<td>${minutos_horas(colaborador.diferenca)}</td>`
+                        +   `<td class="d-none">${colaboradores[i].id_servico}</td>`
+                        +   `<td>${colaboradores[i].nome_colaborador} | ${colaboradores[i].chapa}</td>`
+                        +   `<td>${colaboradores[i].nome_motivo}</td>`
+                        +   `<td>${colaboradores[i].data}</td>`
+                        +   `<td>${minutos_horas(colaboradores[i].diferenca)}</td>`
                         +`</tr>`
-                    )
-
+                    }
+                 
                     var html =``
                     +`<table class="table">`
                     +   `<thead>`
                     +       `<tr>`
                     +           `<th scope="col">#</th>`
-                   // +           `<th scope="col">CHAPA</th>`
                     +           `<th scope="col">NOME</th>`
                     +           `<th scope="col">MOTIVO</th>`
                     +           `<th scope="col">DATA</th>`
@@ -116,11 +116,7 @@ $(document).ready(function(){
                 $('#lista_relatorios tr').hover(listar_relatorios_hover)
        
             }
-
         )
-
-
-
     }
 
     //hovver sobre o colaborador, para saber detalhes sobre o serviço extra prestado
@@ -160,8 +156,6 @@ $(document).ready(function(){
         return horas+':'+minutos
     }
    
-    
-    
 	$('#input_relatorio').on("keyup", function(){
         logged()
         var value = $(this).val().toLowerCase();
@@ -221,17 +215,19 @@ $(document).ready(function(){
     })
 
     
-
     function logged()
     {
-        $.get(
+        $.getJSON(
             `${site}setup`,
             function(data){
-                data = JSON.parse(data)
-                if(!data.logged){
-                    alert('FAÇA LOGIN NOVAMENTE!')
-                    location.reload()
+				var {logged, msg} = data
+                
+                if(!logged){
+					alert(msg)
+				
+                    location.href = `${app}`
                 }
+                /**/
             }
 
         )

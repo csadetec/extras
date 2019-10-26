@@ -4,6 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Perfis_model extends CI_Model {
 
 	public function select(){
+		
+		$this->db->order_by('nome_perfil', 'asc');
+		
 		return $this->db->get('perfis')->result();
 	}	
 

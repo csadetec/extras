@@ -9,11 +9,10 @@ class Servicos extends CI_Controller {
 		$this->load->model(array('colaboradores_model', 'servicos_model', 'servicos_colaboradores_model', 'motivos_model'));
 		$this->load->library(array('form_validation'));
 		$this->load->helper(array('funcoes_helper'));
-		
-
-		//verifica_login();
+		verifica_login();
 
 	}
+
 	public function index($id_servico = null)
 	{
 		if($id_servico){
@@ -23,7 +22,6 @@ class Servicos extends CI_Controller {
 		}
 		echo json_encode($data);
 	}
-
 
 	public function cadastrar()
 	{	
