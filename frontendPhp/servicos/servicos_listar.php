@@ -22,15 +22,18 @@
         </tr>
       </thead>
       <tbody id="lista_servicos" class="cursor-pointer">
+        <!--
+        <?php foreach ($servicos as $r): ?>
         <tr>
-          <th scope="row">teste</th>
+          <th scope="row">s1</th>
           <td class="d-none">teste</td>
-          <td>teste</td>
-          <td>teste</td>
-          <td>teste</td>
-          <td>teste</td>
-          <td>teste</td>
+          <td>13:00</td>
+          <td>14:00</td>
+          <td>AULA EXTRA</td>
+          <td>LUCAS TESTE</td>
         </tr>
+        <?php endforeach; ?>
+        <!-- -->
       </tbody>
     </table>
   </div>

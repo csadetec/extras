@@ -33,5 +33,5 @@
     </table>
   </div>
 </div>
-<?php $this->load->view('usuarios/usuarios_form'); ?>
+<?php require('usuarios_form.php'); ?>
 

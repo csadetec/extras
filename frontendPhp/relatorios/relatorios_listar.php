@@ -40,5 +40,3 @@
 </div>
 
 
-<?php $this->load->view('relatorios/relatorios_listar_modal'); ?>
-

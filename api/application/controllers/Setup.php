@@ -6,6 +6,8 @@ class Setup extends CI_Controller {
 	public function index()
 	{
 		$data['logged'] = $this->session->userdata('logged');
+		$data['id_usuario'] = $this->session->userdata('id_usuario');
+		$data['msg'] = !$data['logged'] ? 'FAÇA LOGIN NOVAMENTE': 'OK';
 		echo json_encode($data);
 
 	}

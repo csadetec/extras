@@ -23,8 +23,8 @@ function diff_hours($inicio, $fim)
 function verifica_login()
 {
     $CI = & get_instance();
-
-    if (!$CI->session->userdata('logged'))redirect('login');
+    
+    if (!$CI->session->userdata('logged'))redirect('setup');
 }
 
 function is_admin($leave  = false)
@@ -33,7 +33,7 @@ function is_admin($leave  = false)
     $CI = & get_instance();
     
     if($CI->session->userdata('nome_perfil') == 'ADMINISTRADOR')return true;
-    if($leave)redirect('');
+    if($leave)redirect('setup');
     return false;
 }
 

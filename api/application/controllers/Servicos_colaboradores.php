@@ -33,8 +33,11 @@ class Servicos_colaboradores extends CI_Controller {
 				$post['horas_inicio'] = $servico->horas_inicio;
 				$post['horas_fim'] = $servico->horas_fim;
 				$post['id_motivo'] = $servico->id_motivo;
+				$post['id_motivo_rh'] = $servico->id_motivo;
 				$post['diferenca'] = diff_hours($post['horas_inicio'], $post['horas_fim']);
-			
+
+				$data['post'] = $post;
+				
 				$disponivel = verifica_disponibilidade($post, 'insert');
 				if($disponivel['status']):
 					$sc = $this->servicos_colaboradores_model->insert($post);
@@ -42,6 +45,7 @@ class Servicos_colaboradores extends CI_Controller {
 				else:
 					$data['msg'] = $disponivel['msg'];
 				endif;
+				/**/
 			else:
 				$data['msg'] = 'Serviço não encontrado!';
 			endif;

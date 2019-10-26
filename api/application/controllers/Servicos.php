@@ -48,7 +48,6 @@ class Servicos extends CI_Controller {
 			/**/
 		endif;			
 		echo json_encode($data);
-	
 	}
 
 	public function editar($id_servico = null)
@@ -101,42 +100,41 @@ class Servicos extends CI_Controller {
 	{
 	
 		if(!$s = $this->servicos_model->select_id($id_servico)):
-			//$data['msg'] = 'Serviço não Cadastrado';
-			redirect('servicos');
+			$data['msg'] = 'Serviço não Cadastrado';
 		else:
 			$sc = $this->servicos_colaboradores_model->select_colaboradores_by_id_servico($id_servico);
 			$insert = array(
-				'id_motivo'=>$s->id_motivo, 'horas_inicio'=>$s->horas_inicio, 'horas_fim'=>$s->horas_fim
+				'id_motivo'=>$s->id_motivo, 'horas_inicio'=>$s->horas_inicio, 'horas_fim'=>$s->horas_fim, 'id_usuario'=>$this->session->userdata('id_usuario')
 			);
 			$s = $this->servicos_model->insert($insert);
 			if($s){
 				$insert = null;
+				$data['servico_duplicado'] = $s;
+
 				foreach($sc as $r){
 					$insert['chapa'] = $r->chapa;
 					$insert['id_servico'] = $s;
 					$insert['id_motivo'] = $r->id_motivo;
+					$insert['id_motivo_rh'] = $r->id_motivo;
 					$insert['horas_inicio'] = $r->horas_inicio;
 					$insert['horas_fim'] = $r->horas_fim;
 					$insert['diferenca'] = $r->diferenca;
+			
 
-					if(!$this->servicos_colaboradores_model->insert($insert)){
-						$msg = 'Erro ao duplicar Serviço';
-						echo '<script>alert("'.$msg.'")</script>';
-						$url = 'http://'.$_SERVER['SERVER_NAME'].'/extras/servicos';
-						echo '<script>location.href = "'.$url.'"</script>';
-					}
-
+					if(!$this->servicos_colaboradores_model->insert($insert)):
+						$data['msg'] = 'Erro ao duplicar Serviço e Adicionar os colaboradores';
+						break;
+					else:
+						$data['msg'] = 'duplicado';
+					endif;
+				
 				}
-				redirect('servicos/editar/'.$s);
 			}else{
-				$msg = 'Erro ao duplicar Serviço';
-				echo '<script>alert("'.$msg.'")</script>';
-				$url = 'http://'.$_SERVER['SERVER_NAME'].'/extras/servicos';
-				echo '<script>location.href = "'.$url.'"</script>';
-							
+				$data['msg'] = 'ERRO ao duplicar Serviço';
 			}		
 		
 		endif;		
+		echo json_encode($data);
 	}
 
 	public function excluir($id_servico = null)

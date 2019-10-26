@@ -11,11 +11,7 @@
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url('servicos') ?>">Serviços</a>
       </li>
-      <!--
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('colaboradores') ?>">Colaboradores</a>
-      </li>
-      <!-- -->
+
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url('relatorios') ?>">Relatórios</a>
       </li>
@@ -29,7 +25,7 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-default"
           aria-labelledby="navbarDropdownMenuLink-333">
           <a class="dropdown-item" href="#">Nome perfil</a>
-          <a class="dropdown-item" href="<?php echo base_url('page/usuarios') ?>">Usuários</a>
+          <a class="dropdown-item" href="<?php echo base_url('usuarios') ?>">Usuários</a>
           <a class="dropdown-item" href="<?php echo base_url('testes/restart') ?>">RESTART</a>
           <a class="dropdown-item" href="<?php echo base_url('sair') ?>">Sair</a>
         </div>

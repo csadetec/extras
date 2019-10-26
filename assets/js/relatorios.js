@@ -61,9 +61,6 @@ $(document).ready(function(){
         logged()
         var inicio = $('#relatorio_inicio').val()
         var fim = $('#relatorio_fim').val()
-        //var ordernar = $('#relatorio_ordenar').val()
-
-        //var url =  `${site}relatorios/filter/${inicio}/${fim}/${ordernar}`
         var url =  `${site}relatorios/filter/${inicio}/${fim}/`
        
         $.get(
@@ -118,7 +115,6 @@ $(document).ready(function(){
                 $('#table_relatorios').prepend(html)
                 $('#lista_relatorios tr').hover(listar_relatorios_hover)
        
-
             }
 
         )
@@ -135,7 +131,7 @@ $(document).ready(function(){
         var title  = $(this)
         
         $.get(
-            `${site}servicos/listar/${id_servico}`,
+            `${site}servicos/${id_servico}`,
             function(data)
             {
                 data  = JSON.parse(data)

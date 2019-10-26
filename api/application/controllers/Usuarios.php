@@ -14,29 +14,33 @@ class Usuarios extends CI_Controller {
 
 		//$this->output->enable_profiler(TRUE);
 	}
-	public function index()
+	public function index($id_usuario = null)
 	{
-		is_admin(true);
-		$data['usuarios'] = $this->usuarios_model->select();
-		$data['page'] = 'usuarios/usuarios_listar';
-		$data['title'] = 'Usuários';
-		$data['perfis'] = $this->perfis_model->select();
-		$this->load->view('index', $data, FALSE);
+		if($id_usuario){
+			$data['usuario']  = $this->usuarios_model->select_id($id_usuario);
+		}else{
+			$data['usuarios']  = $this->usuarios_model->select();
+
+		}
+		echo json_encode($data);
 	}
 
 	public function listar($id_usuario = null)
-	{
+	{	
+		/*
 		is_admin();
 		$data  = $this->usuarios_model->select_id($id_usuario);
 		echo json_encode($data);
+		/**/
 	}
 
 	public function login()
 	{
 		$this->form_validation->set_rules('usuario', 'USUÁRIO', 'trim|required');
 		$this->form_validation->set_rules('senha', 'SENHA', 'trim|required|md5');
+		$data = null;
 		if ($this->form_validation->run() == false):
-			echo validation_errors() == true ? validation_errors():false;
+			$data['msg'] =  validation_errors() == true ? validation_errors():false;
 		else:
 			$post = $this->input->post();
 			if ($usuario = $this->usuarios_model->select_login(array('usuario' => $post['usuario']))):
@@ -47,18 +51,19 @@ class Usuarios extends CI_Controller {
 					$this->session->set_userdata('usuario', $usuario->usuario);
 					$this->session->set_userdata('nome_perfil', $usuario->nome_perfil);
 		
-					echo 'success';
+					$data['msg'] = 'success';
 				else:
-					echo 'Senha Incorreta!';
+					$data['msg'] =  'Senha Incorreta!';
 				endif;
 
 			else:
-				echo 'Usuário não Cadastrado.';
+				$data['msg'] =  'Usuário não Cadastrado.';
 			endif;
 			/**/
 
 		endif;
-		if(!$this->input->post())$this->load->view('usuarios/usuarios_login');
+		echo json_encode($data);
+	
 	}
 
 	public function cadastrar()

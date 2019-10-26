@@ -1,43 +1,6 @@
 $(document).ready(function(){
 	
 
-	//listar servicos
-
-	var lista_servicos = () => {
-		url = `${site}servicos`
-		//console.log(url)
-		$.getJSON(
-			url,
-			function(data)
-			{			
-				servicos = data.servicos
-				//console.log(servicos)
-				var cont = 1
-				var row = servicos.map( servico => 
-					`<tr>`
-			        +  `<th scope="row">${servico.id_servico}</th>`
-			        +  `<td class="d-none">${servico.id_servico}</td>`
-		        	+  `<td>${servico.data}</td>`
-		        	+  `<td>${servico.horas_inicio}</td>`
-		        	+  `<td>${servico.horas_fim}</td>`
-		        	+  `<td>${servico.nome_motivo}</td>`
-		        	+  `<td>${servico.nome}</td>`
-			        +`</tr>`
-				)
-				$("#lista_servicos").empty()
-				$("#lista_servicos").prepend(row)
-				$("#lista_servicos tr").click(duplicar_editar_servico)
-				$("#lista_servicos tr").hover(listar_sc)
-				
-				
-				/**/
-			}
-		)
-	}
-
-	lista_servicos()
-
-
 	//cadastrar e editar o servico
 
 	$('form#servicos_form').submit(function(){
@@ -45,8 +8,7 @@ $(document).ready(function(){
 		var obj = $(this).serialize()
 		var id_servico = $('#id_servico').val()
 		var url = id_servico ? `${site}servicos/editar/${id_servico}` : `${site}servicos/cadastrar`
-		console.log(url, obj)
-
+		
 		
 		$.post(
 			url,
@@ -59,8 +21,9 @@ $(document).ready(function(){
 				var msg = data.msg
 				var servico = data.servico
 				
+				
 				if(msg == 'cadastrado'){
-					location.href = `${site}../servicos/editar/${servico}`
+					location.href = `${app}servicos/editar/${servico}`
 	            }else if(msg == 'editado' && servico){
 					var html = ``
 					+`<div><strong>N°. Serviço: </strong>${servico.id_servico}</div>`
@@ -90,7 +53,7 @@ $(document).ready(function(){
 
 	//opcao servico
 	
-	function  duplicar_editar_servico(){
+	$('#lista_servicos tr').click(function(){
 		logged()
 		var id_servico = $(this).find('td').eq(0).text()
 		var url = `${site}../../servicos/editar/${id_servico}`
@@ -99,15 +62,15 @@ $(document).ready(function(){
 		$('#a_editar_servico').attr('href', url )
 		$('#servicos_opcoes').modal('show')
 
-	}
+	})
 
 	//Quando o úsuario passar o mouse em cima de um serviço, listar o nome dos colaboradores
-    function listar_sc(){
+    $('#listar_servicos tr').hover(function(){
 		logged()
 		var id_servico = $(this).find('td').eq(0).text()
 		var url = `${site}servicos_colaboradores/listar/${id_servico}`
 		var escolhido = $(this)
-		
+
 		$.get(
 			url,
 			function(data)
@@ -118,16 +81,16 @@ $(document).ready(function(){
 				
 			
 				for(var i in sc){
-					title += `${sc[i].nome_colaborador} | ${sc[i].cargo == 'PROFESSOR'?'PROFESSOR':'ANALISTA'} | ${sc[i].nome_motivo} \n`
+					title += `${sc[i].nome_colaborador} | ${sc[i].nome_motivo} ${sc[i].cargo != 'PROFESSOR'?' | ANALISTA':''}\n`
 
 				}
-				//title = title.replace(',','')
+				//console.log(title)
 				escolhido.attr('title',title)
 			
 			}
 
 		)
-	}
+	})
 
 	//editar serviço
 	editar_servico()
@@ -162,7 +125,28 @@ $(document).ready(function(){
 	$('#btn_duplicate_servico').click(function(){
 		logged()
 		var id_servico = $('#id_servico_opcao').val()
-		location.href = `${api}servicos/duplicar/${id_servico}`
+		var url = `${site}servicos/duplicar/${id_servico}`
+		console.log(url)
+		
+		$.getJSON(
+			url,
+			function(data)
+			{
+				var {servico_duplicado, msg} = data
+				console.log(data)
+				/*
+				if(msg == 'duplicado'){
+					location.href = `${api}servicos/editar/${servico}`
+				}else{
+					alert(msg)
+
+				}
+				/**/
+			}
+		)
+
+		//location.href = `${api}servicos/duplicar/${id_servico}`
+		/**/
 	})
 
 	//Filtro para pesquisar serviços
@@ -218,12 +202,12 @@ $(document).ready(function(){
             `${site}setup`,
             function(data){
                 data = JSON.parse(data)
-                console.log(data)
+              //  console.log(data)
 
                 
                 if(!data.logged){
                     alert('FAÇA LOGIN NOVAMENTE!')
-                    location.reload()
+                    location.href = `${site}`
                 }
                 /**/
             }

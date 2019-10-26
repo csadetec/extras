@@ -3,22 +3,25 @@ $(document).ready(function(){
     $('#lista_usuarios tr').click(function(){
         logged()
         var id_usuario = $(this).find('td').eq(0).text()
+        var url = `${site}usuarios/${id_usuario}`
+     
+        $.getJSON(
+            url,
+            function(data){
+     
+                var {nome, usuario, id_perfil, id_usuario}  = data.usuario
 
-        $.get(
-            `${site}usuarios/listar/${id_usuario}`,
-            function(data)
-            {
-                usuario = JSON.parse(data)
                 $('#usuarios_form').modal('show')
-                $('#nome').val(usuario.nome)
-                $('#cad_usuario').val(usuario.usuario).attr('disabled', true)
-                $('#id_perfil').val(usuario.id_perfil)
-                $('#id_usuario').val(usuario.id_usuario)
+                $('#nome').val(nome)
+                $('#cad_usuario').val(usuario).attr('disabled', true)
+                $('#id_perfil').val(id_perfil)
+                $('#id_usuario').val(id_usuario)
                 $('#cad_senha').val('')
-
-            //    console.log(usuario)
+                /**/
+                //    console.log(usuario)
             }
         )
+        
     })
 
     $('form#form_login').submit(function()
@@ -26,23 +29,28 @@ $(document).ready(function(){
         var obj = $(this).serialize()
         //console.log(obj)
         
-        var url = `${app}usuarios/login/`
+        var url = `${site}usuarios/login/`
+        console.log(url)
+        
         $.post(
             url,
             obj,
             function(data){
-                console.log(data)
-               
-                if(data == 'success'){
+                //console.log(data)
+                data =  JSON.parse(data)
+                var { msg } = data
+                     
+                if(msg == 'success'){
                 
-                    location.href =  `${app}`
+                    location.href =  `${app}servicos`
                 }else{
                     var alert = ``
                     +`<div class="alert alert-info mt-2" role="alert" >`
-                    +`  ${data}`
+                    +`  ${msg}`
                     +`</div>`
                     $('#alertLogin').html(alert)
                 }
+                /**/
             }
         )
         /**/

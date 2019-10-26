@@ -13,11 +13,7 @@ class Relatorios extends CI_Controller {
 	
 	public function index()
 	{
-		$data['colaboradores'] = $this->relatorios_model->select_distinct_colaboradores();
-		$data['page'] = 'relatorios/relatorios_listar';
-		$data['title'] = 'Relatórios';
-		$this->load->view('index', $data, FALSE);
-		//echo json_encode($data);		
+		
 	}
 	
 	public function listar($chapa = null)
