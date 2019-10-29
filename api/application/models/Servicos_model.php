@@ -11,7 +11,7 @@ class Servicos_model extends CI_Model {
 		$this->db->from('servicos as s');
 		$this->db->join('motivos as m', 'm.id_motivo = s.id_motivo');
 		$this->db->join('usuarios as u', 's.id_usuario = u.id_usuario');
-
+		$this->db->order_by('data', 'desc');
 		return $this->db->get()->result();
 	}
 

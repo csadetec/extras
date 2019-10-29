@@ -27,11 +27,10 @@ elseif($url[1] == 'login'):
 
 //servicos listar
 elseif ($url[1] == 'servicos' and !isset($url[2])):
-	$data = file_get_contents(base_url('api/servicos'));
-	$data = json_decode($data);
-	$servicos = $data->servicos;
+
 	$page = './frontendPhp/servicos/servicos_listar.php';
 	require('./frontendPhp/load.php');
+
 
 elseif ($url[1] == 'servicos' and $url[2] ==  'cadastrar'):
 	$json = file_get_contents(base_url('api/motivos'));

@@ -232,9 +232,9 @@ $(document).ready(function(){
 				var {logged, msg} = data
                 
                 if(!logged){
-					alert(msg)
-				
-                    location.href = `${app}`
+					alert(msg)		
+                    location.href = `${app}login`
+
                 }
                 /**/
             }

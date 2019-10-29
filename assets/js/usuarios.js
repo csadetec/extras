@@ -146,10 +146,10 @@ $(document).ready(function(){
     $('#btn_cadastrar_usuario').click(function(){
         $('#usuarios_form').modal('show')
     })
+
     $("#btn_cancelar_cad_usuario").click(function(){
         $('#usuarios_form').modal('hide')
         $('#cad_usuario').attr('disabled', false)
-        
     })
 
     $("#myInput").on("keyup", function(){
@@ -169,7 +169,8 @@ $(document).ready(function(){
                 if(!logged){
 					alert(msg)
 				
-                    location.href = `${app}`
+                    location.href = `${app}login`
+
                 }
                 /**/
             }

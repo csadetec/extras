@@ -12,7 +12,7 @@ $(document).ready(function(){
 				var cont = 1
 				var row = servicos.map( servico => 
 					`<tr>`
-			        +  `<th scope="row">${servico.id_servico}</th>`
+			        +  `<th scope="row">s${servico.id_servico}</th>`
 			        +  `<td class="d-none">${servico.id_servico}</td>`
 		        	+  `<td>${servico.data || 'DEFINIR'}</td>`
 		        	+  `<td>${servico.horas_inicio}</td>`
@@ -239,7 +239,8 @@ $(document).ready(function(){
                 if(!logged){
 					alert(msg)
 				
-                    location.href = `${app}`
+   	               location.href = `${app}login`
+
                 }
                 /**/
             }

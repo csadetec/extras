@@ -225,7 +225,7 @@ $(document).ready(function(){
                 if(!logged){
 					alert(msg)
 				
-                    location.href = `${app}`
+                    location.href = `${app}login`
                 }
                 /**/
             }
