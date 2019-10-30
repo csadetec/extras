@@ -50,12 +50,12 @@ class Servicos extends CI_Controller {
 
 	public function editar($id_servico = null)
 	{
+
 		$this->form_validation->set_rules('id_motivo', 'MOTIVO', 'trim|required');
 		$this->form_validation->set_rules('data', 'DATA', 'trim|required');
 		$this->form_validation->set_rules('horas_inicio', 'INÍCIO', 'trim|required');
 		$this->form_validation->set_rules('horas_fim', 'FIM', 'trim|required');
 		$this->form_validation->set_rules('obs', 'OBS', 'trim');
-		
 
 		if(!$data['servico'] = $this->servicos_model->select_id($id_servico)):
 			$data['msg'] = 'Serviço não Cadastrado';
@@ -94,6 +94,28 @@ class Servicos extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function editar_status($id_servico = null)
+	{
+
+		$this->form_validation->set_rules('status', 'status', 'trim|required');
+		
+
+		if(!$data['servico'] = $this->servicos_model->select_id($id_servico)):
+			$data['msg'] = 'Serviço não Cadastrado';
+			//redirect('servicos');
+		elseif($this->form_validation->run() == false):
+			# code...
+			if(validation_errors()):
+				$data['msg'] = validation_errors();
+			endif;
+		else:
+			$post = $this->input->post();
+			$data['servico'] = $this->servicos_model->update($post, $id_servico);
+			$data['msg'] = $data['servico'] ? 'editado' : 'error';
+			
+		endif;
+		echo json_encode($data);
+	}
 	public function duplicar($id_servico = null)
 	{
 	

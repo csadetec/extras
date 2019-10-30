@@ -1,6 +1,7 @@
 <div class="row breadcrumb pt-65 pb-2">
   <div class="col-md-6">
     <h3 class="modal-title"><?php echo $title ?></h3>
+    <p id="criador_status"></p>
   </div>
   <div class="col-md-6 ">
     <button id="btn_excluir_servico" class="btn btn-danger float-right">Excluir Serviço</button>

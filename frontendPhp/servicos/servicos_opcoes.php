@@ -10,12 +10,23 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="row">
-          <div class="col-6">
+
+        <div class="row  mb-3">
+          <div class="col-md-6">
             <button id="btn_duplicate_servico" type="button" class="btn btn-outline-primary btn-block">DUPLICAR</button>
           </div>
-          <div class="col-6">
-            <a id="a_editar_servico" class="btn btn-primary btn-block">EDITAR</a>
+          <div class="col-md-6">
+            <a id="a_editar_servico" class="btn btn-primary btn-block">VISUALIZAR</a>           
+          </div>
+        </div>
+        <div class="row justify-content-center mb-3">
+          <!-- Default switch -->
+        
+          <div class="col-md-12">
+            <select  id="validation_service" class="form-control">
+              <option value=0>PENDENTE</option>
+              <option value=1>VALIDADO</option>
+            </select>
           </div>
         </div>
       </div>

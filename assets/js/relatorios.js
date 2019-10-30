@@ -55,7 +55,7 @@ $(document).ready(function(){
     $('#relatorio_inicio, #relatorio_fim, #relatorio_ordenar').change(function(){
         relatorios_listar()
     })
-  //  relatorios_listar()
+    relatorios_listar()
     function relatorios_listar()
     {
         logged()

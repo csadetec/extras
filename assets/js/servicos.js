@@ -10,15 +10,20 @@ $(document).ready(function(){
 			function(data){
 				var {servicos} = data
 				var cont = 1
+				var orange = `<i class="fas fa-exclamation-circle icon-orange">`
+				var green = `<i class="fas fa-check-circle icon-green">`
+
 				var row = servicos.map( servico => 
 					`<tr>`
 			        +  `<th scope="row">s${servico.id_servico}</th>`
 			        +  `<td class="d-none">${servico.id_servico}</td>`
+			        +  `<td class="d-none">${servico.status}</td>`
 		        	+  `<td>${servico.data || 'DEFINIR'}</td>`
 		        	+  `<td>${servico.horas_inicio}</td>`
 		        	+  `<td>${servico.horas_fim}</td>`
 		        	+  `<td>${servico.nome_motivo}</td>`
 		        	+  `<td>${servico.nome}</td>`
+		        	+  `<td>${servico.status == 1 ? green : orange}</i></td>`
 			        +`</tr>`
 				)
 				$("#lista_servicos").empty()
@@ -28,7 +33,6 @@ $(document).ready(function(){
 			}
 
 		)
-
 	}
 	
 	servicos()
@@ -86,17 +90,60 @@ $(document).ready(function(){
 	$("#lista_servicos tr").hover(function(){
 		alert('tests')
 	})
-	//opcao servico
-	
-	function duplicar_editar_servico(){
+
+	//$('#servicos_opcoes').modal('show')
+
+	var teste =  () => {
 		logged()
-		var id_servico = $(this).find('td').eq(0).text()
+		var id_servico = 5
 		var url = `${site}../../servicos/editar/${id_servico}`
 		$('#id_servico_opcao').val(id_servico)
 		$('.modal-title').text(`Serviço N° ${id_servico}`)
 		$('#a_editar_servico').attr('href', url )
 		$('#servicos_opcoes').modal('show')
+	}
 
+	//teste()
+	//Atualiza o status do servico
+	$('select#validation_service').change(function(){
+		var id_servico = $('#id_servico_opcao').val()
+		var status = $(this).val()
+		var url = `${site}servicos/editar_status/${id_servico}`
+
+		var obj = {status:status }
+		
+		$.post(
+			url,
+			obj,
+			function(data){
+				data = JSON.parse(data)
+				var { msg } = data;
+				if(msg == 'editado'){
+					servicos()				
+				}else{
+					alert('ERRO AO ATUALIZAR O STATUS')
+					location.reload()
+				}
+				console.log(data)
+			}
+		)
+	})
+
+	//opcao servico
+	
+	function duplicar_editar_servico(){
+		logged()
+		var id_servico = $(this).find('td').eq(0).text()
+		var status = $(this).find('td').eq(1).text()
+
+		//console.log(status)
+		var url = `${site}../../servicos/editar/${id_servico}`
+
+		$('#id_servico_opcao').val(id_servico)
+		$('.modal-title').text(`Serviço N° ${id_servico}`)
+		$('#a_editar_servico').attr('href', url )
+		$('#validation_service').val(status)
+		$('#servicos_opcoes').modal('show')
 	}
 
 	//Quando o úsuario passar o mouse em cima de um serviço, listar o nome dos colaboradores
@@ -137,7 +184,9 @@ $(document).ready(function(){
 				function(data){
 					var { servico } = data
 					if(!servico)location.href = `${app}servicos`
-						
+					var criador_status = `<strong>Criador: </strong> ${servico.nome} <br><strong>Status:</strong> ${servico.status ? 'VALIDADO' : 'PENDENTE'}`
+					$('#criador_status').html(criador_status)
+
 					$('#id_servico').val(servico.id_servico)
 					$('#id_motivo').val(servico.id_motivo)
 
@@ -152,7 +201,6 @@ $(document).ready(function(){
 				}
 			)
 		}
-		
 	}
 
 	//Quando usuario quiser duplicar o serviço, carregando motivo, horas e colobaradores, necessitando 
@@ -225,7 +273,7 @@ $(document).ready(function(){
 	})
     
 	//caso tenha feito alguma alteração no formulário, hide input q busca os colaboradores para add.
-	$('#id_motivo, #data, #horas_inicio, #horas_fim').change(function(){
+	$('#id_motivo, #data, #horas_inicio, #horas_fim, #obs').change(function(){
 		$('#pesquisa_colaborador').hide()
 	})
 
@@ -237,8 +285,8 @@ $(document).ready(function(){
 				var {logged, msg} = data
                 
                 if(!logged){
-					alert(msg)
-				
+					alert(msg+'PARA VISUALIZAR O SERVIÇOS')
+
    	               location.href = `${app}login`
 
                 }

@@ -7,7 +7,7 @@ class Setup extends CI_Controller {
 	{
 		$data['logged'] = $this->session->userdata('logged');
 		$data['id_usuario'] = $this->session->userdata('id_usuario');
-		$data['nome_usuario']
+		$data['nome_usuario'] = $this->session->userdata('nome');
 		$data['perfil'] = $this->session->userdata('nome_perfil');
 		$data['msg'] = !$data['logged'] ? 'FAÇA LOGIN NOVAMENTE': 'OK';
 

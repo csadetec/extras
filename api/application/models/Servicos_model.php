@@ -5,6 +5,7 @@ class Servicos_model extends CI_Model {
 	public function select()
 	{
 		$this->db->select('s.id_servico, DATE_FORMAT(s.data, "%d/%m/%Y") as data, s.horas_inicio, s.horas_fim, '
+			.'s.status, '
 			.'m.nome_motivo, '
 			.'u.nome'
 		);
@@ -17,11 +18,13 @@ class Servicos_model extends CI_Model {
 
 	public function select_id($id_servico)
 	{
-		$this->db->select('s.id_servico, s.id_motivo, s.data, date_format(s.data, "%d/%m/%Y") as data_editada, s.horas_inicio, s.horas_fim, s.obs, '
-			.'m.nome_motivo'
+		$this->db->select('s.id_servico, s.id_motivo, s.data, date_format(s.data, "%d/%m/%Y") as data_editada, s.horas_inicio, s.horas_fim, s.obs, s.status, '
+			.'m.nome_motivo, '
+			.'u.nome'
 		);
 		$this->db->from('servicos as s');
 		$this->db->join('motivos as m', 'm.id_motivo = s.id_motivo');
+		$this->db->join('usuarios as u', 'u.id_usuario = s.id_usuario');
 		
 		$this->db->where('id_servico', $id_servico);
 		return $this->db->get()->row();

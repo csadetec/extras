@@ -19,6 +19,7 @@
           <th scope="col">FIM</th>
           <th scope="col">MOTIVO</th>
           <th scope="col">CRIADOR</th>
+          <th scope="col">STATUS</th>
         </tr>
       </thead>
       <tbody id="lista_servicos" class="cursor-pointer">
@@ -38,4 +39,4 @@
   </div>
 </div>
 <?php require('servicos_opcoes.php'); ?>
-<?php require('servicos_duplicate_form.php'); ?>
+

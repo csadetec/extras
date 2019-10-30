@@ -65,10 +65,11 @@ $(document).ready(function(){
     listar_servicos_colaboradores()
     function listar_servicos_colaboradores()
     {   
-        logged()
+      
         var id_servico = $('h3.modal-title').text()
         id_servico = id_servico.substring(18)
         if(id_servico > 0){
+            logged()
             $.getJSON(
                 `${site}servicos_colaboradores/listar/${id_servico}`,
                 function(data){
@@ -232,7 +233,7 @@ $(document).ready(function(){
 				var {logged, msg} = data
                 
                 if(!logged){
-					alert(msg)		
+					alert(msg+' SC')		
                     location.href = `${app}login`
 
                 }
