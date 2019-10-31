@@ -5,7 +5,7 @@ $REQUEST_URI = filter_input(INPUT_SERVER, 'REQUEST_URI');
 $REQUEST_URI_PASTA = substr($REQUEST_URI, 1);
 
 $url = explode('/', $REQUEST_URI_PASTA);
-$url[1] = ($url[1] != '' ? $url[1] : 'servicos');
+$url[1] = ($url[1] != '' ? $url[1] : 'login');
 
 
 function base_url($s = ''){

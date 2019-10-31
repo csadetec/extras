@@ -11,7 +11,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
-  <link  href="<?php echo base_url('assets/css/style.css?20191029')  ?>" rel="stylesheet">
+  <link  href="<?php echo base_url('assets/css/style.css?20191030')  ?>" rel="stylesheet">
   <title>Serviços Extras</title>
 </head>
 <body>
@@ -52,7 +52,7 @@
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script> 
   <script src="<?php echo base_url('assets/js/script.js?20191029')?>"></script>
-  <script src="<?php echo base_url('assets/js/servicos.js?201910292005') ?>"></script>
+  <script src="<?php echo base_url('assets/js/servicos.js?201910301625') ?>"></script>
   <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?20191029') ?>"></script>
   <script src="<?php echo base_url('assets/js/usuarios.js?2302') ?>"></script>
   <script src="<?php echo base_url('assets/js/colaboradores.js?2302') ?>"></script>

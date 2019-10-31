@@ -2,6 +2,10 @@
   <div class="col-md-6">
     <h3 class="modal-title"><?php echo $title ?></h3>
     <p id="criador_status"></p>
+    <select  id="validation_service" class="select-status">
+      <option value=0>PENDENTE</option>
+      <option value=1>VALIDADO</option>
+    </select>
   </div>
   <div class="col-md-6 ">
     <button id="btn_excluir_servico" class="btn btn-danger float-right">Excluir Serviço</button>

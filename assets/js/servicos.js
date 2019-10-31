@@ -129,6 +129,35 @@ $(document).ready(function(){
 		)
 	})
 
+	//Atualiza o status do servico com input switch
+
+	$('input#validation_service').change(function(){
+		var id_servico = $('#id_servico_opcao').val()
+		var status = $(this).val()
+		var url = `${site}servicos/editar_status/${id_servico}`
+
+		var obj = {status:status }
+		
+		console.log(obj)
+		/*
+		$.post(
+			url,
+			obj,
+			function(data){
+				data = JSON.parse(data)
+				var { msg } = data;
+				if(msg == 'editado'){
+					servicos()				
+				}else{
+					alert('ERRO AO ATUALIZAR O STATUS')
+					location.reload()
+				}
+				console.log(data)
+			}
+		)
+		/**/
+	})
+
 	//opcao servico
 	
 	function duplicar_editar_servico(){
@@ -139,7 +168,7 @@ $(document).ready(function(){
 		//console.log(status)
 		var url = `${site}../../servicos/editar/${id_servico}`
 
-		$('#id_servico_opcao').val(id_servico)
+		$('#id_servico').val(id_servico)
 		$('.modal-title').text(`Serviço N° ${id_servico}`)
 		$('#a_editar_servico').attr('href', url )
 		$('#validation_service').val(status)
@@ -184,7 +213,8 @@ $(document).ready(function(){
 				function(data){
 					var { servico } = data
 					if(!servico)location.href = `${app}servicos`
-					var criador_status = `<strong>Criador: </strong> ${servico.nome} <br><strong>Status:</strong> ${servico.status ? 'VALIDADO' : 'PENDENTE'}`
+					var criador_status = `<strong>Criador: </strong> ${servico.nome}`
+
 					$('#criador_status').html(criador_status)
 
 					$('#id_servico').val(servico.id_servico)
