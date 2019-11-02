@@ -4,7 +4,6 @@ $(document).ready(function(){
 	var servicos = () =>{
 		logged()
 		var url = `${site}servicos`
-
 		$.getJSON(
 			url,
 			function(data){
@@ -34,9 +33,7 @@ $(document).ready(function(){
 
 		)
 	}
-	
 	servicos()
-
 
 	//cadastrar e editar o servico
 	$('form#servicos_form').submit(function(){
@@ -44,7 +41,6 @@ $(document).ready(function(){
 		var obj = $(this).serialize()
 		var id_servico = $('#id_servico').val()
 		var url = id_servico ? `${site}servicos/editar/${id_servico}` : `${site}servicos/cadastrar`
-		
 		
 		$.post(
 			url,
@@ -105,13 +101,15 @@ $(document).ready(function(){
 
 	//teste()
 	//Atualiza o status do servico
+	/*
 	$('select#validation_service').change(function(){
-		var id_servico = $('#id_servico_opcao').val()
+		var id_servico = $('#id_servico').val()
 		var status = $(this).val()
 		var url = `${site}servicos/editar_status/${id_servico}`
 
 		var obj = {status:status }
-		
+		//console.log(url)		
+	
 		$.post(
 			url,
 			obj,
@@ -121,42 +119,15 @@ $(document).ready(function(){
 				if(msg == 'editado'){
 					servicos()				
 				}else{
-					alert('ERRO AO ATUALIZAR O STATUS')
-					location.reload()
+					//alert(data)
+					//alert('ERRO AO ATUALIZAR O STATUS')
+					console.log(data)
+					//location.reload()
 				}
-				console.log(data)
 			}
 		)
 	})
-
-	//Atualiza o status do servico com input switch
-
-	$('input#validation_service').change(function(){
-		var id_servico = $('#id_servico_opcao').val()
-		var status = $(this).val()
-		var url = `${site}servicos/editar_status/${id_servico}`
-
-		var obj = {status:status }
-		
-		console.log(obj)
-		/*
-		$.post(
-			url,
-			obj,
-			function(data){
-				data = JSON.parse(data)
-				var { msg } = data;
-				if(msg == 'editado'){
-					servicos()				
-				}else{
-					alert('ERRO AO ATUALIZAR O STATUS')
-					location.reload()
-				}
-				console.log(data)
-			}
-		)
-		/**/
-	})
+	*/	
 
 	//opcao servico
 	
@@ -166,7 +137,7 @@ $(document).ready(function(){
 		var status = $(this).find('td').eq(1).text()
 
 		//console.log(status)
-		var url = `${site}../../servicos/editar/${id_servico}`
+		var url = `${app}servicos/editar/${id_servico}`
 
 		$('#id_servico').val(id_servico)
 		$('.modal-title').text(`Serviço N° ${id_servico}`)
@@ -216,7 +187,7 @@ $(document).ready(function(){
 					var criador_status = `<strong>Criador: </strong> ${servico.nome}`
 
 					$('#criador_status').html(criador_status)
-
+					$('select#status').val(servico.status)
 					$('#id_servico').val(servico.id_servico)
 					$('#id_motivo').val(servico.id_motivo)
 
@@ -225,6 +196,9 @@ $(document).ready(function(){
 					$('#horas_fim').val(servico.horas_fim)
 					$('#obs').val(servico.obs)
 					$('#input_pesquisa').removeClass('d-none')
+					$('select#status').removeClass('d-none')
+					
+
 					$('#add_colaborador').text('ATUALIZAR')
 					$('#btn_duplicar_servico').removeClass('d-none')
 					/** */

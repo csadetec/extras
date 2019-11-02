@@ -68,11 +68,11 @@ class Servicos extends CI_Controller {
 		else:
 			# code...
 			$post = $this->input->post();
+			//echo $data['teste_post'] = $post
 			
 			$sc = $this->servicos_colaboradores_model->select_colaboradores_by_id_servico($id_servico);
 		
 			$disponibilidade = verifica_all_sc($sc, $post, 'update');
-			//$data['teste'] = $disponibilidade;
 			
 			if($disponibilidade['status']):
 				if($this->servicos_model->update($post, $id_servico)):
@@ -116,6 +116,7 @@ class Servicos extends CI_Controller {
 		endif;
 		echo json_encode($data);
 	}
+	/**/
 	public function duplicar($id_servico = null)
 	{
 	

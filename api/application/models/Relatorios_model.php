@@ -28,6 +28,8 @@ class Relatorios_model extends CI_Model {
 		$this->db->join('colaboradores as c', 'sc.chapa = c.chapa');
 		$this->db->join('motivos as m', 'm.id_motivo = sc.id_motivo');
 		$this->db->where('sc.data between "'.$inicio.'" and "'.$fim.'"');
+		$this->db->where('sc.status', 1);
+
 		$this->db->order_by('c.nome_colaborador', 'asc');
 		$this->db->order_by('sc.id_motivo', 'asc');
 		$this->db->order_by('sc.data', 'asc');

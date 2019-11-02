@@ -2,10 +2,6 @@
   <div class="col-md-6">
     <h3 class="modal-title"><?php echo $title ?></h3>
     <p id="criador_status"></p>
-    <select  id="validation_service" class="select-status">
-      <option value=0>PENDENTE</option>
-      <option value=1>VALIDADO</option>
-    </select>
   </div>
   <div class="col-md-6 ">
     <button id="btn_excluir_servico" class="btn btn-danger float-right">Excluir Serviço</button>
@@ -16,6 +12,14 @@
 <div class="row">
   <div class="col-md-5">
     <form id="servicos_form"  action="post">
+      <div class="form-row mb-3">
+        <div class="col-md-12">
+          <select  id="status" name="status" class="form-control d-none">
+            <option value=0>PENDENTE</option>
+            <option value=1>VALIDADO</option>
+          </select>
+        </div>
+      </div>
       <div class="form-row mb-3">
         <div class="col-6" >
           <select name="id_motivo" id="id_motivo" class="form-control" required>
@@ -48,10 +52,14 @@
         </div>
       </div>
       <div id="input_pesquisa" class="form-row d-none">
-        <input class="form-control form-control-lg mb-2" type="search" autocomplete="off" placeholder="Pesquisar Colaborador"  id="pesquisa_colaborador" list="list-colaboradores">
-        <datalist id="list-colaboradores">
-        </datalist>
+        <div class="col-md-12">
+          <input class="form-control form-control-lg mb-2" type="search" autocomplete="off" placeholder="Pesquisar Colaborador"  id="pesquisa_colaborador" list="list-colaboradores">
+          <datalist id="list-colaboradores">
+          </datalist>
+        </div>
+  
       </div>
+  
       <div class="form-row mb-3">
         <input type="hidden" id="id_servico">
         <div class="col-md-6">

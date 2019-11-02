@@ -4,7 +4,6 @@ $(document).ready(function(){
 		$.getJSON(
 			url,
 			function(data){
-				console.log(data)
 
 				var link_usuarios = `<a class="dropdown-item" href="${app}usuarios">Usuários</a>`
 
