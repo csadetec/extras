@@ -104,8 +104,11 @@ CREATE TABLE `servicos` (
   `data` varchar(12) NOT NULL,
   `horas_inicio` varchar(6) NOT NULL,
   `horas_fim` varchar(6) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `obs` text,
   PRIMARY KEY (`id_servico`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +117,7 @@ CREATE TABLE `servicos` (
 
 LOCK TABLES `servicos` WRITE;
 /*!40000 ALTER TABLE `servicos` DISABLE KEYS */;
-INSERT INTO `servicos` VALUES (1,11,'2019-10-14','15:00','16:00'),(2,1,'2019-10-13','20:00','20:00'),(3,4,'2019-10-14','16:00','18:00');
+INSERT INTO `servicos` VALUES (1,1,'2019-10-21','10:00','12:00',0,0,NULL),(2,2,'2019-10-21','14:00','15:00',0,0,NULL),(3,2,'2019-10-10','14:00','15:00',0,0,NULL),(4,3,'2019-10-22','14:00','17:00',0,0,NULL),(5,1,'2019-10-21','07:00','08:00',0,0,NULL),(6,1,'','07:00','08:00',0,0,NULL),(7,5,'2019-11-04','06:00','08:00',1,1,'teste');
 /*!40000 ALTER TABLE `servicos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,13 +132,16 @@ CREATE TABLE `servicos_colaboradores` (
   `id_sc` int(11) NOT NULL AUTO_INCREMENT,
   `id_servico` int(11) NOT NULL,
   `id_motivo` int(11) NOT NULL,
+  `id_motivo_rh` int(11) NOT NULL,
   `chapa` varchar(10) NOT NULL,
   `horas_inicio` varchar(6) NOT NULL,
   `horas_fim` varchar(6) NOT NULL,
-  `data` varchar(12) NOT NULL,
   `diferenca` int(11) NOT NULL,
+  `data` varchar(12) NOT NULL,
+  `status` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   PRIMARY KEY (`id_sc`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +150,7 @@ CREATE TABLE `servicos_colaboradores` (
 
 LOCK TABLES `servicos_colaboradores` WRITE;
 /*!40000 ALTER TABLE `servicos_colaboradores` DISABLE KEYS */;
-INSERT INTO `servicos_colaboradores` VALUES (2,2,1,'0022920','20:00','20:00','2019-10-13',0),(3,1,11,'0022920','15:00','16:00','2019-10-14',60),(4,1,11,'0022831','15:00','16:00','2019-10-14',60),(5,3,4,'0022920','16:00','18:00','2019-10-14',120),(6,3,4,'0022715','16:00','18:00','2019-10-14',120),(7,3,4,'0022831','16:00','18:00','2019-10-14',120),(8,3,4,'0022734','16:00','18:00','2019-10-14',120);
+INSERT INTO `servicos_colaboradores` VALUES (1,1,1,0,'0022920','10:00','12:00',120,'2019-10-21',0,0),(2,1,1,0,'0022831','10:00','11:00',60,'2019-10-21',0,0),(3,2,2,0,'0022831','14:00','15:00',60,'2019-10-21',0,0),(4,3,2,0,'0022831','14:00','15:00',60,'2019-10-10',0,0),(5,4,3,0,'0022920','14:00','17:00',180,'2019-10-22',0,0),(6,4,3,0,'0022831','14:00','17:00',180,'2019-10-22',0,0),(7,4,3,0,'0022778','14:00','17:00',180,'2019-10-22',0,0),(8,7,5,5,'0022920','06:00','08:00',120,'2019-11-04',1,0),(9,7,5,5,'0022934','06:00','08:00',120,'2019-11-04',1,0);
 /*!40000 ALTER TABLE `servicos_colaboradores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,7 +169,7 @@ CREATE TABLE `usuarios` (
   `email` varchar(150) DEFAULT NULL,
   `id_perfil` int(11) NOT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +178,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Lucas de Sousa Assunção','lucas.assuncao','97a1884a632e6827e5b95271f8cee262',NULL,1),(2,'Usuário teste','teste','698dc19d489c4e4db73e28a713eab07b',NULL,4),(3,'ASSISTENTE MÉDIO','medio','71954c968ae9c3a50488ef0c9eae6f52',NULL,3),(4,'ASSISTENTE FUNDAMENTAL','fundamental','e01ac89f09c553a7b7bf0d7dec58a21c',NULL,2),(5,'USUÁRIO DETEC','detec','3e6ccfb77e5b68db59884ccc38a46752',NULL,1),(6,'TESTE','teste2','698dc19d489c4e4db73e28a713eab07b',NULL,1),(7,'BRUNO JULIO MOREIRA DUARTE','bruno.duarte','35607bc4097b930211761990928a68d7',NULL,1),(8,'TESTE','testecantina','698dc19d489c4e4db73e28a713eab07b',NULL,4),(9,'teste','teste3','7348cba539160cf399993a4b23832856',NULL,5),(10,'lucas','lucas','202cb962ac59075b964b07152d234b70',NULL,1),(11,'Lucas de Sousa Assunção','lucas.assuncao1','202cb962ac59075b964b07152d234b70',NULL,2),(12,'lucas','lucas123','aa41efe0a1b3eeb9bf303e4561ff8392',NULL,3),(13,'dsf','lasd','dd982884edf68487cb8ff664b3dfdf12',NULL,1),(14,'dsf','lasd','dd982884edf68487cb8ff664b3dfdf12',NULL,1),(15,'sdf','asdf','d9729feb74992cc3482b350163a1a010',NULL,2),(16,'sdf','asdf','d9729feb74992cc3482b350163a1a010',NULL,2),(17,'sdf','asdfzxc','d9729feb74992cc3482b350163a1a010',NULL,2);
+INSERT INTO `usuarios` VALUES (1,'Lucas de Sousa Assunção','lucas.assuncao','97a1884a632e6827e5b95271f8cee262',NULL,1),(2,'Usuário teste','teste','698dc19d489c4e4db73e28a713eab07b',NULL,1),(3,'ASSISTENTE MÉDIO','medio','71954c968ae9c3a50488ef0c9eae6f52',NULL,3),(4,'ASSISTENTE FUNDAMENTAL','fundamental','97a1884a632e6827e5b95271f8cee262',NULL,2),(5,'USUÁRIO DETEC','detec','3e6ccfb77e5b68db59884ccc38a46752',NULL,1),(6,'TESTE','teste2','698dc19d489c4e4db73e28a713eab07b',NULL,1),(7,'BRUNO JULIO MOREIRA DUARTE','bruno.duarte','35607bc4097b930211761990928a68d7',NULL,1),(8,'TESTE','testecantina','698dc19d489c4e4db73e28a713eab07b',NULL,4),(9,'teste','teste3','7348cba539160cf399993a4b23832856',NULL,5),(10,'sdf','asdf','912ec803b2ce49e4a541068d495ab570',NULL,2),(11,'sdf','sdfsda','fe6d1fed11fa60277fb6a2f73efb8be2',NULL,1),(12,'teste','testeteste','77df6c21f12bfdee969ca05a542fe137',NULL,2),(13,'sdf','xvxcASDF','48ac1b60506a763987115161659f8305',NULL,1),(14,'teste','asdfas','97a1884a632e6827e5b95271f8cee262',NULL,2),(15,'vas','vas','233692e0aad5a445107564ca1bb68d51',NULL,2),(16,'sadfasd','testesdfsdf','1f5741a01f51daaf29e2b96678100ba8',NULL,4);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -185,4 +191,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-14 13:19:56
+-- Dump completed on 2019-11-04 15:20:26
