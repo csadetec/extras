@@ -46,9 +46,11 @@ elseif($url[1] == 'servicos' && $url[2] == 'editar' && $url[3] > 0):
 	$page = './frontendPhp/servicos/servicos_form.php';	
 	require('./frontendPhp/load.php');
 
-elseif($url[1] == 'relatorios'):
+elseif($url[1] == 'relatorios' and !isset($url[2])):
 	$page = './frontendPhp/relatorios/relatorios_listar.php';
 	require('./frontendPhp/load.php');
+elseif($url[1] == 'relatorios' and $url[2] == 'pdf'):
+	require('./frontendPhp/relatorios/relatorios_listar_pdf.php');
 else:
 	$page = './frontendPhp/default/404.php';
 	require('./frontendPhp/load.php');

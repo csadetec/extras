@@ -69,7 +69,7 @@ $(document).ready(function(){
             {
                 data = JSON.parse(data)
                 colaboradores = data.colaboradores
-                console.log(colaboradores)
+                ///console.log(colaboradores)
                 if(colaboradores.length > 0){
                     var cont = 0
                     var row = ``
@@ -114,6 +114,9 @@ $(document).ready(function(){
                 $('#table_relatorios').empty()
                 $('#table_relatorios').prepend(html)
                 $('#lista_relatorios tr').hover(listar_relatorios_hover)
+                $('#btn_gerar_pdf').click(function(){
+                    btn_gerar_pdf(colaboradores)
+                })
        
             }
         )
@@ -214,6 +217,75 @@ $(document).ready(function(){
         )
     })
 
+    //$('#btn_gerar_pdf').click(function(){
+    function btn_gerar_pdf(colaboradores){ 
+        logged()
+  
+        var inicio = $('#relatorio_inicio').val()
+        var fim = $('#relatorio_fim').val()
+        
+        var msg;
+
+        msg = inicio.length == 0 ? 'Selecione a data de Início':''
+        msg += fim.length == 0 ? '\nSelecione a data do Fim':''
+        msg += colaboradores == '' ? '\nSem colaboradores':''   
+        /*
+        if(msg.length > 0){
+            //console.log(msg)
+            alert(msg)
+            return false
+        }
+        /** */
+        var cont = 0
+        var row = ``
+        for(i in colaboradores){
+            row+=``
+            +`<tr>`
+            +   `<td>${++cont}</td>`
+            +   `<td>${colaboradores[i].nome_colaborador} | ${colaboradores[i].chapa}</td>`
+            +   `<td>${colaboradores[i].nome_motivo}</td>`
+            +   `<td>${colaboradores[i].data}</td>`
+            +   `<td>${minutos_horas(colaboradores[i].diferenca)}</td>`
+            +`</tr>`
+        
+        }
+
+        var table =``
+        +`<table>`
+        +   `<thead>`
+        +       `<tr>`
+        +           `<th scope="col">#</th>`
+        +           `<th scope="col">NOME dfgdfg</th>`
+        +           `<th scope="col">MOTIVO</th>`
+        +           `<th scope="col">DATA</th>`
+        +           `<th scope="col">HORAS</th>`
+        +       `</tr>`
+        +    `</thead>`
+        +    `<tbody>`
+        +       `${row}`
+        +    `</tbody>`
+        +`</table>`
+        var div = ``
+        +`<body><div>`
+        +`${table}`
+        +`</div></body>`
+
+        
+
+        var doc = new jsPDF()
+        doc.fromHTML(div,10 ,10)
+        doc.save('teste.pdf')
+        //doc.autoPrint()
+        //doc.output(`Horas Extras - ${inicio} - ${fim}`)
+            /** */
+            /*
+        $('#table_relatorios').empty()
+        $('#table_relatorios').prepend(table)
+        //** */
+       
+    }
+
+   
     
     function logged()
     {

@@ -1,4 +1,9 @@
-<div class="row justify-content-center pt-list mb-3">
+<div class="row justify-content-center pt-list">
+    <div class="col-md-8">
+        <button id="btn_gerar_pdf" class="btn btn-outline-danger float-right">Gerar PDF</button>
+    </div>
+</div>
+<div class="row justify-content-center mb-3">
     <div class="col-md-8">
         <form method="post" id="relatorios_form" class="">
             <div class="form-row">

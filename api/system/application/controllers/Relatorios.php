@@ -36,6 +36,13 @@ class Relatorios extends CI_Controller {
 		$data['colaboradores'] = $colaboradores;
 		echo json_encode($data);
 	}
+
+	public function filter_pdf($inicio, $fim)
+	{
+		$colaboradores = $this->relatorios_model->filter($inicio, $fim, $order);
+		$data['colaboradores'] = $colaboradores;
+		echo json_encode($data);
+	}
 }
 
 /* End of file Relatorios.php */

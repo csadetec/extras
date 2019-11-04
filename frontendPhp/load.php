@@ -51,6 +51,8 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+
   <script src="<?php echo base_url('assets/js/script.js?20191029')?>"></script>
   <script src="<?php echo base_url('assets/js/servicos.js?201911011445') ?>"></script>
   <script src="<?php echo base_url('assets/js/servicos_colaboradores.js?20191029') ?>"></script>
