@@ -214,7 +214,7 @@ $(document).ready(function(){
 		var id_servico = $('#id_servico_opcao').val()
 		var url = `${site}servicos/duplicar/${id_servico}`
 		console.log(url)
-		
+		/*
 		$.getJSON(
 			url,
 			function(data)
@@ -226,7 +226,6 @@ $(document).ready(function(){
 				}else{
 					alert(msg)
 				}
-				/**/
 			}
 		)
 
