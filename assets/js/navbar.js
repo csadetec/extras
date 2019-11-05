@@ -4,7 +4,7 @@ $(document).ready(function(){
 		$.getJSON(
 			url,
 			function(data){
-
+				console.log(data)
 				var link_usuarios = `<a class="dropdown-item" href="${app}usuarios">Usuários</a>`
 
 				var navitem = ``
@@ -16,18 +16,26 @@ $(document).ready(function(){
 			        +`<div class="dropdown-menu dropdown-menu-right dropdown-default"
 			          aria-labelledby="navbarDropdownMenuLink-333">`
 			        	+`<a class="dropdown-item" href="#">${data.perfil}</a>`
-			        	+`${data.usuario != 'ADMINISTRADOR' ? link_usuarios : ''}`
+						+`${data.perfil == 'ADMINISTRADOR' ? link_usuarios : ''}`
+			        	+`<a class="dropdown-item" href="#" id="logout" >SAIR</a>`
 			        +`</div>`
 	            +`</li>`
 
 	            $('ul.ml-auto').empty()
-	         	$('ul.ml-auto').prepend(navitem)
+				$('ul.ml-auto').prepend(navitem)
+				$('a#logout').click(logout)
 	               
 			}
 		)
 	}
-
 	usuario()
+
+	function logout(){
+		console.log('sair');
+		
+	}
+
+
 
 })
 
