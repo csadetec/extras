@@ -33,14 +33,18 @@ export default function(){
                         </tr>
                     </thead>
                     <tbody id="lista_servicos" className="cursor-pointer">
-                        <tr>
-                            <th scope="row">s1</th>
-                            <td className="d-none">teste</td>
-                            <td>13:00</td>
-                            <td>14:00</td>
-                            <td>AULA EXTRA</td>
-                            <td>LUCAS TESTE</td>
+                        {services.map( s => (
+                        <tr key = {s.id_servico}>
+                            <th scope="row">s.id_servico</th>
+                            <td className="d-none">s.id_servico</td>
+                            <td>{s.data}</td>
+                            <td>{s.horas_inicio}</td>
+                            <td>{s.horas_fim}</td>
+                            <td>{s.nome_motivo}</td>
+                            <td>{s.nome}</td>
+                            <td>{s.status ===  '1' ? 'VALIDADO': 'PENDENTE'}</td>
                         </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
