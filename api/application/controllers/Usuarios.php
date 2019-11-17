@@ -128,7 +128,7 @@ class Usuarios extends CI_Controller {
 		$this->session->unset_userdata('usuario');
 		$this->session->unset_userdata('nome_perfil');
 		
-		redirect('');
+		redirect('setup');
 	}
 
 }

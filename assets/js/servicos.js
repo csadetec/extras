@@ -211,14 +211,13 @@ $(document).ready(function(){
 	//setar a nova data do evento 
 	$('#btn_duplicate_servico').click(function(){
 		logged()
-		var id_servico = $('#id_servico_opcao').val()
+		var id_servico = $('#id_servico').val()
 		var url = `${site}servicos/duplicar/${id_servico}`
-		console.log(url)
+		//console.log(url)
 		
 		$.getJSON(
 			url,
-			function(data)
-			{
+			function(data){
 				var {servico_duplicado, msg} = data
 	
 				if(msg == 'duplicado'){
@@ -226,7 +225,6 @@ $(document).ready(function(){
 				}else{
 					alert(msg)
 				}
-				/**/
 			}
 		)
 
@@ -289,7 +287,7 @@ $(document).ready(function(){
 				var {logged, msg} = data
                 
                 if(!logged){
-					alert(msg+'PARA VISUALIZAR O SERVIÇOS')
+			
 
    	               location.href = `${app}login`
 

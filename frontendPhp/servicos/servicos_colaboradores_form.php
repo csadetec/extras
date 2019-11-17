@@ -28,7 +28,7 @@
         <!-- Default form contact -->
         <form id="servicos_colaboradores_form" action="post">
           <div class="form-row mb-3">
-            <label for="id_motivo">Motivo</label>
+            <label for="id_motivo">Centro de Custo</label>
             <select name="id_motivo" id="sc_id_motivo" class="form-control">
               <option value="">SELECIONE</option>
               <?php foreach ($motivos as $key => $row): ?>

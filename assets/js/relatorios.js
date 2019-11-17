@@ -91,7 +91,7 @@ $(document).ready(function(){
                     +       `<tr>`
                     +           `<th scope="col">#</th>`
                     +           `<th scope="col">NOME</th>`
-                    +           `<th scope="col">MOTIVO</th>`
+                    +           `<th scope="col">CENTRO DE CUSTO</th>`
                     +           `<th scope="col">DATA</th>`
                     +           `<th scope="col">HORAS</th>`
                     +       `</tr>`

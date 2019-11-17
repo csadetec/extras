@@ -5,7 +5,7 @@
       <div class="modal-header">
         <h5 class="modal-title" id="">Serviço</h5>
 
-        <input type="hidden" id="id_servico_opcao">
+        <input type="hidden" id="id_servico">
         
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -26,12 +26,7 @@
         
           <div class="col-md-12">
             <input type="hidden" id="id_servico">
-            <!--
-            <select  id="validation_service" class="form-control">
-              <option value=0>PENDENTE</option>
-              <option value=1>VALIDADO</option>
-            </select>
-            <!-- -->
+  
           </div>
         </div>
       </div>
