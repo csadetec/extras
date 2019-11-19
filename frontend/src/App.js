@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
 import './App.css'
 import {
 MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, 
@@ -6,7 +11,7 @@ MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
 } from "mdbreact";
 import {Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 
-import Servicos from './Pages/Servicos'
+import Servicos from './Pages/Servicos/ServicosListar'
 import Relatorios from './Pages/Relatorios'
 import Footer from './Template/Footer'
 

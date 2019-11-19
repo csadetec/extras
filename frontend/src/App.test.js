@@ -1,7 +1,25 @@
 import React, { useState, useEffect} from 'react'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter as Router, Link} from 'react-router-dom'
 
-export default function App2(){
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+export default function ReactBootstrap(){
+    return(
+        <Router>
+            <Navbar bg="primary" variant="dark">
+                <Navbar.Brand to="/">Navbar</Navbar.Brand>
+                <Nav className="mr-auto">
+                    <Link> <Nav.Link to="/servicos">Serviços</Nav.Link></Link>
+                    <Nav.Link to="/relatorios">Relatórios</Nav.Link>
+                </Nav>
+            </Navbar>
+        </Router>
+
+    )
+}
+/*
+function App2(){
     const [repositories, setRepositories] = useState([])
 
     useEffect(() => {
