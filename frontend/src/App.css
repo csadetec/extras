@@ -1,0 +1,7 @@
+.nav-link{
+    font-weight: 400;
+}
+.cursor-pointer:hover{
+    cursor:pointer;
+    background:#00bcd436;
+}
