@@ -8,7 +8,7 @@ class Relatorios extends CI_Controller {
 		parent::__construct();
 		$this->load->model(array('relatorios_model'));
 		$this->load->helper(array('funcoes_helper'));
-		verifica_login();
+	//	verifica_login();
 	}
 	
 	public function index()

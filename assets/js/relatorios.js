@@ -54,6 +54,7 @@ $(document).ready(function(){
     
     $('#relatorio_inicio, #relatorio_fim, #relatorio_ordenar').change(function(){
         relatorios_listar()
+        
     })
     relatorios_listar()
     function relatorios_listar()
@@ -86,7 +87,7 @@ $(document).ready(function(){
                     }
                  
                     var html =``
-                    +`<table class="table">`
+                    +`<table class="table" id="table_relatorio">`
                     +   `<thead>`
                     +       `<tr>`
                     +           `<th scope="col">#</th>`
@@ -220,22 +221,30 @@ $(document).ready(function(){
     //$('#btn_gerar_pdf').click(function(){
     function btn_gerar_pdf(colaboradores){ 
         logged()
-  
+        //console.log('teste generete')
+                
         var inicio = $('#relatorio_inicio').val()
         var fim = $('#relatorio_fim').val()
-        
+        /** */
+        var pegar_dados = document.getElementById('table_relatorio').innerHTML
+        var janela = window.open('', '', 'width=800, height:600')
+        janela.document.write('<html><head>')
+        janela.document.write(`<title>${inicio} | ${fim}</title></head>`)
+        janela.document.write('<body>')
+        janela.document.write(pegar_dados)
+        janela.document.write('</body></html>')
+        janela.document.close()
+        janela.print()
+
+
+
+        /*
         var msg;
 
         msg = inicio.length == 0 ? 'Selecione a data de Início':''
         msg += fim.length == 0 ? '\nSelecione a data do Fim':''
         msg += colaboradores == '' ? '\nSem colaboradores':''   
-        /*
-        if(msg.length > 0){
-            //console.log(msg)
-            alert(msg)
-            return false
-        }
-        /** */
+      
         var cont = 0
         var row = ``
         for(i in colaboradores){
