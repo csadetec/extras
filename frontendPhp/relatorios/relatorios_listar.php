@@ -42,12 +42,10 @@
     let start = document.getElementById('relatorio_inicio').value
     let end = document.getElementById('relatorio_fim').value
     let dados = document.getElementById('table_relatorios').innerHTML
-    start = start && `${start}/`
-    end = end && ``
+ 
+    let url = `/extras/relatorios/pdf/${start}/${end}`
 
-    let url = `/extras/relatorios/pdf/${start}${end}`
-
-    //console.log(url)
+    console.log(url)
     window.open(url)
 
   }

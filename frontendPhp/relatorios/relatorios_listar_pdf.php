@@ -25,19 +25,24 @@
   div#assinatura{
     margin-top: 30px;
     width: 50%;
+    text-align:center;
 
   }
 </style>
+<div>
+  <h2>Interválo: <?php echo $start?> à <?php echo $end?></h2>
+
+</div>
 <div>
   <?php  ?>
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col">N°</th>
         <th scope="col">NOME</th>
-        <th scope="col">MOTIVO</th>
+        <th scope="col">NATUREZA DO SERVIÇO</th>
         <th scope="col">DATA</th>
-        <th scope="col">HORAS</th>
+        <th scope="col">QTD. HORAS</th>
       </tr>
     </thead>
     <tbody>
@@ -61,6 +66,7 @@
 </div>
 <div id="assinatura">
   <hr>
+  Assinatura
 </div>
 <?php
 

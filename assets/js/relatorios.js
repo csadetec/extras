@@ -90,9 +90,9 @@ $(document).ready(function(){
                     +`<table class="table" id="table_relatorio">`
                     +   `<thead>`
                     +       `<tr>`
-                    +           `<th scope="col">#</th>`
+                    +           `<th scope="col">Nº</th>`
                     +           `<th scope="col">NOME</th>`
-                    +           `<th scope="col">MOTIVO</th>`
+                    +           `<th scope="col">NATUREZA DO SERVIÇO</th>`
                     +           `<th scope="col">DATA</th>`
                     +           `<th scope="col">QTD. HORAS</th>`
                     +       `</tr>`

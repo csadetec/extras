@@ -23,6 +23,7 @@ function base_url($s = ''){
 	return 'http://'.$_SERVER['SERVER_NAME'].'/extras/'.$s;
 }
 
+
 if($url[1] == 'usuarios'):
 	$data = file_get_contents(base_url('api/index.php/perfis'));
 	$data = json_decode($data);
@@ -59,18 +60,20 @@ elseif($url[1] == 'relatorios' and !isset($url[2])):
 	$page = './frontendPhp/relatorios/relatorios_listar.php';
 	require('./frontendPhp/load.php');
 elseif($url[1] == 'relatorios' and $url[2] == 'pdf'):
-	
+
 	$start = $url[3];
 	$end = isset($url[4]) ? $url[4]:'';
+	/*
+	echo '<pre>';
+	print_r($url);
+	/**/
 	$data = file_get_contents(base_url('api/index.php/relatorios/filter/'.$start.'/'.$end));
 	$data = json_decode($data);
-
-
-	// instantiate and use the dompdf class
 	$dompdf = new Dompdf();
 
 	ob_start();
 	require __DIR__.'/frontendPhp/relatorios/relatorios_listar_pdf.php';
+	
 	$dompdf->loadHtml(ob_get_clean());
 
 	$dompdf->setPaper('A4');
