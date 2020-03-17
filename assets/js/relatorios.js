@@ -70,7 +70,7 @@ $(document).ready(function(){
             {
                 data = JSON.parse(data)
                 colaboradores = data.colaboradores
-                ///console.log(colaboradores)
+                console.log(colaboradores)
                 if(colaboradores.length > 0){
                     var cont = 0
                     var row = ``
@@ -92,9 +92,9 @@ $(document).ready(function(){
                     +       `<tr>`
                     +           `<th scope="col">#</th>`
                     +           `<th scope="col">NOME</th>`
-                    +           `<th scope="col">CENTRO DE CUSTO</th>`
+                    +           `<th scope="col">MOTIVO</th>`
                     +           `<th scope="col">DATA</th>`
-                    +           `<th scope="col">HORAS</th>`
+                    +           `<th scope="col">QTD. HORAS</th>`
                     +       `</tr>`
                     +    `</thead>`
                     +    `<tbody id="lista_relatorios" >`
